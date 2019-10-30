@@ -1,0 +1,7 @@
+.DS_Store
+.ipynb_checkpoints
+*.html
+proposal/*.pdf
+.Rproj.user
+.Rhistory
+.RData
