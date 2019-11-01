@@ -30,10 +30,9 @@ r_github_packages:
   - nhejazi/haldensify@master
 
 before_script:
-  - chmod +x ./handbook/_build.sh
-  - chmod +x ./handbook/_deploy.sh
+  - chmod +x ./_build.sh
+  - chmod +x ./_deploy.sh
 
 script:
-  - cd handbook
   - ./_build.sh
   - test $TRAVIS_BRANCH = "master" && ./_deploy.sh
