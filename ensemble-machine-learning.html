@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Ensemble Machine Learning | Targeted Learning with the tlverse Software Ecosystem</title>
+  <meta name="description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Ensemble Machine Learning | Targeted Learning with the tlverse Software Ecosystem" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://tlverse.org/deming2019-workshop/" />
+  
+  <meta property="og:description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  <meta name="github-repo" content="tlverse/deming2019-workshop" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Ensemble Machine Learning | Targeted Learning with the tlverse Software Ecosystem" />
+  
+  <meta name="twitter:description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  
+
+<meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/logos/favicons/favicon.png" type="image/x-icon" />
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="the-tmle-framework.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Deming Conference 2019 Targeted Learning Workshop</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#important-links"><i class="fa fa-check"></i>Important links</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contents"><i class="fa fa-check"></i>Contents</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-instructors-and-authors"><i class="fa fa-check"></i>About the instructors and authors</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#mark-van-der-laan"><i class="fa fa-check"></i>Mark van der Laan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#jeremy-coyle"><i class="fa fa-check"></i>Jeremy Coyle</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#alan-hubbard"><i class="fa fa-check"></i>Alan Hubbard</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#nima-hejazi"><i class="fa fa-check"></i>Nima Hejazi</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#ivana-malenica"><i class="fa fa-check"></i>Ivana Malenica</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#rachael-phillips"><i class="fa fa-check"></i>Rachael Phillips</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="1" data-path="tlverse.html"><a href="tlverse.html"><i class="fa fa-check"></i><b>1</b> Welcome to the <code>tlverse</code></a><ul>
+<li class="chapter" data-level="1.1" data-path="tlverse.html"><a href="tlverse.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="tlverse.html"><a href="tlverse.html#what-is-the-tlverse"><i class="fa fa-check"></i><b>1.2</b> What is the <code>tlverse</code>?</a></li>
+<li class="chapter" data-level="1.3" data-path="tlverse.html"><a href="tlverse.html#tlverse-components"><i class="fa fa-check"></i><b>1.3</b> <code>tlverse</code> components</a></li>
+<li class="chapter" data-level="1.4" data-path="tlverse.html"><a href="tlverse.html#installtlverse"><i class="fa fa-check"></i><b>1.4</b> Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> The Targeted Learning Roadmap</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#the-statistical-model"><i class="fa fa-check"></i><b>2.1</b> The Statistical Model</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-causal-model"><i class="fa fa-check"></i><b>2.2</b> The Causal Model</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#the-parameter-of-interest"><i class="fa fa-check"></i><b>2.3</b> The Parameter of Interest</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#identifiability"><i class="fa fa-check"></i><b>2.4</b> Identifiability</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#estimators-superlearning-and-targeted-maximum-likelihood"><i class="fa fa-check"></i><b>2.5</b> Estimators: SuperLearning and Targeted Maximum Likelihood</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#super-learning"><i class="fa fa-check"></i><b>2.5.1</b> Super Learning</a></li>
+<li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#substitution-estimators"><i class="fa fa-check"></i><b>2.5.2</b> Substitution Estimators</a></li>
+<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#tmle"><i class="fa fa-check"></i><b>2.5.3</b> TMLE</a></li>
+<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#inference"><i class="fa fa-check"></i><b>2.5.4</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#the-wash-benefits-example-dataset"><i class="fa fa-check"></i><b>2.6</b> The WASH Benefits Example Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html"><i class="fa fa-check"></i><b>3</b> Ensemble Machine Learning</a><ul>
+<li class="chapter" data-level="3.1" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#basic-sl3-implementation"><i class="fa fa-check"></i><b>3.3</b> Basic <code>sl3</code> Implementation</a><ul>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#train-the-super-learner-on-the-machine-learning-task"><i class="fa fa-check"></i>3. Train the super learner on the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#obtain-predicted-values"><i class="fa fa-check"></i>4. Obtain predicted values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#extensions"><i class="fa fa-check"></i><b>3.4</b> Extensions</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#cross-validated-super-learner"><i class="fa fa-check"></i><b>3.4.1</b> Cross-validated Super Learner</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#variable-importance-measures-with-sl3"><i class="fa fa-check"></i><b>3.4.2</b> Variable Importance Measures with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#exercise"><i class="fa fa-check"></i><b>3.5</b> Exercise</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#predicting-myocardial-infarction-with-sl3"><i class="fa fa-check"></i><b>3.5.1</b> Predicting Myocardial Infarction with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="ensemble-machine-learning.html"><a href="ensemble-machine-learning.html#summary"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html"><i class="fa fa-check"></i><b>4</b> The TMLE Framework</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#easy-bake-example-tmle3-for-ate"><i class="fa fa-check"></i><b>4.2</b> Easy-Bake Example: <code>tmle3</code> for ATE</a><ul>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#load-the-data"><i class="fa fa-check"></i>0. Load the Data</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#define-the-variable-roles"><i class="fa fa-check"></i>1. Define the variable roles</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#create-a-spec-object"><i class="fa fa-check"></i>2. Create a “Spec” Object</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#define-the-relevant-super-learners"><i class="fa fa-check"></i>3. Define the Relevant Super Learners</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit-the-tmle"><i class="fa fa-check"></i>4. Fit the TMLE</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#evaluate-the-estimates"><i class="fa fa-check"></i>5. Evaluate the Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3-components"><i class="fa fa-check"></i><b>4.3</b> <code>tmle3</code> Components</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3_task"><i class="fa fa-check"></i><b>4.3.1</b> <code>tmle3_task</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#initial-likelihood"><i class="fa fa-check"></i><b>4.3.2</b> Initial Likelihood</a></li>
+<li class="chapter" data-level="4.3.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#targeted-likelihood-updater"><i class="fa fa-check"></i><b>4.3.3</b> Targeted Likelihood (updater)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#parameter-mapping"><i class="fa fa-check"></i><b>4.3.4</b> Parameter Mapping</a></li>
+<li class="chapter" data-level="4.3.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#putting-it-all-together"><i class="fa fa-check"></i><b>4.3.5</b> Putting it all together</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fitting-tmle3-with-multiple-parameters"><i class="fa fa-check"></i><b>4.4</b> Fitting <code>tmle3</code> with multiple parameters</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#delta-method"><i class="fa fa-check"></i><b>4.4.1</b> Delta Method</a></li>
+<li class="chapter" data-level="4.4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit"><i class="fa fa-check"></i><b>4.4.2</b> Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#stratified-effect-estimates"><i class="fa fa-check"></i><b>4.5</b> Stratified Effect Estimates</a></li>
+<li class="chapter" data-level="4.6" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>4.6</b> Exercise</a></li>
+<li class="chapter" data-level="4.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>5</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="5.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>5.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="5.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>5.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Targeted Learning with the <code>tlverse</code> Software Ecosystem</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ensemble-machine-learning" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Ensemble Machine Learning</h1>
+<p><em>Rachael Phillips</em></p>
+<p>Based on the <a href="https://github.com/tlverse/sl3"><code>sl3</code> <code>R</code> package</a> by <em>Jeremy
+Coyle, Nima Hejazi, Ivana Malenica, and Oleg Sofrygin</em>.</p>
+<p>Updated: 2019-11-01</p>
+<div id="learning-objectives-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Learning Objectives</h2>
+<p>By the end of this lesson you will be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Assemble an ensemble of learners based on the properties that identify what
+features they support.</li>
+<li>Customize learner hyperparameters to incorporate a diversity of different
+settings.</li>
+<li>Select a subset of available covariates and pass only those variables to the
+modeling algorithm.</li>
+<li>Fit an ensemble with nested cross-validation to obtain an estimate of the
+performance of the ensemble itself.</li>
+<li>Calculate <code>sl3</code> variable importance metrics.</li>
+<li>Interpret the discrete and continuous super learner fits.</li>
+<li>Rationalize the need to remove bias from the super learner to make an optimal
+bias-variance tradeoff for the parameter of interest.</li>
+</ol>
+</div>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">3.2</span> Introduction</h2>
+<p>Now that we have defined the statistical estimation problem in <a href="intro.html#intro">The Targeted
+Learning Roadmap</a>, we are ready construct the TMLE; an asymptotically
+efficient substitution estimator of this target quantity.</p>
+<p>The first step in this estimation procedure is an initial estimate of the
+data-generating distribution, or the relevant part of this distribution that is
+needed to evaluate the target parameter. For this initial estimation, we use the
+super learner <span class="citation">(van der Laan, Polley, and Hubbard <a href="#ref-vdl2007super">2007</a>)</span>, an important step for creating a robust
+estimator.</p>
+<div id="super-learner" class="section level4 unnumbered">
+<h4>Super Learner</h4>
+<ul>
+<li><p>Loss-function-based tool that uses V-fold cross-validation to obtain the best
+prediction of the relevant part of the likelihood that’s needed to evaluate
+target parameter.</p></li>
+<li><p>Requires expressing the estimand as the minimizer of an expected loss, and
+proposing a library of algorithms (“learners” in <code>sl3</code> nomenclature) that we
+think might be consistent with the true data-generating distribution.</p></li>
+<li><p>Proven to be asymptotically as accurate as the best possible prediction
+algorithm that is tested <span class="citation">(van der Laan and Dudoit <a href="#ref-vdl2003unified">2003</a>; van der Vaart, Dudoit, and van der Laan <a href="#ref-van2006oracle">2006</a>)</span>.</p></li>
+<li><p>The <em>discrete super learner</em>, or cross-validated selector, is the algorithm in
+the library that minimizes the V-fold cross-validated empirical risk.</p></li>
+<li><p>The <em>continuous super learner</em> is a weighted average of the library of
+algorithms, where the weights are chosen to minimize the V-fold
+cross-validated empirical risk of the library. Restricting the weights
+(“metalearner” in <code>sl3</code> nomenclature) to be positive and sum to one (convex
+combination) has been shown to improve upon the discrete super learner
+<span class="citation">(Polley and van der Laan <a href="#ref-polley2010super">2010</a>; van der Laan, Polley, and Hubbard <a href="#ref-vdl2007super">2007</a>)</span>.</p></li>
+<li><p>This background material is described in greater detail in the accompanying
+<code>tlverse</code> handbook <a href="https://tlverse.org/tlverse-handbook/ensemble-machine-learning.html"><code>sl3</code>
+chapter</a>.</p></li>
+</ul>
+</div>
+</div>
+<div id="basic-sl3-implementation" class="section level2">
+<h2><span class="header-section-number">3.3</span> Basic <code>sl3</code> Implementation</h2>
+<p>We begin by illustrating the core functionality of the super learner algorithm
+as implemented in <code>sl3</code>.</p>
+<p>The <code>sl3</code> implementation consists of the following steps:</p>
+<ol start="0" style="list-style-type: decimal">
+<li>Load the necessary libraries and data</li>
+<li>Define the machine learning task</li>
+<li>Make a super learner by creating library of base learners and a metalearner</li>
+<li>Train the super learner on the machine learning task</li>
+<li>Obtain predicted values</li>
+</ol>
+<div id="wash-benefits-study-example" class="section level3 unnumbered">
+<h3>WASH Benefits Study Example</h3>
+<p>Using the WASH data, we are interested in predicting weight-for-height z-score
+<code>whz</code> using the available covariate data.</p>
+</div>
+<div id="load-the-necessary-libraries-and-data" class="section level3 unnumbered">
+<h3>0. Load the necessary libraries and data</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">library</span>(skimr)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">library</span>(data.table)</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="kw">library</span>(sl3)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="kw">library</span>(SuperLearner)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="kw">library</span>(origami)</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="kw">set.seed</span>(<span class="dv">7194</span>)</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co"># load data set and take a peek</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">washb_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">  <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15">)</a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="kw">head</span>(washb_data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">fixed_thead =</span> T, <span class="dt">font_size =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="st">  </span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;250px&quot;</span>)</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:250px; overflow-x: scroll; width:100%; ">
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+whz
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+tr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fracode
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+month
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+aged
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+sex
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+momage
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+momedu
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+momheight
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+hfiacat
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Nlt18
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+Ncomp
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+watmin
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+elec
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+floor
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+walls
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+roof
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_wardrobe
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_table
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_chair
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_khat
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_chouki
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_tv
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_refrig
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_bike
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_moto
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_sewmach
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+asset_mobile
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N05265
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+268
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Primary (1-5y)
+</td>
+<td style="text-align:right;">
+146.40
+</td>
+<td style="text-align:left;">
+Food Secure
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.16
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N05265
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+286
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Primary (1-5y)
+</td>
+<td style="text-align:right;">
+148.75
+</td>
+<td style="text-align:left;">
+Moderately Food Insecure
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.05
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N08002
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Primary (1-5y)
+</td>
+<td style="text-align:right;">
+152.15
+</td>
+<td style="text-align:left;">
+Food Secure
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.26
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N08002
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+252
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+Primary (1-5y)
+</td>
+<td style="text-align:right;">
+140.25
+</td>
+<td style="text-align:left;">
+Food Secure
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.59
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N06531
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+336
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Secondary (&gt;5y)
+</td>
+<td style="text-align:right;">
+150.95
+</td>
+<td style="text-align:left;">
+Food Secure
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.51
+</td>
+<td style="text-align:left;">
+Control
+</td>
+<td style="text-align:left;">
+N06531
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+Secondary (&gt;5y)
+</td>
+<td style="text-align:right;">
+154.20
+</td>
+<td style="text-align:left;">
+Severely Food Insecure
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="define-the-machine-learning-task" class="section level3 unnumbered">
+<h3>1. Define the machine learning task</h3>
+<p>To define the machine learning <strong>“task”</strong> (predict weight-for-height z-score
+<code>whz</code> using the available covariate data), we need to create an <code>sl3_Task</code>
+object.</p>
+<p>The <code>sl3_Task</code> keeps track of the roles the variables play in the
+machine learning problem, the data, and any metadata (e.g., observational-level
+weights, id, offset).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># specify the outcome and covariates</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">outcome &lt;-<span class="st"> &quot;whz&quot;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">covars &lt;-<span class="st"> </span><span class="kw">colnames</span>(washb_data)[<span class="op">-</span><span class="kw">which</span>(<span class="kw">names</span>(washb_data) <span class="op">==</span><span class="st"> </span>outcome)]</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co"># create the sl3 task</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">washb_task &lt;-<span class="st"> </span><span class="kw">make_sl3_Task</span>(</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="dt">data =</span> washb_data,</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  <span class="dt">covariates =</span> covars,</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">  <span class="dt">outcome =</span> outcome</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">)</a></code></pre></div>
+<pre><code>Warning in .subset2(public_bind_env, &quot;initialize&quot;)(...): Missing Covariate Data
+Found. Imputing covariates using sl3_process_missing.</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># examine the task</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">washb_task</a></code></pre></div>
+<pre><code>A sl3 Task with 4695 obs and these nodes:
+$covariates
+ [1] &quot;tr&quot;              &quot;fracode&quot;         &quot;month&quot;           &quot;aged&quot;           
+ [5] &quot;sex&quot;             &quot;momage&quot;          &quot;momedu&quot;          &quot;momheight&quot;      
+ [9] &quot;hfiacat&quot;         &quot;Nlt18&quot;           &quot;Ncomp&quot;           &quot;watmin&quot;         
+[13] &quot;elec&quot;            &quot;floor&quot;           &quot;walls&quot;           &quot;roof&quot;           
+[17] &quot;asset_wardrobe&quot;  &quot;asset_table&quot;     &quot;asset_chair&quot;     &quot;asset_khat&quot;     
+[21] &quot;asset_chouki&quot;    &quot;asset_tv&quot;        &quot;asset_refrig&quot;    &quot;asset_bike&quot;     
+[25] &quot;asset_moto&quot;      &quot;asset_sewmach&quot;   &quot;asset_mobile&quot;    &quot;delta_momage&quot;   
+[29] &quot;delta_momheight&quot;
+
+$outcome
+[1] &quot;whz&quot;
+
+$id
+NULL
+
+$weights
+NULL
+
+$offset
+NULL</code></pre>
+</div>
+<div id="make-a-super-learner" class="section level3 unnumbered">
+<h3>2. Make a super learner</h3>
+<p>Now that we have defined our machine learning problem with the task, we are
+ready to <strong>“make”</strong> the super learner. This requires specification of</p>
+<ul>
+<li>Base learning algorithms, to establish a library of learners that we think
+might be consistent with the true data-generating distribution.</li>
+<li>Metalearner, to ensemble the base learners.</li>
+</ul>
+<p>We might also incorporate</p>
+<ul>
+<li>Feature selection, to pass only a subset of the predictors to the algorithm.</li>
+<li>Hyperparameter specification, to tune base learners.</li>
+</ul>
+<p>Learners have properties that indicate what features they support. We may use
+<code>sl3_list_properties()</code> to get a list of all properties supported by at least
+one learner.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">sl3_list_properties</span>()</a></code></pre></div>
+<pre><code> [1] &quot;binomial&quot;             &quot;categorical&quot;          &quot;continuous&quot;          
+ [4] &quot;cv&quot;                   &quot;density&quot;              &quot;ids&quot;                 
+ [7] &quot;multivariate_outcome&quot; &quot;offset&quot;               &quot;preprocessing&quot;       
+[10] &quot;timeseries&quot;           &quot;weights&quot;              &quot;wrapper&quot;             </code></pre>
+<p>Since we have a continuous outcome, we may identify the learners that support
+this outcome type with <code>sl3_list_learners()</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">sl3_list_learners</span>(<span class="kw">c</span>(<span class="st">&quot;continuous&quot;</span>))</a></code></pre></div>
+<pre><code> [1] &quot;Lrnr_arima&quot;                     &quot;Lrnr_bartMachine&quot;              
+ [3] &quot;Lrnr_bilstm&quot;                    &quot;Lrnr_caret&quot;                    
+ [5] &quot;Lrnr_condensier&quot;                &quot;Lrnr_dbarts&quot;                   
+ [7] &quot;Lrnr_earth&quot;                     &quot;Lrnr_expSmooth&quot;                
+ [9] &quot;Lrnr_gam&quot;                       &quot;Lrnr_gbm&quot;                      
+[11] &quot;Lrnr_glm&quot;                       &quot;Lrnr_glm_fast&quot;                 
+[13] &quot;Lrnr_glmnet&quot;                    &quot;Lrnr_grf&quot;                      
+[15] &quot;Lrnr_h2o_glm&quot;                   &quot;Lrnr_h2o_grid&quot;                 
+[17] &quot;Lrnr_hal9001&quot;                   &quot;Lrnr_HarmonicReg&quot;              
+[19] &quot;Lrnr_lstm&quot;                      &quot;Lrnr_mean&quot;                     
+[21] &quot;Lrnr_nnls&quot;                      &quot;Lrnr_optim&quot;                    
+[23] &quot;Lrnr_pkg_SuperLearner&quot;          &quot;Lrnr_pkg_SuperLearner_method&quot;  
+[25] &quot;Lrnr_pkg_SuperLearner_screener&quot; &quot;Lrnr_polspline&quot;                
+[27] &quot;Lrnr_randomForest&quot;              &quot;Lrnr_ranger&quot;                   
+[29] &quot;Lrnr_rpart&quot;                     &quot;Lrnr_rugarch&quot;                  
+[31] &quot;Lrnr_solnp&quot;                     &quot;Lrnr_stratified&quot;               
+[33] &quot;Lrnr_svm&quot;                       &quot;Lrnr_tsDyn&quot;                    
+[35] &quot;Lrnr_xgboost&quot;                  </code></pre>
+<p>Now that we have an idea of some learners, we can construct them using the
+<code>make_learner</code> function.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># choose base learners</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">lrnr_glm &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glm)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">lrnr_glmnet &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glmnet)</a></code></pre></div>
+<p>We can customize learner hyperparameters to incorporate a diversity of different
+settings.</p>
+<p>Documentation for the learners and their hyperparameters can be found
+in the <a href="https://tlverse.org/sl3/reference/index.html#section-sl-learners"><code>sl3</code> Learners
+Reference</a>.</p>
+<p>We can also include learners from the <code>SuperLearner</code> <code>R</code> package.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">lrnr_ranger100 &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_ranger, <span class="dt">num.trees =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">lrnr_hal_simple &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_hal9001, <span class="dt">degrees =</span> <span class="dv">1</span>, <span class="dt">n_folds =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">lrnr_gam &lt;-<span class="st"> </span>Lrnr_pkg_SuperLearner<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;SL.gam&quot;</span>)</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">lrnr_bayesglm &lt;-<span class="st"> </span>Lrnr_pkg_SuperLearner<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;SL.bayesglm&quot;</span>)</a></code></pre></div>
+<p>In order to assemble the library of learners, we need to <strong>“stack”</strong> them
+together.</p>
+<p>A <code>Stack</code> is a special learner and it has the same interface as all
+other learners. What makes a stack special is that it combines multiple learners
+by training them simultaneously, so that their predictions can be either
+combined or compared.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">stack &lt;-<span class="st"> </span><span class="kw">make_learner</span>(</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">  Stack,</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">  lrnr_glm, lrnr_mean, lrnr_ranger100, lrnr_glmnet,</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  lrnr_gam, lrnr_bayesglm</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">)</a></code></pre></div>
+<p>We will fit a non-negative least squares metalearner using <code>Lrnr_nnls</code>. Note
+that any learner can be used as a metalearner.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_nnls)</a></code></pre></div>
+<p>We can optionally select a subset of available covariates and pass only
+those variables to the modeling algorithm.</p>
+<p>Let’s consider screening covariates based on their correlation with our outcome
+of interest (<code>cor.test</code> p-value <span class="math inline">\(\leq 0.1\)</span>).</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">screen_cor &lt;-<span class="st"> </span>Lrnr_pkg_SuperLearner_screener<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;screen.corP&quot;</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co"># which covariates are selected on the full data?</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">screen_cor<span class="op">$</span><span class="kw">train</span>(washb_task)</a></code></pre></div>
+<pre><code>Warning: `lang_tail()` is deprecated as of rlang 0.2.0.
+This warning is displayed once per session.</code></pre>
+<pre><code>Warning: `mut_node_cdr()` is deprecated as of rlang 0.2.0.
+This warning is displayed once per session.</code></pre>
+<pre><code>[1] &quot;Lrnr_pkg_SuperLearner_screener_screen.corP&quot;
+$selected
+ [1] &quot;tr&quot;             &quot;fracode&quot;        &quot;aged&quot;           &quot;momage&quot;        
+ [5] &quot;momedu&quot;         &quot;momheight&quot;      &quot;hfiacat&quot;        &quot;Nlt18&quot;         
+ [9] &quot;elec&quot;           &quot;floor&quot;          &quot;walls&quot;          &quot;asset_wardrobe&quot;
+[13] &quot;asset_table&quot;    &quot;asset_chair&quot;    &quot;asset_khat&quot;     &quot;asset_chouki&quot;  
+[17] &quot;asset_tv&quot;       &quot;asset_refrig&quot;   &quot;asset_moto&quot;     &quot;asset_sewmach&quot; 
+[21] &quot;asset_mobile&quot;  </code></pre>
+<p>To <strong>“pipe”</strong> only the selected covariates to the modeling algorithm, we need to
+make a <code>Pipeline</code>, which is a just set of learners to be fit sequentially, where
+the fit from one learner is used to define the task for the next learner.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">cor_pipeline &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Pipeline, screen_cor, stack)</a></code></pre></div>
+<p>Now our learners will be preceded by a screening step.</p>
+<p>We also consider the original <code>stack</code>, just to compare how the feature selection
+methods perform in comparison to the methods without feature selection.</p>
+<p>Analogous to what we have seen before, we have to stack the pipeline and
+original <code>stack</code> together, so we may use them as base learners in our super
+learner.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">fancy_stack &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Stack, cor_pipeline, stack)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co"># we can visualize the stack</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">dt_stack &lt;-<span class="st"> </span><span class="kw">delayed_learner_train</span>(fancy_stack, washb_task)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="kw">plot</span>(dt_stack, <span class="dt">color =</span> <span class="ot">FALSE</span>, <span class="dt">height =</span> <span class="st">&quot;400px&quot;</span>, <span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-d91cd5b01f0c5d1bd9f3" style="width:100%;height:400px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d91cd5b01f0c5d1bd9f3">{"x":{"nodes":{"id":["e75d9a0e-fc7a-11e9-ba19-42010a1e0097","e75d86e0-fc7a-11e9-ba19-42010a1e0097","e75cd204-fc7a-11e9-ba19-42010a1e0097","e75cbef4-fc7a-11e9-ba19-42010a1e0097","e75ba4ba-fc7a-11e9-ba19-42010a1e0097","e75c9622-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75bf64a-fc7a-11e9-ba19-42010a1e0097","e75c133c-fc7a-11e9-ba19-42010a1e0097","e75c2962-fc7a-11e9-ba19-42010a1e0097","e75c3fd8-fc7a-11e9-ba19-42010a1e0097","e75c5482-fc7a-11e9-ba19-42010a1e0097","e75c68e6-fc7a-11e9-ba19-42010a1e0097","e75d6f52-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75ced48-fc7a-11e9-ba19-42010a1e0097","e75d00b2-fc7a-11e9-ba19-42010a1e0097","e75d128c-fc7a-11e9-ba19-42010a1e0097","e75d2524-fc7a-11e9-ba19-42010a1e0097","e75d373a-fc7a-11e9-ba19-42010a1e0097","e75d4964-fc7a-11e9-ba19-42010a1e0097"],"label":["Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm"],"level":[1,2,3,4,9,5,8,6,7,7,7,7,7,7,3,4,5,5,5,5,5,5],"sequential":[true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false],"state":["waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready"],"group":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},"edges":{"from":["e75ba4ba-fc7a-11e9-ba19-42010a1e0097","e75ba4ba-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75bf64a-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c133c-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c2962-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c3fd8-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c5482-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c68e6-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c9622-fc7a-11e9-ba19-42010a1e0097","e75cbef4-fc7a-11e9-ba19-42010a1e0097","e75cd204-fc7a-11e9-ba19-42010a1e0097","e75ced48-fc7a-11e9-ba19-42010a1e0097","e75d00b2-fc7a-11e9-ba19-42010a1e0097","e75d128c-fc7a-11e9-ba19-42010a1e0097","e75d2524-fc7a-11e9-ba19-42010a1e0097","e75d373a-fc7a-11e9-ba19-42010a1e0097","e75d4964-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d6f52-fc7a-11e9-ba19-42010a1e0097","e75d86e0-fc7a-11e9-ba19-42010a1e0097"],"to":["e75cbef4-fc7a-11e9-ba19-42010a1e0097","e75bcf58-fc7a-11e9-ba19-42010a1e0097","e75c9622-fc7a-11e9-ba19-42010a1e0097","e75bf64a-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c133c-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c2962-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c3fd8-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c5482-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c68e6-fc7a-11e9-ba19-42010a1e0097","e75c8114-fc7a-11e9-ba19-42010a1e0097","e75c9622-fc7a-11e9-ba19-42010a1e0097","e75cbef4-fc7a-11e9-ba19-42010a1e0097","e75cd204-fc7a-11e9-ba19-42010a1e0097","e75d86e0-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d5c92-fc7a-11e9-ba19-42010a1e0097","e75d6f52-fc7a-11e9-ba19-42010a1e0097","e75d86e0-fc7a-11e9-ba19-42010a1e0097","e75d9a0e-fc7a-11e9-ba19-42010a1e0097"],"label":["","","","","","","","","","","","","","","","","","","","","","","","","","","",""]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"nodeSpacing":200,"direction":"RL"}},"groups":{"useDefaultGroups":true,"none":{"color":{"border":"black","background":"white"}}}},"groups":["none"],"width":"100%","height":"400px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<p>We have made a library/stack of base learners and a metalearner, so we
+are ready to make the super learner. The super learner algorithm fits a
+metalearner on the validation-set predictions.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">sl &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_sl,</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">  <span class="dt">learners =</span> fancy_stack,</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">  <span class="dt">metalearner =</span> metalearner</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="co"># we can visualize the super learner</span></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">dt_sl &lt;-<span class="st"> </span><span class="kw">delayed_learner_train</span>(sl, washb_task)</a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="kw">plot</span>(dt_sl, <span class="dt">color =</span> <span class="ot">FALSE</span>, <span class="dt">height =</span> <span class="st">&quot;400px&quot;</span>, <span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-888d71c7e57e765d16d5" style="width:100%;height:400px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-888d71c7e57e765d16d5">{"x":{"nodes":{"id":["e7929f60-fc7a-11e9-ba19-42010a1e0097","e7928ab6-fc7a-11e9-ba19-42010a1e0097","e7924c72-fc7a-11e9-ba19-42010a1e0097","e79238ea-fc7a-11e9-ba19-42010a1e0097","e76b069e-fc7a-11e9-ba19-42010a1e0097","e76af3a2-fc7a-11e9-ba19-42010a1e0097","e76a39a8-fc7a-11e9-ba19-42010a1e0097","e76a256c-fc7a-11e9-ba19-42010a1e0097","e7694020-fc7a-11e9-ba19-42010a1e0097","e769fe66-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769687a-fc7a-11e9-ba19-42010a1e0097","e7697d4c-fc7a-11e9-ba19-42010a1e0097","e7699156-fc7a-11e9-ba19-42010a1e0097","e769a59c-fc7a-11e9-ba19-42010a1e0097","e769bf0a-fc7a-11e9-ba19-42010a1e0097","e769d468-fc7a-11e9-ba19-42010a1e0097","e76add36-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76a53fc-fc7a-11e9-ba19-42010a1e0097","e76a6978-fc7a-11e9-ba19-42010a1e0097","e76a7c6a-fc7a-11e9-ba19-42010a1e0097","e76a8e9e-fc7a-11e9-ba19-42010a1e0097","e76aa10e-fc7a-11e9-ba19-42010a1e0097","e76ab4b4-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e77cd3a6-fc7a-11e9-ba19-42010a1e0097","e77cc0dc-fc7a-11e9-ba19-42010a1e0097","e77c0c00-fc7a-11e9-ba19-42010a1e0097","e77bf814-fc7a-11e9-ba19-42010a1e0097","e77b1bf6-fc7a-11e9-ba19-42010a1e0097","e77bd122-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77b446e-fc7a-11e9-ba19-42010a1e0097","e77b58f0-fc7a-11e9-ba19-42010a1e0097","e77b6dfe-fc7a-11e9-ba19-42010a1e0097","e77b8280-fc7a-11e9-ba19-42010a1e0097","e77b9630-fc7a-11e9-ba19-42010a1e0097","e77ba9f4-fc7a-11e9-ba19-42010a1e0097","e77cad0e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c24ce-fc7a-11e9-ba19-42010a1e0097","e77c381a-fc7a-11e9-ba19-42010a1e0097","e77c4c9c-fc7a-11e9-ba19-42010a1e0097","e77c5f5c-fc7a-11e9-ba19-42010a1e0097","e77c7208-fc7a-11e9-ba19-42010a1e0097","e77c843c-fc7a-11e9-ba19-42010a1e0097","e77f325e-fc7a-11e9-ba19-42010a1e0097","e77f1f58-fc7a-11e9-ba19-42010a1e0097","e77e71ac-fc7a-11e9-ba19-42010a1e0097","e77e5d52-fc7a-11e9-ba19-42010a1e0097","e77d838c-fc7a-11e9-ba19-42010a1e0097","e77e387c-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77da9ac-fc7a-11e9-ba19-42010a1e0097","e77dbbd6-fc7a-11e9-ba19-42010a1e0097","e77dd198-fc7a-11e9-ba19-42010a1e0097","e77de7a0-fc7a-11e9-ba19-42010a1e0097","e77dfb96-fc7a-11e9-ba19-42010a1e0097","e77e0f5a-fc7a-11e9-ba19-42010a1e0097","e77f0a54-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77e8818-fc7a-11e9-ba19-42010a1e0097","e77e9ac4-fc7a-11e9-ba19-42010a1e0097","e77eace4-fc7a-11e9-ba19-42010a1e0097","e77ebefa-fc7a-11e9-ba19-42010a1e0097","e77ed098-fc7a-11e9-ba19-42010a1e0097","e77ee376-fc7a-11e9-ba19-42010a1e0097","e78181b2-fc7a-11e9-ba19-42010a1e0097","e7816e02-fc7a-11e9-ba19-42010a1e0097","e780bd0e-fc7a-11e9-ba19-42010a1e0097","e780aabc-fc7a-11e9-ba19-42010a1e0097","e77fd66e-fc7a-11e9-ba19-42010a1e0097","e78085aa-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e77ff96e-fc7a-11e9-ba19-42010a1e0097","e7800bac-fc7a-11e9-ba19-42010a1e0097","e7802074-fc7a-11e9-ba19-42010a1e0097","e78035fa-fc7a-11e9-ba19-42010a1e0097","e7804b1c-fc7a-11e9-ba19-42010a1e0097","e7805ef4-fc7a-11e9-ba19-42010a1e0097","e7815ade-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e780d528-fc7a-11e9-ba19-42010a1e0097","e780e96e-fc7a-11e9-ba19-42010a1e0097","e780fcce-fc7a-11e9-ba19-42010a1e0097","e7810f2a-fc7a-11e9-ba19-42010a1e0097","e781235c-fc7a-11e9-ba19-42010a1e0097","e7813586-fc7a-11e9-ba19-42010a1e0097","e783d71e-fc7a-11e9-ba19-42010a1e0097","e783c558-fc7a-11e9-ba19-42010a1e0097","e7831310-fc7a-11e9-ba19-42010a1e0097","e7830000-fc7a-11e9-ba19-42010a1e0097","e782255e-fc7a-11e9-ba19-42010a1e0097","e782db66-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e7824a20-fc7a-11e9-ba19-42010a1e0097","e7825d58-fc7a-11e9-ba19-42010a1e0097","e7826ffa-fc7a-11e9-ba19-42010a1e0097","e7828710-fc7a-11e9-ba19-42010a1e0097","e7829e3a-fc7a-11e9-ba19-42010a1e0097","e782b42e-fc7a-11e9-ba19-42010a1e0097","e783b27a-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7832b20-fc7a-11e9-ba19-42010a1e0097","e7833e12-fc7a-11e9-ba19-42010a1e0097","e7835294-fc7a-11e9-ba19-42010a1e0097","e783655e-fc7a-11e9-ba19-42010a1e0097","e783788c-fc7a-11e9-ba19-42010a1e0097","e7838a02-fc7a-11e9-ba19-42010a1e0097","e786364e-fc7a-11e9-ba19-42010a1e0097","e78623a2-fc7a-11e9-ba19-42010a1e0097","e78574f2-fc7a-11e9-ba19-42010a1e0097","e7856232-fc7a-11e9-ba19-42010a1e0097","e7848470-fc7a-11e9-ba19-42010a1e0097","e7853b54-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e784adc4-fc7a-11e9-ba19-42010a1e0097","e784c1d8-fc7a-11e9-ba19-42010a1e0097","e784d4fc-fc7a-11e9-ba19-42010a1e0097","e784e938-fc7a-11e9-ba19-42010a1e0097","e784fd6a-fc7a-11e9-ba19-42010a1e0097","e7851110-fc7a-11e9-ba19-42010a1e0097","e7861222-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e7858c94-fc7a-11e9-ba19-42010a1e0097","e7859f90-fc7a-11e9-ba19-42010a1e0097","e785b2dc-fc7a-11e9-ba19-42010a1e0097","e785c722-fc7a-11e9-ba19-42010a1e0097","e785da0a-fc7a-11e9-ba19-42010a1e0097","e785ed10-fc7a-11e9-ba19-42010a1e0097","e7888944-fc7a-11e9-ba19-42010a1e0097","e788759e-fc7a-11e9-ba19-42010a1e0097","e787c5ea-fc7a-11e9-ba19-42010a1e0097","e787b302-fc7a-11e9-ba19-42010a1e0097","e786da9a-fc7a-11e9-ba19-42010a1e0097","e7878b7a-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e78702ea-fc7a-11e9-ba19-42010a1e0097","e787178a-fc7a-11e9-ba19-42010a1e0097","e7872b4e-fc7a-11e9-ba19-42010a1e0097","e787411a-fc7a-11e9-ba19-42010a1e0097","e787542a-fc7a-11e9-ba19-42010a1e0097","e7876744-fc7a-11e9-ba19-42010a1e0097","e78861da-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e787ddd2-fc7a-11e9-ba19-42010a1e0097","e787f006-fc7a-11e9-ba19-42010a1e0097","e788026c-fc7a-11e9-ba19-42010a1e0097","e788143c-fc7a-11e9-ba19-42010a1e0097","e7882670-fc7a-11e9-ba19-42010a1e0097","e7883a20-fc7a-11e9-ba19-42010a1e0097","e78af116-fc7a-11e9-ba19-42010a1e0097","e78adfe6-fc7a-11e9-ba19-42010a1e0097","e78a2b1e-fc7a-11e9-ba19-42010a1e0097","e78a1836-fc7a-11e9-ba19-42010a1e0097","e78938b2-fc7a-11e9-ba19-42010a1e0097","e789ef82-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e7895e6e-fc7a-11e9-ba19-42010a1e0097","e78976b0-fc7a-11e9-ba19-42010a1e0097","e7898a56-fc7a-11e9-ba19-42010a1e0097","e7899ec4-fc7a-11e9-ba19-42010a1e0097","e789b256-fc7a-11e9-ba19-42010a1e0097","e789c62e-fc7a-11e9-ba19-42010a1e0097","e78acd44-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78a40f4-fc7a-11e9-ba19-42010a1e0097","e78a5508-fc7a-11e9-ba19-42010a1e0097","e78a6872-fc7a-11e9-ba19-42010a1e0097","e78a7f74-fc7a-11e9-ba19-42010a1e0097","e78a932e-fc7a-11e9-ba19-42010a1e0097","e78aa7ba-fc7a-11e9-ba19-42010a1e0097","e78d4dc6-fc7a-11e9-ba19-42010a1e0097","e78d3bec-fc7a-11e9-ba19-42010a1e0097","e78c8e5e-fc7a-11e9-ba19-42010a1e0097","e78c7ba8-fc7a-11e9-ba19-42010a1e0097","e78b9e5e-fc7a-11e9-ba19-42010a1e0097","e78c5312-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78bc4a6-fc7a-11e9-ba19-42010a1e0097","e78bda04-fc7a-11e9-ba19-42010a1e0097","e78bedbe-fc7a-11e9-ba19-42010a1e0097","e78c00ec-fc7a-11e9-ba19-42010a1e0097","e78c1398-fc7a-11e9-ba19-42010a1e0097","e78c27e8-fc7a-11e9-ba19-42010a1e0097","e78d28e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78ca54c-fc7a-11e9-ba19-42010a1e0097","e78cb758-fc7a-11e9-ba19-42010a1e0097","e78cc98c-fc7a-11e9-ba19-42010a1e0097","e78cdbde-fc7a-11e9-ba19-42010a1e0097","e78ced72-fc7a-11e9-ba19-42010a1e0097","e78cffe2-fc7a-11e9-ba19-42010a1e0097","e78fac10-fc7a-11e9-ba19-42010a1e0097","e78f9900-fc7a-11e9-ba19-42010a1e0097","e78ee582-fc7a-11e9-ba19-42010a1e0097","e78ed07e-fc7a-11e9-ba19-42010a1e0097","e78df69a-fc7a-11e9-ba19-42010a1e0097","e78ea9dc-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e1a76-fc7a-11e9-ba19-42010a1e0097","e78e2d2c-fc7a-11e9-ba19-42010a1e0097","e78e40fa-fc7a-11e9-ba19-42010a1e0097","e78e584c-fc7a-11e9-ba19-42010a1e0097","e78e6cf6-fc7a-11e9-ba19-42010a1e0097","e78e8092-fc7a-11e9-ba19-42010a1e0097","e78f83c0-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78efe64-fc7a-11e9-ba19-42010a1e0097","e78f11f6-fc7a-11e9-ba19-42010a1e0097","e78f23b2-fc7a-11e9-ba19-42010a1e0097","e78f35be-fc7a-11e9-ba19-42010a1e0097","e78f47f2-fc7a-11e9-ba19-42010a1e0097","e78f5b34-fc7a-11e9-ba19-42010a1e0097","e7920d34-fc7a-11e9-ba19-42010a1e0097","e791fa1a-fc7a-11e9-ba19-42010a1e0097","e79143b8-fc7a-11e9-ba19-42010a1e0097","e79130a8-fc7a-11e9-ba19-42010a1e0097","e79058e0-fc7a-11e9-ba19-42010a1e0097","e79109e8-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e7907dca-fc7a-11e9-ba19-42010a1e0097","e79090e4-fc7a-11e9-ba19-42010a1e0097","e790a462-fc7a-11e9-ba19-42010a1e0097","e790b812-fc7a-11e9-ba19-42010a1e0097","e790cd66-fc7a-11e9-ba19-42010a1e0097","e790e1d4-fc7a-11e9-ba19-42010a1e0097","e791e44e-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e7915d12-fc7a-11e9-ba19-42010a1e0097","e79170e0-fc7a-11e9-ba19-42010a1e0097","e79183d2-fc7a-11e9-ba19-42010a1e0097","e7919642-fc7a-11e9-ba19-42010a1e0097","e791a9e8-fc7a-11e9-ba19-42010a1e0097","e791bcb2-fc7a-11e9-ba19-42010a1e0097","e7926252-fc7a-11e9-ba19-42010a1e0097","e7927616-fc7a-11e9-ba19-42010a1e0097"],"label":["CV_","bundle","CV_Stack","bundle","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","bundle","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP->Stack)","bundle","Lrnr_pkg_SuperLearner_screener_screen.corP","Stack","chain","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","Stack","bundle","Lrnr_glm_TRUE","Lrnr_mean","Lrnr_ranger_100_TRUE_1","Lrnr_glmnet_NULL_deviance_10_1_100_TRUE","Lrnr_pkg_SuperLearner_SL.gam","Lrnr_pkg_SuperLearner_SL.bayesglm","chain","Lrnr_nnls"],"level":[1,2,5,6,7,8,9,10,15,11,14,12,13,13,13,13,13,13,9,10,11,11,11,11,11,11,7,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,8,9,10,11,16,12,15,13,14,14,14,14,14,14,10,11,12,12,12,12,12,12,4,3],"sequential":[true,true,true,true,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,true,true,true,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,false],"state":["waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting","waiting","waiting","ready","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","waiting","ready","ready","ready","ready","ready","ready","waiting","waiting"],"group":["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},"edges":{"from":["e7694020-fc7a-11e9-ba19-42010a1e0097","e7694020-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769687a-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e7697d4c-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e7699156-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769a59c-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769bf0a-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769d468-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769fe66-fc7a-11e9-ba19-42010a1e0097","e76a256c-fc7a-11e9-ba19-42010a1e0097","e76a39a8-fc7a-11e9-ba19-42010a1e0097","e76a53fc-fc7a-11e9-ba19-42010a1e0097","e76a6978-fc7a-11e9-ba19-42010a1e0097","e76a7c6a-fc7a-11e9-ba19-42010a1e0097","e76a8e9e-fc7a-11e9-ba19-42010a1e0097","e76aa10e-fc7a-11e9-ba19-42010a1e0097","e76ab4b4-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76add36-fc7a-11e9-ba19-42010a1e0097","e76af3a2-fc7a-11e9-ba19-42010a1e0097","e76b069e-fc7a-11e9-ba19-42010a1e0097","e77b1bf6-fc7a-11e9-ba19-42010a1e0097","e77b1bf6-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b446e-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b58f0-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b6dfe-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b8280-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77b9630-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77ba9f4-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77bd122-fc7a-11e9-ba19-42010a1e0097","e77bf814-fc7a-11e9-ba19-42010a1e0097","e77c0c00-fc7a-11e9-ba19-42010a1e0097","e77c24ce-fc7a-11e9-ba19-42010a1e0097","e77c381a-fc7a-11e9-ba19-42010a1e0097","e77c4c9c-fc7a-11e9-ba19-42010a1e0097","e77c5f5c-fc7a-11e9-ba19-42010a1e0097","e77c7208-fc7a-11e9-ba19-42010a1e0097","e77c843c-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77cad0e-fc7a-11e9-ba19-42010a1e0097","e77cc0dc-fc7a-11e9-ba19-42010a1e0097","e77cd3a6-fc7a-11e9-ba19-42010a1e0097","e77d838c-fc7a-11e9-ba19-42010a1e0097","e77d838c-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77da9ac-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77dbbd6-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77dd198-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77de7a0-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77dfb96-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77e0f5a-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77e387c-fc7a-11e9-ba19-42010a1e0097","e77e5d52-fc7a-11e9-ba19-42010a1e0097","e77e71ac-fc7a-11e9-ba19-42010a1e0097","e77e8818-fc7a-11e9-ba19-42010a1e0097","e77e9ac4-fc7a-11e9-ba19-42010a1e0097","e77eace4-fc7a-11e9-ba19-42010a1e0097","e77ebefa-fc7a-11e9-ba19-42010a1e0097","e77ed098-fc7a-11e9-ba19-42010a1e0097","e77ee376-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77f0a54-fc7a-11e9-ba19-42010a1e0097","e77f1f58-fc7a-11e9-ba19-42010a1e0097","e77f325e-fc7a-11e9-ba19-42010a1e0097","e77fd66e-fc7a-11e9-ba19-42010a1e0097","e77fd66e-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e77ff96e-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e7800bac-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e7802074-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e78035fa-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e7804b1c-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e7805ef4-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e78085aa-fc7a-11e9-ba19-42010a1e0097","e780aabc-fc7a-11e9-ba19-42010a1e0097","e780bd0e-fc7a-11e9-ba19-42010a1e0097","e780d528-fc7a-11e9-ba19-42010a1e0097","e780e96e-fc7a-11e9-ba19-42010a1e0097","e780fcce-fc7a-11e9-ba19-42010a1e0097","e7810f2a-fc7a-11e9-ba19-42010a1e0097","e781235c-fc7a-11e9-ba19-42010a1e0097","e7813586-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7815ade-fc7a-11e9-ba19-42010a1e0097","e7816e02-fc7a-11e9-ba19-42010a1e0097","e78181b2-fc7a-11e9-ba19-42010a1e0097","e782255e-fc7a-11e9-ba19-42010a1e0097","e782255e-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7824a20-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7825d58-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7826ffa-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7828710-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e7829e3a-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e782b42e-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e782db66-fc7a-11e9-ba19-42010a1e0097","e7830000-fc7a-11e9-ba19-42010a1e0097","e7831310-fc7a-11e9-ba19-42010a1e0097","e7832b20-fc7a-11e9-ba19-42010a1e0097","e7833e12-fc7a-11e9-ba19-42010a1e0097","e7835294-fc7a-11e9-ba19-42010a1e0097","e783655e-fc7a-11e9-ba19-42010a1e0097","e783788c-fc7a-11e9-ba19-42010a1e0097","e7838a02-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e783b27a-fc7a-11e9-ba19-42010a1e0097","e783c558-fc7a-11e9-ba19-42010a1e0097","e783d71e-fc7a-11e9-ba19-42010a1e0097","e7848470-fc7a-11e9-ba19-42010a1e0097","e7848470-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784adc4-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784c1d8-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784d4fc-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784e938-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e784fd6a-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e7851110-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e7853b54-fc7a-11e9-ba19-42010a1e0097","e7856232-fc7a-11e9-ba19-42010a1e0097","e78574f2-fc7a-11e9-ba19-42010a1e0097","e7858c94-fc7a-11e9-ba19-42010a1e0097","e7859f90-fc7a-11e9-ba19-42010a1e0097","e785b2dc-fc7a-11e9-ba19-42010a1e0097","e785c722-fc7a-11e9-ba19-42010a1e0097","e785da0a-fc7a-11e9-ba19-42010a1e0097","e785ed10-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e7861222-fc7a-11e9-ba19-42010a1e0097","e78623a2-fc7a-11e9-ba19-42010a1e0097","e786364e-fc7a-11e9-ba19-42010a1e0097","e786da9a-fc7a-11e9-ba19-42010a1e0097","e786da9a-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e78702ea-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e787178a-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e7872b4e-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e787411a-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e787542a-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e7876744-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e7878b7a-fc7a-11e9-ba19-42010a1e0097","e787b302-fc7a-11e9-ba19-42010a1e0097","e787c5ea-fc7a-11e9-ba19-42010a1e0097","e787ddd2-fc7a-11e9-ba19-42010a1e0097","e787f006-fc7a-11e9-ba19-42010a1e0097","e788026c-fc7a-11e9-ba19-42010a1e0097","e788143c-fc7a-11e9-ba19-42010a1e0097","e7882670-fc7a-11e9-ba19-42010a1e0097","e7883a20-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e78861da-fc7a-11e9-ba19-42010a1e0097","e788759e-fc7a-11e9-ba19-42010a1e0097","e7888944-fc7a-11e9-ba19-42010a1e0097","e78938b2-fc7a-11e9-ba19-42010a1e0097","e78938b2-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e7895e6e-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e78976b0-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e7898a56-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e7899ec4-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e789b256-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e789c62e-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e789ef82-fc7a-11e9-ba19-42010a1e0097","e78a1836-fc7a-11e9-ba19-42010a1e0097","e78a2b1e-fc7a-11e9-ba19-42010a1e0097","e78a40f4-fc7a-11e9-ba19-42010a1e0097","e78a5508-fc7a-11e9-ba19-42010a1e0097","e78a6872-fc7a-11e9-ba19-42010a1e0097","e78a7f74-fc7a-11e9-ba19-42010a1e0097","e78a932e-fc7a-11e9-ba19-42010a1e0097","e78aa7ba-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78acd44-fc7a-11e9-ba19-42010a1e0097","e78adfe6-fc7a-11e9-ba19-42010a1e0097","e78af116-fc7a-11e9-ba19-42010a1e0097","e78b9e5e-fc7a-11e9-ba19-42010a1e0097","e78b9e5e-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78bc4a6-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78bda04-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78bedbe-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78c00ec-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78c1398-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78c27e8-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78c5312-fc7a-11e9-ba19-42010a1e0097","e78c7ba8-fc7a-11e9-ba19-42010a1e0097","e78c8e5e-fc7a-11e9-ba19-42010a1e0097","e78ca54c-fc7a-11e9-ba19-42010a1e0097","e78cb758-fc7a-11e9-ba19-42010a1e0097","e78cc98c-fc7a-11e9-ba19-42010a1e0097","e78cdbde-fc7a-11e9-ba19-42010a1e0097","e78ced72-fc7a-11e9-ba19-42010a1e0097","e78cffe2-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d28e6-fc7a-11e9-ba19-42010a1e0097","e78d3bec-fc7a-11e9-ba19-42010a1e0097","e78d4dc6-fc7a-11e9-ba19-42010a1e0097","e78df69a-fc7a-11e9-ba19-42010a1e0097","e78df69a-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e1a76-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e2d2c-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e40fa-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e584c-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e6cf6-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78e8092-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78ea9dc-fc7a-11e9-ba19-42010a1e0097","e78ed07e-fc7a-11e9-ba19-42010a1e0097","e78ee582-fc7a-11e9-ba19-42010a1e0097","e78efe64-fc7a-11e9-ba19-42010a1e0097","e78f11f6-fc7a-11e9-ba19-42010a1e0097","e78f23b2-fc7a-11e9-ba19-42010a1e0097","e78f35be-fc7a-11e9-ba19-42010a1e0097","e78f47f2-fc7a-11e9-ba19-42010a1e0097","e78f5b34-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f83c0-fc7a-11e9-ba19-42010a1e0097","e78f9900-fc7a-11e9-ba19-42010a1e0097","e78fac10-fc7a-11e9-ba19-42010a1e0097","e79058e0-fc7a-11e9-ba19-42010a1e0097","e79058e0-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e7907dca-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e79090e4-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e790a462-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e790b812-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e790cd66-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e790e1d4-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e79109e8-fc7a-11e9-ba19-42010a1e0097","e79130a8-fc7a-11e9-ba19-42010a1e0097","e79143b8-fc7a-11e9-ba19-42010a1e0097","e7915d12-fc7a-11e9-ba19-42010a1e0097","e79170e0-fc7a-11e9-ba19-42010a1e0097","e79183d2-fc7a-11e9-ba19-42010a1e0097","e7919642-fc7a-11e9-ba19-42010a1e0097","e791a9e8-fc7a-11e9-ba19-42010a1e0097","e791bcb2-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791e44e-fc7a-11e9-ba19-42010a1e0097","e791fa1a-fc7a-11e9-ba19-42010a1e0097","e7920d34-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e79238ea-fc7a-11e9-ba19-42010a1e0097","e7924c72-fc7a-11e9-ba19-42010a1e0097","e7924c72-fc7a-11e9-ba19-42010a1e0097","e7926252-fc7a-11e9-ba19-42010a1e0097","e7926252-fc7a-11e9-ba19-42010a1e0097","e7927616-fc7a-11e9-ba19-42010a1e0097","e7928ab6-fc7a-11e9-ba19-42010a1e0097"],"to":["e76a256c-fc7a-11e9-ba19-42010a1e0097","e76953ee-fc7a-11e9-ba19-42010a1e0097","e769fe66-fc7a-11e9-ba19-42010a1e0097","e769687a-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e7697d4c-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e7699156-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769a59c-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769bf0a-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769d468-fc7a-11e9-ba19-42010a1e0097","e769e8a4-fc7a-11e9-ba19-42010a1e0097","e769fe66-fc7a-11e9-ba19-42010a1e0097","e76a256c-fc7a-11e9-ba19-42010a1e0097","e76a39a8-fc7a-11e9-ba19-42010a1e0097","e76af3a2-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76ac80a-fc7a-11e9-ba19-42010a1e0097","e76add36-fc7a-11e9-ba19-42010a1e0097","e76af3a2-fc7a-11e9-ba19-42010a1e0097","e76b069e-fc7a-11e9-ba19-42010a1e0097","e79238ea-fc7a-11e9-ba19-42010a1e0097","e77bf814-fc7a-11e9-ba19-42010a1e0097","e77b2f4c-fc7a-11e9-ba19-42010a1e0097","e77bd122-fc7a-11e9-ba19-42010a1e0097","e77b446e-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77b58f0-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77b6dfe-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77b8280-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77b9630-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77ba9f4-fc7a-11e9-ba19-42010a1e0097","e77bbd68-fc7a-11e9-ba19-42010a1e0097","e77bd122-fc7a-11e9-ba19-42010a1e0097","e77bf814-fc7a-11e9-ba19-42010a1e0097","e77c0c00-fc7a-11e9-ba19-42010a1e0097","e77cc0dc-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77c981e-fc7a-11e9-ba19-42010a1e0097","e77cad0e-fc7a-11e9-ba19-42010a1e0097","e77cc0dc-fc7a-11e9-ba19-42010a1e0097","e77cd3a6-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e77e5d52-fc7a-11e9-ba19-42010a1e0097","e77d966a-fc7a-11e9-ba19-42010a1e0097","e77e387c-fc7a-11e9-ba19-42010a1e0097","e77da9ac-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77dbbd6-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77dd198-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77de7a0-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77dfb96-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77e0f5a-fc7a-11e9-ba19-42010a1e0097","e77e2332-fc7a-11e9-ba19-42010a1e0097","e77e387c-fc7a-11e9-ba19-42010a1e0097","e77e5d52-fc7a-11e9-ba19-42010a1e0097","e77e71ac-fc7a-11e9-ba19-42010a1e0097","e77f1f58-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77ef56e-fc7a-11e9-ba19-42010a1e0097","e77f0a54-fc7a-11e9-ba19-42010a1e0097","e77f1f58-fc7a-11e9-ba19-42010a1e0097","e77f325e-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e780aabc-fc7a-11e9-ba19-42010a1e0097","e77fe71c-fc7a-11e9-ba19-42010a1e0097","e78085aa-fc7a-11e9-ba19-42010a1e0097","e77ff96e-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e7800bac-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e7802074-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e78035fa-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e7804b1c-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e7805ef4-fc7a-11e9-ba19-42010a1e0097","e7807222-fc7a-11e9-ba19-42010a1e0097","e78085aa-fc7a-11e9-ba19-42010a1e0097","e780aabc-fc7a-11e9-ba19-42010a1e0097","e780bd0e-fc7a-11e9-ba19-42010a1e0097","e7816e02-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7814756-fc7a-11e9-ba19-42010a1e0097","e7815ade-fc7a-11e9-ba19-42010a1e0097","e7816e02-fc7a-11e9-ba19-42010a1e0097","e78181b2-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e7830000-fc7a-11e9-ba19-42010a1e0097","e7823710-fc7a-11e9-ba19-42010a1e0097","e782db66-fc7a-11e9-ba19-42010a1e0097","e7824a20-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e7825d58-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e7826ffa-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e7828710-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e7829e3a-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e782b42e-fc7a-11e9-ba19-42010a1e0097","e782c75c-fc7a-11e9-ba19-42010a1e0097","e782db66-fc7a-11e9-ba19-42010a1e0097","e7830000-fc7a-11e9-ba19-42010a1e0097","e7831310-fc7a-11e9-ba19-42010a1e0097","e783c558-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e7839d80-fc7a-11e9-ba19-42010a1e0097","e783b27a-fc7a-11e9-ba19-42010a1e0097","e783c558-fc7a-11e9-ba19-42010a1e0097","e783d71e-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e7856232-fc7a-11e9-ba19-42010a1e0097","e784974e-fc7a-11e9-ba19-42010a1e0097","e7853b54-fc7a-11e9-ba19-42010a1e0097","e784adc4-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e784c1d8-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e784d4fc-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e784e938-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e784fd6a-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e7851110-fc7a-11e9-ba19-42010a1e0097","e78525f6-fc7a-11e9-ba19-42010a1e0097","e7853b54-fc7a-11e9-ba19-42010a1e0097","e7856232-fc7a-11e9-ba19-42010a1e0097","e78574f2-fc7a-11e9-ba19-42010a1e0097","e78623a2-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e785fe4a-fc7a-11e9-ba19-42010a1e0097","e7861222-fc7a-11e9-ba19-42010a1e0097","e78623a2-fc7a-11e9-ba19-42010a1e0097","e786364e-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e787b302-fc7a-11e9-ba19-42010a1e0097","e786ed8c-fc7a-11e9-ba19-42010a1e0097","e7878b7a-fc7a-11e9-ba19-42010a1e0097","e78702ea-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e787178a-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e7872b4e-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e787411a-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e787542a-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e7876744-fc7a-11e9-ba19-42010a1e0097","e78778d8-fc7a-11e9-ba19-42010a1e0097","e7878b7a-fc7a-11e9-ba19-42010a1e0097","e787b302-fc7a-11e9-ba19-42010a1e0097","e787c5ea-fc7a-11e9-ba19-42010a1e0097","e788759e-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e7884db2-fc7a-11e9-ba19-42010a1e0097","e78861da-fc7a-11e9-ba19-42010a1e0097","e788759e-fc7a-11e9-ba19-42010a1e0097","e7888944-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e78a1836-fc7a-11e9-ba19-42010a1e0097","e7894a5a-fc7a-11e9-ba19-42010a1e0097","e789ef82-fc7a-11e9-ba19-42010a1e0097","e7895e6e-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e78976b0-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e7898a56-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e7899ec4-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e789b256-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e789c62e-fc7a-11e9-ba19-42010a1e0097","e789dbb4-fc7a-11e9-ba19-42010a1e0097","e789ef82-fc7a-11e9-ba19-42010a1e0097","e78a1836-fc7a-11e9-ba19-42010a1e0097","e78a2b1e-fc7a-11e9-ba19-42010a1e0097","e78adfe6-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78ab994-fc7a-11e9-ba19-42010a1e0097","e78acd44-fc7a-11e9-ba19-42010a1e0097","e78adfe6-fc7a-11e9-ba19-42010a1e0097","e78af116-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e78c7ba8-fc7a-11e9-ba19-42010a1e0097","e78bb0b0-fc7a-11e9-ba19-42010a1e0097","e78c5312-fc7a-11e9-ba19-42010a1e0097","e78bc4a6-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78bda04-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78bedbe-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78c00ec-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78c1398-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78c27e8-fc7a-11e9-ba19-42010a1e0097","e78c3ae4-fc7a-11e9-ba19-42010a1e0097","e78c5312-fc7a-11e9-ba19-42010a1e0097","e78c7ba8-fc7a-11e9-ba19-42010a1e0097","e78c8e5e-fc7a-11e9-ba19-42010a1e0097","e78d3bec-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d14e6-fc7a-11e9-ba19-42010a1e0097","e78d28e6-fc7a-11e9-ba19-42010a1e0097","e78d3bec-fc7a-11e9-ba19-42010a1e0097","e78d4dc6-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e78ed07e-fc7a-11e9-ba19-42010a1e0097","e78e0766-fc7a-11e9-ba19-42010a1e0097","e78ea9dc-fc7a-11e9-ba19-42010a1e0097","e78e1a76-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e2d2c-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e40fa-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e584c-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e6cf6-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78e8092-fc7a-11e9-ba19-42010a1e0097","e78e9578-fc7a-11e9-ba19-42010a1e0097","e78ea9dc-fc7a-11e9-ba19-42010a1e0097","e78ed07e-fc7a-11e9-ba19-42010a1e0097","e78ee582-fc7a-11e9-ba19-42010a1e0097","e78f9900-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f6d18-fc7a-11e9-ba19-42010a1e0097","e78f83c0-fc7a-11e9-ba19-42010a1e0097","e78f9900-fc7a-11e9-ba19-42010a1e0097","e78fac10-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e79130a8-fc7a-11e9-ba19-42010a1e0097","e7906a88-fc7a-11e9-ba19-42010a1e0097","e79109e8-fc7a-11e9-ba19-42010a1e0097","e7907dca-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e79090e4-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e790a462-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e790b812-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e790cd66-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e790e1d4-fc7a-11e9-ba19-42010a1e0097","e790f548-fc7a-11e9-ba19-42010a1e0097","e79109e8-fc7a-11e9-ba19-42010a1e0097","e79130a8-fc7a-11e9-ba19-42010a1e0097","e79143b8-fc7a-11e9-ba19-42010a1e0097","e791fa1a-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791cfcc-fc7a-11e9-ba19-42010a1e0097","e791e44e-fc7a-11e9-ba19-42010a1e0097","e791fa1a-fc7a-11e9-ba19-42010a1e0097","e7920d34-fc7a-11e9-ba19-42010a1e0097","e79222ec-fc7a-11e9-ba19-42010a1e0097","e79238ea-fc7a-11e9-ba19-42010a1e0097","e7924c72-fc7a-11e9-ba19-42010a1e0097","e7928ab6-fc7a-11e9-ba19-42010a1e0097","e7926252-fc7a-11e9-ba19-42010a1e0097","e7928ab6-fc7a-11e9-ba19-42010a1e0097","e7927616-fc7a-11e9-ba19-42010a1e0097","e7928ab6-fc7a-11e9-ba19-42010a1e0097","e7929f60-fc7a-11e9-ba19-42010a1e0097"],"label":["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"nodeSpacing":200,"direction":"RL"}},"groups":{"useDefaultGroups":true,"none":{"color":{"border":"black","background":"white"}}}},"groups":["none"],"width":"100%","height":"400px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="train-the-super-learner-on-the-machine-learning-task" class="section level3 unnumbered">
+<h3>3. Train the super learner on the machine learning task</h3>
+<p>Now we are ready to <strong>“train”</strong> our super learner on our <code>sl3_task</code> object, <code>washb_task</code>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">sl_fit &lt;-<span class="st"> </span>sl<span class="op">$</span><span class="kw">train</span>(washb_task)</a></code></pre></div>
+</div>
+<div id="obtain-predicted-values" class="section level3 unnumbered">
+<h3>4. Obtain predicted values</h3>
+<p>Now that we have fit the super learner, we are ready to obtain our predicted
+values, and we can also obtain a summary of the results.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">sl_preds &lt;-<span class="st"> </span>sl_fit<span class="op">$</span><span class="kw">predict</span>()</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">head</span>(sl_preds)</a></code></pre></div>
+<pre><code>[1] -0.5613113 -0.9132432 -0.7707479 -0.8007013 -0.6674561 -0.7356120</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">sl_fit<span class="op">$</span><span class="kw">print</span>()</a></code></pre></div>
+<pre><code>[1] &quot;SuperLearner:&quot;
+List of 2
+ $ : chr &quot;Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)&quot;
+ $ : chr &quot;Stack&quot;
+[1] &quot;Lrnr_nnls&quot;
+                                                                                                  lrnrs
+ 1:                           Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glm_TRUE
+ 2:                               Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_mean
+ 3:                  Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_ranger_100_TRUE_1
+ 4: Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+ 5:            Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.gam
+ 6:       Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.bayesglm
+ 7:                                                                                 Stack_Lrnr_glm_TRUE
+ 8:                                                                                     Stack_Lrnr_mean
+ 9:                                                                        Stack_Lrnr_ranger_100_TRUE_1
+10:                                                       Stack_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+11:                                                                  Stack_Lrnr_pkg_SuperLearner_SL.gam
+12:                                                             Stack_Lrnr_pkg_SuperLearner_SL.bayesglm
+       weights
+ 1: 0.00000000
+ 2: 0.00000000
+ 3: 0.14135651
+ 4: 0.00000000
+ 5: 0.18042311
+ 6: 0.00000000
+ 7: 0.03821181
+ 8: 0.00000000
+ 9: 0.27807197
+10: 0.36715034
+11: 0.00000000
+12: 0.00000000
+[1] &quot;Cross-validated risk (MSE, squared error loss):&quot;
+                                                                                                learner
+ 1:                           Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glm_TRUE
+ 2:                               Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_mean
+ 3:                  Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_ranger_100_TRUE_1
+ 4: Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+ 5:            Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.gam
+ 6:       Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.bayesglm
+ 7:                                                                                 Stack_Lrnr_glm_TRUE
+ 8:                                                                                     Stack_Lrnr_mean
+ 9:                                                                        Stack_Lrnr_ranger_100_TRUE_1
+10:                                                       Stack_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+11:                                                                  Stack_Lrnr_pkg_SuperLearner_SL.gam
+12:                                                             Stack_Lrnr_pkg_SuperLearner_SL.bayesglm
+13:                                                                                        SuperLearner
+    coefficients mean_risk    SE_risk    fold_SD fold_min_risk fold_max_risk
+ 1:           NA  1.015128 0.02363317 0.07629401     0.8927540      1.131594
+ 2:           NA  1.065282 0.02502664 0.09191791     0.9264292      1.196647
+ 3:           NA  1.023606 0.02370666 0.08193812     0.8865254      1.162385
+ 4:           NA  1.012542 0.02359690 0.07896802     0.8824119      1.130815
+ 5:           NA  1.015128 0.02363317 0.07629401     0.8927540      1.131594
+ 6:           NA  1.015119 0.02363328 0.07631510     0.8926608      1.131570
+ 7:           NA  1.018612 0.02380402 0.07799191     0.8956048      1.134940
+ 8:           NA  1.065282 0.02502664 0.09191791     0.9264292      1.196647
+ 9:           NA  1.018999 0.02345097 0.08506346     0.8667548      1.147128
+10:           NA  1.012362 0.02357777 0.07961400     0.8826979      1.130114
+11:           NA  1.018612 0.02380402 0.07799191     0.8956048      1.134940
+12:           NA  1.018596 0.02380414 0.07801948     0.8954820      1.134909
+13:           NA  1.007335 0.02341011 0.08073439     0.8704619      1.131367</code></pre>
+</div>
+</div>
+<div id="extensions" class="section level2">
+<h2><span class="header-section-number">3.4</span> Extensions</h2>
+<div id="cross-validated-super-learner" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Cross-validated Super Learner</h3>
+<p>We can cross-validate the super learner to see how well the super learner
+performs on unseen data, and obtain an estimate of the cross-validated risk of
+the super learner.</p>
+<p>This estimation procedure requires an “external” layer of cross-validation,
+also called nested cross-validation, which involves setting aside a separate
+holdout sample that we don’t use to fit the super learner. This
+external cross validation procedure may also incorporate 10 folds, which is the
+default in <code>sl3</code>. However, we will incorporate 2 outer/external folds of
+cross-validation for computational efficiency.</p>
+<p>We also need to specify a loss function to evaluate super learner.
+Documentation for the available loss functions can be found in the <a href="https://tlverse.org/sl3/reference/loss_functions.html"><code>sl3</code> Loss
+Function Reference</a>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">washb_task_new &lt;-<span class="st"> </span><span class="kw">make_sl3_Task</span>(</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">  <span class="dt">data =</span> washb_data,</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">  <span class="dt">covariates =</span> covars,</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">  <span class="dt">outcome =</span> outcome,</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">  <span class="dt">folds =</span> <span class="kw">make_folds</span>(washb_data, <span class="dt">fold_fun =</span> folds_vfold, <span class="dt">V =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">)</a></code></pre></div>
+<pre><code>Warning in .subset2(public_bind_env, &quot;initialize&quot;)(...): Missing Covariate Data
+Found. Imputing covariates using sl3_process_missing.</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">CVsl &lt;-<span class="st"> </span><span class="kw">CV_lrnr_sl</span>(sl_fit, washb_task_new, loss_squared_error)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">CVsl <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">fixed_thead =</span> T, <span class="dt">font_size =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="st">  </span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;250px&quot;</span>)</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:250px; overflow-x: scroll; width:100%; ">
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+learner
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+coefficients
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+mean_risk
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+SE_risk
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fold_SD
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fold_min_risk
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fold_max_risk
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glm_TRUE
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0118
+</td>
+<td style="text-align:right;">
+0.0236
+</td>
+<td style="text-align:right;">
+0.0063
+</td>
+<td style="text-align:right;">
+1.0073
+</td>
+<td style="text-align:right;">
+1.0163
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_mean
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0652
+</td>
+<td style="text-align:right;">
+0.0250
+</td>
+<td style="text-align:right;">
+0.0045
+</td>
+<td style="text-align:right;">
+1.0620
+</td>
+<td style="text-align:right;">
+1.0684
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_ranger_100_TRUE_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0333
+</td>
+<td style="text-align:right;">
+0.0238
+</td>
+<td style="text-align:right;">
+0.0067
+</td>
+<td style="text-align:right;">
+1.0286
+</td>
+<td style="text-align:right;">
+1.0381
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0121
+</td>
+<td style="text-align:right;">
+0.0236
+</td>
+<td style="text-align:right;">
+0.0005
+</td>
+<td style="text-align:right;">
+1.0118
+</td>
+<td style="text-align:right;">
+1.0124
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.gam
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0118
+</td>
+<td style="text-align:right;">
+0.0236
+</td>
+<td style="text-align:right;">
+0.0063
+</td>
+<td style="text-align:right;">
+1.0073
+</td>
+<td style="text-align:right;">
+1.0163
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pipeline(Lrnr_pkg_SuperLearner_screener_screen.corP-&gt;Stack)_Lrnr_pkg_SuperLearner_SL.bayesglm
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0118
+</td>
+<td style="text-align:right;">
+0.0236
+</td>
+<td style="text-align:right;">
+0.0063
+</td>
+<td style="text-align:right;">
+1.0073
+</td>
+<td style="text-align:right;">
+1.0163
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_glm_TRUE
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0282
+</td>
+<td style="text-align:right;">
+0.0279
+</td>
+<td style="text-align:right;">
+0.0318
+</td>
+<td style="text-align:right;">
+1.0057
+</td>
+<td style="text-align:right;">
+1.0507
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_mean
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0652
+</td>
+<td style="text-align:right;">
+0.0250
+</td>
+<td style="text-align:right;">
+0.0045
+</td>
+<td style="text-align:right;">
+1.0620
+</td>
+<td style="text-align:right;">
+1.0684
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_ranger_100_TRUE_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0248
+</td>
+<td style="text-align:right;">
+0.0238
+</td>
+<td style="text-align:right;">
+0.0069
+</td>
+<td style="text-align:right;">
+1.0200
+</td>
+<td style="text-align:right;">
+1.0297
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_glmnet_NULL_deviance_10_1_100_TRUE
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0184
+</td>
+<td style="text-align:right;">
+0.0241
+</td>
+<td style="text-align:right;">
+0.0057
+</td>
+<td style="text-align:right;">
+1.0144
+</td>
+<td style="text-align:right;">
+1.0225
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_pkg_SuperLearner_SL.gam
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0282
+</td>
+<td style="text-align:right;">
+0.0279
+</td>
+<td style="text-align:right;">
+0.0318
+</td>
+<td style="text-align:right;">
+1.0057
+</td>
+<td style="text-align:right;">
+1.0507
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stack_Lrnr_pkg_SuperLearner_SL.bayesglm
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0282
+</td>
+<td style="text-align:right;">
+0.0279
+</td>
+<td style="text-align:right;">
+0.0318
+</td>
+<td style="text-align:right;">
+1.0057
+</td>
+<td style="text-align:right;">
+1.0507
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SuperLearner
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.0138
+</td>
+<td style="text-align:right;">
+0.0237
+</td>
+<td style="text-align:right;">
+0.0055
+</td>
+<td style="text-align:right;">
+1.0099
+</td>
+<td style="text-align:right;">
+1.0178
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="variable-importance-measures-with-sl3" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Variable Importance Measures with <code>sl3</code></h3>
+<p>The <code>sl3</code> <code>varimp</code> function returns a table with variables listed in decreasing
+order of importance, in which the measure of importance is based on a risk
+difference between the learner fit with a permuted covariate and the learner
+fit with the true covariate, across all covariates.</p>
+<p>In this manner, the larger the risk difference, the more important the variable
+is in the prediction.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">washb_varimp &lt;-<span class="st"> </span><span class="kw">varimp</span>(sl_fit, loss_squared_error)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">washb_varimp <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">fixed_thead =</span> T, <span class="dt">font_size =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="st">  </span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;250px&quot;</span>)</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:250px; overflow-x: scroll; width:100%; ">
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+X
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+risk_diff
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+aged
+</td>
+<td style="text-align:right;">
+0.0532
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+momedu
+</td>
+<td style="text-align:right;">
+0.0072
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tr
+</td>
+<td style="text-align:right;">
+0.0056
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fracode
+</td>
+<td style="text-align:right;">
+0.0047
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+month
+</td>
+<td style="text-align:right;">
+0.0044
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_refrig
+</td>
+<td style="text-align:right;">
+0.0035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+momheight
+</td>
+<td style="text-align:right;">
+0.0028
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+floor
+</td>
+<td style="text-align:right;">
+0.0020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nlt18
+</td>
+<td style="text-align:right;">
+0.0019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hfiacat
+</td>
+<td style="text-align:right;">
+0.0018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_chair
+</td>
+<td style="text-align:right;">
+0.0017
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_chouki
+</td>
+<td style="text-align:right;">
+0.0015
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+elec
+</td>
+<td style="text-align:right;">
+0.0012
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+momage
+</td>
+<td style="text-align:right;">
+0.0009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_table
+</td>
+<td style="text-align:right;">
+0.0008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_wardrobe
+</td>
+<td style="text-align:right;">
+0.0008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_moto
+</td>
+<td style="text-align:right;">
+0.0008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+walls
+</td>
+<td style="text-align:right;">
+0.0007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sex
+</td>
+<td style="text-align:right;">
+0.0006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+watmin
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roof
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+delta_momage
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+delta_momheight
+</td>
+<td style="text-align:right;">
+-0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_khat
+</td>
+<td style="text-align:right;">
+-0.0003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_mobile
+</td>
+<td style="text-align:right;">
+-0.0003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_bike
+</td>
+<td style="text-align:right;">
+-0.0005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_tv
+</td>
+<td style="text-align:right;">
+-0.0007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+asset_sewmach
+</td>
+<td style="text-align:right;">
+-0.0007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ncomp
+</td>
+<td style="text-align:right;">
+-0.0011
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="exercise" class="section level2">
+<h2><span class="header-section-number">3.5</span> Exercise</h2>
+<div id="predicting-myocardial-infarction-with-sl3" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Predicting Myocardial Infarction with <code>sl3</code></h3>
+<p>Follow the steps below to predict myocardial infarction (<code>mi</code>) using the
+available covariate data. Thanks to Professor David Benkeser at Emory University
+for making the this Cardiovascular Health Study (CHS) data accessible.</p>
+<p>Work with a buddy/team. You have 20 minutes.</p>
+<p>In the <a href="https://etherpad.net/p/acic2019-tlverse">etherpad</a>, submit your group’s
+answers to the following questions.</p>
+<ol style="list-style-type: decimal">
+<li>Which learner was the discrete super learner? What was the cross validated
+mean risk of the discrete super learner?</li>
+<li>What was the cross validated risk of the continuous super learner?</li>
+<li>Did your group face any challenges?</li>
+<li>Any additional comments/questions about this <code>sl3</code> section of the workshop?</li>
+</ol>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># load the data set</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">db_data &lt;-</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">  </span><span class="kw">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/benkeser/sllecture/master/chspred.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">chspred &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> db_data, <span class="dt">col_names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="co"># take a quick peek</span></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="kw">head</span>(chspred) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">fixed_thead =</span> T, <span class="dt">font_size =</span> <span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="st">  </span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="dt">height =</span> <span class="st">&quot;200px&quot;</span>)</a></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+waist
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+alcoh
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+hdl
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+beta
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+smoke
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+ace
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+ldl
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+bmi
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+aspirin
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+gend
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+age
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+estrgn
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+glu
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+ins
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+cysgfr
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+dm
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+fetuina
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+whr
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+hsed
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+race
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+logcystat
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+logtrig
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+logcrp
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+logcre
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+health
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+logkcal
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+sysbp
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;position: sticky; top:0; background-color: #FFFFFF;">
+mi
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+110.1642
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+66.4974
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+114.2162
+</td>
+<td style="text-align:right;">
+27.9975
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+73.5179
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+159.9314
+</td>
+<td style="text-align:right;">
+70.3343
+</td>
+<td style="text-align:right;">
+75.0078
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1752
+</td>
+<td style="text-align:right;">
+1.1690
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-0.3420
+</td>
+<td style="text-align:right;">
+5.4063
+</td>
+<td style="text-align:right;">
+2.0126
+</td>
+<td style="text-align:right;">
+-0.6739
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4.3926
+</td>
+<td style="text-align:right;">
+177.1345
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+89.9763
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+50.0652
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+103.7766
+</td>
+<td style="text-align:right;">
+20.8931
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+61.7723
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+153.3888
+</td>
+<td style="text-align:right;">
+33.9695
+</td>
+<td style="text-align:right;">
+82.7433
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.5717
+</td>
+<td style="text-align:right;">
+0.9011
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-0.0847
+</td>
+<td style="text-align:right;">
+4.8592
+</td>
+<td style="text-align:right;">
+3.2933
+</td>
+<td style="text-align:right;">
+-0.5551
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6.2071
+</td>
+<td style="text-align:right;">
+136.3742
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+106.1941
+</td>
+<td style="text-align:right;">
+8.4174
+</td>
+<td style="text-align:right;">
+40.5059
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+165.7158
+</td>
+<td style="text-align:right;">
+28.4554
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+72.9312
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+121.7145
+</td>
+<td style="text-align:right;">
+-17.3017
+</td>
+<td style="text-align:right;">
+74.6989
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3517
+</td>
+<td style="text-align:right;">
+1.1797
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-0.4451
+</td>
+<td style="text-align:right;">
+4.5088
+</td>
+<td style="text-align:right;">
+0.3013
+</td>
+<td style="text-align:right;">
+-0.0115
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.7320
+</td>
+<td style="text-align:right;">
+135.1993
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+90.0566
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+36.1750
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+45.2035
+</td>
+<td style="text-align:right;">
+23.9608
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+79.1191
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+53.9691
+</td>
+<td style="text-align:right;">
+11.7315
+</td>
+<td style="text-align:right;">
+95.7823
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.5439
+</td>
+<td style="text-align:right;">
+1.1360
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-0.4807
+</td>
+<td style="text-align:right;">
+5.1832
+</td>
+<td style="text-align:right;">
+3.0243
+</td>
+<td style="text-align:right;">
+-0.5751
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7.3972
+</td>
+<td style="text-align:right;">
+139.0182
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+78.6143
+</td>
+<td style="text-align:right;">
+2.9790
+</td>
+<td style="text-align:right;">
+71.0642
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+131.3121
+</td>
+<td style="text-align:right;">
+10.9656
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+69.0179
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+94.3153
+</td>
+<td style="text-align:right;">
+9.7112
+</td>
+<td style="text-align:right;">
+72.7109
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.4916
+</td>
+<td style="text-align:right;">
+1.1028
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3121
+</td>
+<td style="text-align:right;">
+4.2190
+</td>
+<td style="text-align:right;">
+-0.7057
+</td>
+<td style="text-align:right;">
+0.0053
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8.2779
+</td>
+<td style="text-align:right;">
+88.0470
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+91.6593
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+59.4963
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+171.1872
+</td>
+<td style="text-align:right;">
+29.1317
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+81.8346
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+212.9066
+</td>
+<td style="text-align:right;">
+-28.2269
+</td>
+<td style="text-align:right;">
+69.2184
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.4621
+</td>
+<td style="text-align:right;">
+0.9529
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-0.2872
+</td>
+<td style="text-align:right;">
+5.1773
+</td>
+<td style="text-align:right;">
+0.9705
+</td>
+<td style="text-align:right;">
+0.2127
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5.9942
+</td>
+<td style="text-align:right;">
+69.5943
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol style="list-style-type: decimal">
+<li>Create an <code>sl3</code> task, setting myocardial infarction <code>mi</code> as the outcome and
+using all available covariate data.</li>
+<li>Make a library of seven relatively fast base learning algorithms (i.e., do
+not consider BART or HAL). Customize hyperparameters for one of your
+learners. Feel free to use learners from <code>sl3</code> or <code>SuperLearner</code>. You may
+use the same base learning library that is presented above.</li>
+<li>Incorporate feature selection with the <code>SuperLearner</code> screener <code>screen.corP</code>.</li>
+<li>Fit the metalearning step with non-negative least squares, <code>Lrnr_nnls</code>.</li>
+<li>With the metalearner and base learners, make the super learner and train it
+on the task.</li>
+<li>Print your super learner fit by calling <code>print()</code> with <code>$</code>.</li>
+<li>Cross-validate your super learner fit to see how well it performs on unseen
+data. Specify <code>loss_squared_error</code> as the loss function to evaluate the
+super learner. Like above, create a new task with 2 folds of external cross
+validation for computational efficiency.</li>
+</ol>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">3.6</span> Summary</h2>
+<ul>
+<li><p>The general ensemble learning approach of super learner can be applied to a
+diversity of estimation and prediction problems that can be defined by a loss
+function.</p></li>
+<li><p>Plug-in estimators of the estimand are desirable because a plug-in estimator
+respects both the local and global constraints of the statistical model.</p></li>
+<li><p>Asymptotically linear estimators are also advantageous, since they converge to
+the estimand at <span class="math inline">\(\frac{1}{\sqrt{n}}\)</span> rate, and thereby permit formal
+statistical inference.</p></li>
+<li><p>If we plug in the estimator returned by super learner into the target
+parameter mapping, then we would end up with an estimator that has the same
+bias as what we plugged in. This estimator would not be asymptotically linear.</p></li>
+<li><p>Targeted maximum likelihood estimation (TMLE) is a general strategy that
+succeeds in constructing asymptotically linear plug-in estimators.</p></li>
+<li><p>In the chapters that follow, we focus on the targeted maximum likelihood
+estimator and the targeted minimum loss-based estimator, both referred to as
+TMLE.</p></li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-polley2010super">
+<p>Polley, Eric C, and Mark J van der Laan. 2010. “Super Learner in Prediction.” bepress.</p>
+</div>
+<div id="ref-vdl2003unified">
+<p>van der Laan, Mark J, and Sandrine Dudoit. 2003. “Unified Cross-Validation Methodology for Selection Among Estimators and a General Cross-Validated Adaptive Epsilon-Net Estimator: Finite Sample Oracle Inequalities and Examples.” bepress.</p>
+</div>
+<div id="ref-vdl2007super">
+<p>van der Laan, Mark J, Eric C Polley, and Alan E Hubbard. 2007. “Super Learner.” <em>Statistical Applications in Genetics and Molecular Biology</em> 6 (1).</p>
+</div>
+<div id="ref-van2006oracle">
+<p>van der Vaart, Aad W, Sandrine Dudoit, and Mark J van der Laan. 2006. “Oracle Inequalities for Multi-Fold Cross Validation.” <em>Statistics &amp; Decisions</em> 24 (3). Oldenbourg Wissenschaftsverlag: 351–71.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-tmle-framework.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tlverse/deming2019-workshop/edit/master/04-sl3.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
