@@ -1,41 +1,130 @@
-# Ensemble Machine Learning
-
-_Rachael Phillips_
+# Super (Ensemble Machine) Learning
 
 Based on the [`sl3` `R` package](https://github.com/tlverse/sl3) by _Jeremy
 Coyle, Nima Hejazi, Ivana Malenica, and Oleg Sofrygin_.
 
 Updated: `r Sys.Date()`
 
-## Learning Objectives
-By the end of this lesson you will be able to:
-
-1. Assemble an ensemble of learners based on the properties that identify what
-   features they support.
-2. Customize learner hyperparameters to incorporate a diversity of different
-   settings.
-3. Select a subset of available covariates and pass only those variables to the
-   modeling algorithm.
-4. Fit an ensemble with nested cross-validation to obtain an estimate of the
-   performance of the ensemble itself.
-5. Calculate `sl3` variable importance metrics.
-6. Interpret the discrete and continuous super learner fits.
-7. Rationalize the need to remove bias from the super learner to make an optimal
-   bias-variance tradeoff for the parameter of interest.
-
 ## Introduction
 
-Now that we have defined the statistical estimation problem in [The Targeted
-Learning Roadmap](#intro), we are ready construct the TMLE; an asymptotically
-efficient substitution estimator of this target quantity.
+Once the statistical estimation problem is defined, as described in the 
+[The Targeted Learning Roadmap](#intro), we are ready to construct the TMLE:
+an asymptotically efficient substitution estimator of this target quantity.
 
-The first step in this estimation procedure is an initial estimate of the
+The first step in the estimation procedure is an initial estimate of the
 data-generating distribution, or the relevant part of this distribution that is
 needed to evaluate the target parameter. For this initial estimation, we use the
 super learner [@vdl2007super], an important step for creating a robust
 estimator.
 
-#### Super Learner {-}
+### Super Learning
+
+- A common task in statistical data analysis is estimator selection 
+  (e.g., for prediction).
+- There is no universally optimal machine learning algorithm for density
+  estimation or prediction.
+- For some data, one needs learners that can model a complex function.
+- For others, possibly as a result of noise or insufficient sample size, a
+  simple, parametric model might fit best.
+- Super Learner, an ensemble learner, solves this issue, by allowing a
+  combination of learners from the simplest (intercept-only) to most complex
+  (neural nets, random forests, SVM, etc).
+- It works by using cross-validation in a manner which guarantees that the
+  resulting fit will be as good as possible, given the learners provided.
+- Note: even a combination of poor learners can sometimes result in good fit.
+  It is very important to have good candidates in our library, possibly
+  incorporating known knowledge about the system in question.
+  
+#### General Overview of the Algorithm
+
+**What is cross-validation and how does it work?**
+
+- There are many different cross-validation schemes, designed to accommodate different 
+  study designs and data structures.
+- The figure below shows an example of 10-fold cross-validation.  
+  
+```{r cv_fig, fig.show="hold", echo = FALSE}
+knitr::include_graphics("img/misc/vs.pdf")
+```
+
+**General step-by-step overview of the Super Learner algorithm:**
+
+- Break up the sample evenly into V-folds (say V=10).
+- For each of these 10 folds, remove that portion of the sample (kept out as
+  validation sample) and the remaining will be used to fit learners (training
+  sample).
+- Fit each learner on the training sample (note, some learners will have their
+  own internal cross-validation procedure or other methods to select tuning
+  parameters).
+- For each observation in the corresponding validation sample, predict the outcome
+  using each of the learners, so if there are $p$ learners, then there would be
+  $p$ predictions.
+- Take out another validation sample and repeat until each of the V-sets of data
+  are removed.
+- Compare the cross-validated fit of the learners across all observations based
+  on specified loss function (e.g., squared error, negative log-likelihood, ...)
+  by calculating the corresponding average loss (risk).
+- Either:
+
+  + choose the learner with smallest risk and apply that learner to entire data
+    set (resulting SL fit),
+  + do a weighted average of the learners to minimize the cross-validated risk
+    (construct an ensemble of learners), by
+
+    + re-fitting the learners on the original data set, and
+    + use the weights above to get the SL fit.
+
+Note, this entire procedure can be itself cross-validated to get a consistent
+estimate of the future performance of the SL fit.
+
+```{r cv_fig2, fig.show="hold", echo = FALSE}
+knitr::include_graphics("img/misc/SLKaiserNew.pdf")
+``` 
+
+**How to pick a Super Learner library?**
+
+- A library is simply a collection of algorithms.
+- The algorithms in the library should come from contextual knowledge and a large
+  set of "default" algorithms.
+- The algorithms may range from a simple linear regression model to multi-step 
+  algorithms involving screening covariates, penalizations, optimizing tuning
+  parameters, etc. 
+
+#### Example: Super Learner In Prediction
+
+- We observe a learning data set $X_i=(Y_i,W_i)$, for $i=1, ..., n$.
+- Here, $Y_i$ is the outcome of interest, and $W_i$ is a p-dimensional 
+  set of covariates.
+- Our objective is to estimate the function $\psi_0(W) = E(Y|W)$.
+- This function can be expressed as the minimizer of the expected loss:
+  $\psi_0(W) = \text{argmin}_{\psi} E[L(X,\psi(W))]$.
+- Here, the loss function is represented as $L$ (e.g., squared error loss,
+  $L: (Y-\psi(W))^2)$).
+  
+#### Why use the Super Learner?
+
+- For prediction, one can use the cross-validated risk to empirically determine
+  the relative performance of SL and competing methods. 
+- When we have tested different algorithms on actual
+  data and looked at the performance (e.g., MSE of prediction), never does one
+  algorithm always win (see below).
+- Below shows the results of such a study, comparing the fits of several different learners, 
+  including the SL algorithms.
+
+```{r cv_fig3, fig.show="hold", echo = FALSE}
+knitr::include_graphics("img/misc/ericSL.pdf")
+```
+
+- Super Learner performs asymptotically as well as best possible weighted 
+  combination. 
+- By including all competitors in the library of candidate estimators (glm, neural nets, 
+  SVMs, random forest, etc.), the Super Learner will asymptotically outperform 
+  any of its competitors- even if the set of competitors is allowed to grow polynomial
+  in sample size. 
+- Motivates the name "Super Learner": it provides a system of combining many estimators
+  into an improved estimator. 
+
+### Review of the Super Learner {-}
 
 * Loss-function-based tool that uses V-fold cross-validation to obtain the best
   prediction of the relevant part of the likelihood that's needed to evaluate
@@ -45,27 +134,29 @@ estimator.
   proposing a library of algorithms ("learners" in `sl3` nomenclature) that we
   think might be consistent with the true data-generating distribution.
 
-* Proven to be asymptotically as accurate as the best possible prediction
-  algorithm that is tested [@vdl2003unified; @van2006oracle].
-
 * The *discrete super learner*, or cross-validated selector, is the algorithm in
   the library that minimizes the V-fold cross-validated empirical risk.
 
-* The *continuous super learner* is a weighted average of the library of
+* The *super learner* is a weighted average of the library of
   algorithms, where the weights are chosen to minimize the V-fold
   cross-validated empirical risk of the library. Restricting the weights
   ("metalearner" in `sl3` nomenclature) to be positive and sum to one (convex
   combination) has been shown to improve upon the discrete super learner
   [@polley2010super; @vdl2007super].
+  
+* Proven to be asymptotically as accurate as the best possible prediction
+  algorithm that is tested [@vdl2003unified; @van2006oracle].  
 
- * This background material is described in greater detail in the accompanying
-   `tlverse` handbook [`sl3`
-   chapter](https://tlverse.org/tlverse-handbook/ensemble-machine-learning.html).
-
-## Basic `sl3` Implementation
+* This background material is described in greater detail in the accompanying
+  `tlverse` handbook [`sl3`
+  chapter](https://tlverse.org/tlverse-handbook/ensemble-machine-learning.html). 
+  
+## `sl3` "Microwave Dinner" Implementation
 
 We begin by illustrating the core functionality of the super learner algorithm
-as implemented in `sl3`.
+as implemented in `sl3`. For those who are interested in the internals 
+of `sl3`, see this [`sl3` introductory 
+tutorial](https://tlverse.org/sl3/articles/intro_sl3.html). 
 
 The `sl3` implementation consists of the following steps:
 
@@ -91,14 +182,11 @@ library(data.table)
 library(sl3)
 library(SuperLearner)
 library(origami)
-
 set.seed(7194)
-
 # load data set and take a peek
 washb_data <- fread("https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv",
   stringsAsFactors = TRUE
 )
-
 head(washb_data) %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
@@ -119,14 +207,12 @@ weights, id, offset).
 # specify the outcome and covariates
 outcome <- "whz"
 covars <- colnames(washb_data)[-which(names(washb_data) == outcome)]
-
 # create the sl3 task
 washb_task <- make_sl3_Task(
   data = washb_data,
   covariates = covars,
   outcome = outcome
 )
-
 # examine the task
 washb_task
 ```
@@ -254,9 +340,20 @@ dt_sl <- delayed_learner_train(sl, washb_task)
 plot(dt_sl, color = FALSE, height = "400px", width = "100%")
 ```
 
+We can also use `Lrnr_cv` to build a super learner, cross-validate a stack of 
+learners to compare performance of the learners in the stack, or cross-validate
+any single learner (see "Cross-validation" section of this [`sl3` 
+introductory tutorial](https://tlverse.org/sl3/articles/intro_sl3.html)).
+
+Furthermore, we can [Define New `sl3` 
+Learners](https://tlverse.org/sl3/articles/custom_lrnrs.html) which can be used 
+in all the places you could otherwise use any other `sl3` learners, including
+`Pipelines`, `Stacks`, and the Super Learner. 
+
 ### 3. Train the super learner on the machine learning task {-}
 
-Now we are ready to **"train"** our super learner on our `sl3_task` object, `washb_task`.
+Now we are ready to **"train"** our super learner on our `sl3_task` object,
+`washb_task`.
 
 ```{r sl-basic}
 sl_fit <- sl$train(washb_task)
@@ -283,7 +380,7 @@ the super learner.
 This estimation procedure requires an "external" layer of cross-validation,
 also called nested cross-validation, which involves setting aside a separate
 holdout sample that we don’t use to fit the super learner. This
-external cross validation procedure may also incorporate 10 folds, which is the
+external cross-validation procedure may also incorporate 10 folds, which is the
 default in `sl3`. However, we will incorporate 2 outer/external folds of
 cross-validation for computational efficiency.
 
@@ -328,17 +425,12 @@ washb_varimp %>%
 ### Predicting Myocardial Infarction with `sl3`
 
 Follow the steps below to predict myocardial infarction (`mi`) using the
-available covariate data. Thanks to Professor David Benkeser at Emory University
-for making the this Cardiovascular Health Study (CHS) data accessible.
-
-Work with a buddy/team. You have 20 minutes.
-
-In the [etherpad](https://etherpad.net/p/acic2019-tlverse), submit your group's
-answers to the following questions.
+available covariate data. We thank Prof. David Benkeser at Emory University for
+making the this Cardiovascular Health Study (CHS) data accessible.
 
 1. Which learner was the discrete super learner? What was the cross validated
 mean risk of the discrete super learner?
-2. What was the cross validated risk of the continuous super learner?
+2. What was the cross-validated risk of the continuous super learner?
 3. Did your group face any challenges?
 4. Any additional comments/questions about this `sl3` section of the workshop?
 
@@ -367,8 +459,8 @@ head(chspred) %>%
 6. Print your super learner fit by calling `print()` with `$`.
 7. Cross-validate your super learner fit to see how well it performs on unseen
    data. Specify `loss_squared_error` as the loss function to evaluate the
-   super learner. Like above, create a new task with 2 folds of external cross
-   validation for computational efficiency.
+   super learner. Like above, create a new task with 2 folds of external 
+   cross-validation for computational efficiency.
 
 ## Summary
 

@@ -1,5 +1,7 @@
 # Welcome to the `tlverse` {#tlverse}
 
+_Jeremy Coyle_
+
 ## Learning Objectives
 
 1. Understand the `tlverse` ecosystem conceptually
@@ -18,7 +20,6 @@ By analogy to the [`tidyverse`](https://tidyverse.org/):
 > The `tidyverse` is an opinionated collection of R packages designed for data
 > science. All packages share an underlying design philosophy, grammar, and data
 > structures.
-
 So, the [`tlverse`](https://tlverse.org) is
 
 * an opinionated collection of R packages for Targeted Learning
@@ -97,10 +98,8 @@ Error: HTTP error 403.
   API rate limit exceeded for 71.204.135.82. (But here's the good news:
   Authenticated requests get a higher rate limit. Check out the documentation
   for more details.)
-
   Rate limit remaining: 0/60
   Rate limit reset at: 2019-03-04 19:39:05 UTC
-
   To increase your GitHub API rate limit
   - Use `usethis::browse_github_pat()` to create a Personal Access Token.
   - Use `usethis::edit_r_environ()` and add the token as `GITHUB_PAT`.
@@ -129,3 +128,8 @@ user (you'll need a GitHub user account). Follow these two steps:
 
 After following these steps, you should be able to successfully install the
 package which threw the error above.
+
+This workshop has other dependencies, which you can install using the following
+linked script:
+
+* [install.R](https://github.com/tlverse/gates2019-workshop/blob/master/install.R)

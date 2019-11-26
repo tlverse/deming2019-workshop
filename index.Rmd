@@ -81,17 +81,13 @@ resource to these workshop materials.
 Please install the relevant software before the workshop.
 
 * [installation
-script](https://github.com/tlverse/deming2019-workshop/blob/master/install.R)
-
-You will probably exceed the GitHub API rate limit during this installation, and this
-will throw an error. This issue and the solution are addressed
-[here](#installtlverse).
+script](#installtlverse)
 
 **Code**
 `R` script files for each section of the workshop are available via the GitHub
 repository for the short course.  
 
-* [https://github.com/tlverse/deming2019-workshop/tree/master/handbook/R](https://github.com/tlverse/deming2019-workshop/tree/master/handbook/R)
+* [https://github.com/tlverse/deming2019-workshop/tree/master/R](https://github.com/tlverse/deming2019-workshop/tree/master/R)
 
 ## About {-}
 
@@ -145,25 +141,32 @@ for assessing the causal claim of interest. Topics include
 
 * Introduction to the [`tlverse` software
     ecosystem](https://tlverse.org)
-* The Roadmap of Targeted Learning, and the [WASH
+* The roadmap of statistical learning, and the [WASH
     Benefits](http://www.washbenefits.net/) data
 * [Why we need a statistical
     revolution](https://senseaboutscienceusa.org/super-learning-and-the-revolution-in-knowledge/)
 * Ensemble machine learning with the
-    [`sl3`](https://github.com/tlverse/sl3) `R` package
+    [`sl3`](https://github.com/tlverse/sl3) `tlverse` `R` package
 * Targeted learning for causal inference with the
-    [`tmle3`](https://github.com/tlverse/tmle3) `R` package
+    [`tmle3`](https://github.com/tlverse/tmle3) `tlverse` `R` package
 * Targeted learning for causal inference with the
-    [`tmle3`](https://github.com/tlverse/tmle3) `R` package
+    [`tmle3`](https://github.com/tlverse/tmle3) `tlverse` `R` package
 * Optimal treatment regimes and the
-    [`tmle3mopttx`](https://github.com/tlverse/tmle3mopttx) `R` package
+    [`tmle3mopttx`](https://github.com/tlverse/tmle3mopttx) `tlverse` `R` 
+    package
 * Stochastic treatment regimes and the
-    [`tmle3shift`](https://github.com/tlverse/tmle3shift) `R` package
-
+    [`tmle3shift`](https://github.com/tlverse/tmle3shift) `tlverse` `R` package
+* Treatment specific survival functions with the
+    [`MOSS`](https://github.com/wilsoncai1992/MOSS) `R` package
+* Treatment specific mean outcome or marginal structural model for longitudinal 
+    data with the [`ltmle`](https://cran.r-project.org/web/packages/ltmle/) `R` 
+    package
+    
 ## About the instructors and authors {-}
 
-While this workshop is delivered by Mark van der Laan and Rachael Phillips, all 
-materials are based on joint work with a team of six co-authors:
+While this workshop is delivered by Mark van der Laan and Rachael Phillips, the 
+majority of these materials are based on joint work with a team of six 
+co-authors:
 
 ### Mark van der Laan {-}
 
@@ -230,11 +233,12 @@ adaptive sequential designs.
 
 ### Rachael Phillips {-}
 
-Rachael is a Ph.D. student in biostatistics, advised by Alan Hubbard and Mark
-van der Laan. She has an M.A. in Biostatistics, B.S. in Biology with a Chemistry
-minor and B.A. in Mathematics with a Spanish minor. Her research is applied
-and specific to human health. Motivated by issues arising in healthcare, Rachael
-leverages strategies rooted in causal inference and nonparametric estimation to
-build clinician-tailored, machine-driven solutions. Her accompanying statistical
-interests include high-dimensional statistics and adaptive experimental design. 
-She is also passionate about free, online-mediated education. 
+Rachael is a Ph.D.~student in biostatistics, advised by Alan Hubbard and Mark
+van der Laan. She has an M.A.~in Biostatistics, B.S.~in Biology with a
+Chemistry minor and a B.A.~in Mathematics with a Spanish minor. Rachael's 
+research focuses on narrowing the gap between the theory for and application of 
+modern statistics for real-world data science. Specifically, Rachael is 
+motivated by issues arising in healthcare, and she leverages strategies rooted 
+in causal inference and nonparametric estimation to build clinician-tailored, 
+machine-driven solutions. Rachael is also passionate about free, 
+online-mediated education and its corresponding pedagogy.
