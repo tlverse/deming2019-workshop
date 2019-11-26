@@ -718,15 +718,15 @@ be used to estimate <span class="math inline">\(g_0(A|W)\)</span> in <code>sl3</
 <a class="sourceLine" id="cb82-2" data-line-number="2">fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_spec, data, node_list, learner_list)</a>
 <a class="sourceLine" id="cb82-3" data-line-number="3">fit</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type         param init_est  tmle_est         se     lower     upper
-1:  TSM E[Y_{A=NULL}] 0.539116 0.5539669 0.06713217 0.4223902 0.6855435
+   type         param  init_est  tmle_est         se     lower    upper
+1:  TSM E[Y_{A=NULL}] 0.5425026 0.6409982 0.07198438 0.4999115 0.782085
    psi_transformed lower_transformed upper_transformed
-1:       0.5539669         0.4223902         0.6855435</code></pre>
+1:       0.6409982         0.4999115          0.782085</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="co"># How many individuals got assigned each treatment?</span></a>
 <a class="sourceLine" id="cb84-2" data-line-number="2"><span class="kw">table</span>(tmle_spec<span class="op">$</span>return_rule)</a></code></pre></div>
 <pre><code>
   1   2   3 
-433 381 186 </code></pre>
+410 395 195 </code></pre>
 <p>We can see that the confidence interval covers
 our true mean under the true optimal individualized treatment.</p>
 <p><strong>NOTICE the distribution of the assigned treatment! We will need this shortly.</strong></p>
@@ -765,10 +765,10 @@ inference for the counterfactual mean outcome under the sub-optimal rule.</p></l
 <a class="sourceLine" id="cb87-2" data-line-number="2">fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_spec, data, node_list, learner_list)</a>
 <a class="sourceLine" id="cb87-3" data-line-number="3">fit</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type                param  init_est  tmle_est         se     lower    upper
-1:  TSM E[Y_{A=W4,W3,W2,W1}] 0.5475866 0.6594437 0.05898032 0.5438444 0.775043
+   type             param  init_est  tmle_est         se     lower     upper
+1:  TSM E[Y_{A=W3,W2,W1}] 0.5361701 0.6197021 0.06455923 0.4931683 0.7462359
    psi_transformed lower_transformed upper_transformed
-1:       0.6594437         0.5438444          0.775043</code></pre>
+1:       0.6197021         0.4931683         0.7462359</code></pre>
 <p>Even though the user specified all baseline covariates as the basis
 for rule estimation, a simpler rule is sufficient to
 maximize the mean under the optimal individualized treatment!</p>
@@ -799,15 +799,15 @@ supported by the data.</p></li>
 <a class="sourceLine" id="cb90-2" data-line-number="2">fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(tmle_spec, data, node_list, learner_list)</a>
 <a class="sourceLine" id="cb90-3" data-line-number="3">fit</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type         param  init_est  tmle_est        se     lower     upper
-1:  TSM E[Y_{A=NULL}] 0.5482141 0.6552244 0.0215809 0.6129266 0.6975222
+   type         param  init_est  tmle_est         se     lower     upper
+1:  TSM E[Y_{A=NULL}] 0.5444701 0.6571537 0.02155327 0.6149101 0.6993974
    psi_transformed lower_transformed upper_transformed
-1:       0.6552244         0.6129266         0.6975222</code></pre>
+1:       0.6571537         0.6149101         0.6993974</code></pre>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="co"># How many individuals got assigned each treatment?</span></a>
 <a class="sourceLine" id="cb92-2" data-line-number="2"><span class="kw">table</span>(tmle_spec<span class="op">$</span>return_rule)</a></code></pre></div>
 <pre><code>
   2   3 
-511 489 </code></pre>
+507 493 </code></pre>
 <p><strong>QUESTION:</strong> Referring back to the data-generating distribution, why do you
 think the distribution of allocated treatment changed from the distribution
 that we had under the “non-realistic” rule?</p>
@@ -863,14 +863,14 @@ interest (called a <code>tmle3_Spec</code> in the <code>tlverse</code> nomenclat
 <a class="sourceLine" id="cb96-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb96-6" data-line-number="6"><span class="kw">print</span>(vim_results)</a></code></pre></div>
 <pre><code>   type                  param     init_est    tmle_est         se       lower
-1:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.023523756 -0.07832786 0.05051959 -0.17734444
-2:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.001443784  0.04088098 0.03425574 -0.02625904
-        upper psi_transformed lower_transformed upper_transformed  A
-1: 0.02068873       0.9246612         0.8374913          1.020904 W1
-2: 0.10802101       1.0417281         0.9740827          1.114071  A
-             W    Z_stat       p_nz p_nz_corrected
-1:  W3,W4,W2,A -1.550445 0.06051736      0.1163553
-2: W3,W4,W2,W1  1.193405 0.11635534      0.1163553</code></pre>
+1:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.001966704  0.10524398 0.03270691  0.04113961
+2:   RR RR(E[Y_{A=NULL}]/E[Y]) -0.023440000 -0.09662053 0.05030927 -0.19522488
+         upper psi_transformed lower_transformed upper_transformed  A
+1: 0.169348353       1.1109816         1.0419976          1.184533  A
+2: 0.001983821       0.9079005         0.8226496          1.001986 W1
+             W    Z_stat         p_nz p_nz_corrected
+1: W3,W4,W2,W1  3.217790 0.0006459117    0.001291823
+2:  W3,W4,W2,A -1.920531 0.0273954005    0.027395401</code></pre>
 <p>The final result of <code>tmle3_vim</code> with the <code>tmle3mopttx</code> spec is an ordered list
 of mean outcomes under the optimal individualized treatment for all categorical
 covariates in our dataset.</p>
