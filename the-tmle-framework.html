@@ -164,7 +164,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#identifiability"><i class="fa fa-check"></i><b>2.4</b> Identifiability</a></li>
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#estimation-targeted-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>2.5</b> Estimation: Targeted Maximum Likelihood Estimation</a></li>
 <li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#inference"><i class="fa fa-check"></i><b>2.6</b> Inference</a></li>
-<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#the-wash-benefits-example-dataset"><i class="fa fa-check"></i><b>2.7</b> The WASH Benefits Example Dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html"><i class="fa fa-check"></i><b>3</b> Super (Ensemble Machine) Learning</a><ul>
 <li class="chapter" data-level="3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
@@ -451,10 +450,10 @@ introduced earlier and estimating an Average Treatment Effect (ATE).</p>
 <div id="load-the-data" class="section level3 unnumbered">
 <h3>0. Load the Data</h3>
 <p>We’ll use the same WASH Benefits data as the earlier chapters:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">library</span>(tmle3)</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw">library</span>(sl3)</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">washb_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">library</span>(tmle3)</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw">library</span>(sl3)</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">washb_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="define-the-variable-roles" class="section level3 unnumbered">
 <h3>1. Define the variable roles</h3>
@@ -463,19 +462,19 @@ introduced earlier and estimating an Average Treatment Effect (ATE).</p>
 correspond to each of these roles. We use a list of character vectors to tell
 it. We call this a <strong>“Node List”</strong> as it corresponds to the nodes in a Directed
 Acyclic Graph (DAG), a way of displaying causal relationships between variables.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">node_list &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">  <span class="dt">W =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">    <span class="st">&quot;month&quot;</span>, <span class="st">&quot;aged&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;momage&quot;</span>, <span class="st">&quot;momedu&quot;</span>,</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">    <span class="st">&quot;momheight&quot;</span>, <span class="st">&quot;hfiacat&quot;</span>, <span class="st">&quot;Nlt18&quot;</span>, <span class="st">&quot;Ncomp&quot;</span>, <span class="st">&quot;watmin&quot;</span>,</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">    <span class="st">&quot;elec&quot;</span>, <span class="st">&quot;floor&quot;</span>, <span class="st">&quot;walls&quot;</span>, <span class="st">&quot;roof&quot;</span>, <span class="st">&quot;asset_wardrobe&quot;</span>,</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">    <span class="st">&quot;asset_table&quot;</span>, <span class="st">&quot;asset_chair&quot;</span>, <span class="st">&quot;asset_khat&quot;</span>,</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">    <span class="st">&quot;asset_chouki&quot;</span>, <span class="st">&quot;asset_tv&quot;</span>, <span class="st">&quot;asset_refrig&quot;</span>,</a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">    <span class="st">&quot;asset_bike&quot;</span>, <span class="st">&quot;asset_moto&quot;</span>, <span class="st">&quot;asset_sewmach&quot;</span>,</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">    <span class="st">&quot;asset_mobile&quot;</span></a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">  ),</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11">  <span class="dt">A =</span> <span class="st">&quot;tr&quot;</span>,</a>
-<a class="sourceLine" id="cb35-12" data-line-number="12">  <span class="dt">Y =</span> <span class="st">&quot;whz&quot;</span></a>
-<a class="sourceLine" id="cb35-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">node_list &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">  <span class="dt">W =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="st">&quot;month&quot;</span>, <span class="st">&quot;aged&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;momage&quot;</span>, <span class="st">&quot;momedu&quot;</span>,</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="st">&quot;momheight&quot;</span>, <span class="st">&quot;hfiacat&quot;</span>, <span class="st">&quot;Nlt18&quot;</span>, <span class="st">&quot;Ncomp&quot;</span>, <span class="st">&quot;watmin&quot;</span>,</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    <span class="st">&quot;elec&quot;</span>, <span class="st">&quot;floor&quot;</span>, <span class="st">&quot;walls&quot;</span>, <span class="st">&quot;roof&quot;</span>, <span class="st">&quot;asset_wardrobe&quot;</span>,</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="st">&quot;asset_table&quot;</span>, <span class="st">&quot;asset_chair&quot;</span>, <span class="st">&quot;asset_khat&quot;</span>,</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">    <span class="st">&quot;asset_chouki&quot;</span>, <span class="st">&quot;asset_tv&quot;</span>, <span class="st">&quot;asset_refrig&quot;</span>,</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">    <span class="st">&quot;asset_bike&quot;</span>, <span class="st">&quot;asset_moto&quot;</span>, <span class="st">&quot;asset_sewmach&quot;</span>,</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">    <span class="st">&quot;asset_mobile&quot;</span></a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">  ),</a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">  <span class="dt">A =</span> <span class="st">&quot;tr&quot;</span>,</a>
+<a class="sourceLine" id="cb32-12" data-line-number="12">  <span class="dt">Y =</span> <span class="st">&quot;whz&quot;</span></a>
+<a class="sourceLine" id="cb32-13" data-line-number="13">)</a></code></pre></div>
 <div id="handling-missingness" class="section level4 unnumbered">
 <h4>Handling Missingness</h4>
 <p>Currently, missingness in <code>tmle3</code> is handled in a fairly simple way:</p>
@@ -487,9 +486,9 @@ imputed, and additional covariates indicating imputation are generated</li>
 <p>We plan to implement IPCW-TMLE to more efficiently handle missingness in the
 treatment and outcome variables.</p>
 <p>These steps are implemented in the <code>process_missing</code> function in <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">processed &lt;-<span class="st"> </span><span class="kw">process_missing</span>(washb_data, node_list)</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">washb_data &lt;-<span class="st"> </span>processed<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">node_list &lt;-<span class="st"> </span>processed<span class="op">$</span>node_list</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">processed &lt;-<span class="st"> </span><span class="kw">process_missing</span>(washb_data, node_list)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">washb_data &lt;-<span class="st"> </span>processed<span class="op">$</span>data</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">node_list &lt;-<span class="st"> </span>processed<span class="op">$</span>node_list</a></code></pre></div>
 </div>
 </div>
 <div id="create-a-spec-object" class="section level3 unnumbered">
@@ -501,10 +500,10 @@ manually specifying all of these components. Therefore, <code>tmle3</code> imple
 that, with minimal additional detail, can be run by an end-user.</p>
 <p>We’ll start with using one of the specs, and then work our way down into the
 internals of <code>tmle3</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_ATE</span>(</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">  <span class="dt">treatment_level =</span> <span class="st">&quot;Nutrition + WSH&quot;</span>,</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">  <span class="dt">control_level =</span> <span class="st">&quot;Control&quot;</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_ATE</span>(</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">  <span class="dt">treatment_level =</span> <span class="st">&quot;Nutrition + WSH&quot;</span>,</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">  <span class="dt">control_level =</span> <span class="st">&quot;Control&quot;</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">)</a></code></pre></div>
 </div>
 <div id="define-the-relevant-super-learners" class="section level3 unnumbered">
 <h3>3. Define the Relevant Super Learners</h3>
@@ -512,37 +511,37 @@ internals of <code>tmle3</code>.</p>
 to estimate the relevant factors of the likelihood: Q and g.</p>
 <p>This takes the form of a list of <code>sl3</code> learners, one for each likelihood factor
 to be estimated with <code>sl3</code>:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># choose base learners</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">lrnr_xgboost &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_xgboost)</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="co"># define metalearners appropriate to data types</span></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5">ls_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_nnls)</a>
-<a class="sourceLine" id="cb38-6" data-line-number="6">mn_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(</a>
-<a class="sourceLine" id="cb38-7" data-line-number="7">  Lrnr_solnp, metalearner_linear_multinomial,</a>
-<a class="sourceLine" id="cb38-8" data-line-number="8">  loss_loglik_multinomial</a>
-<a class="sourceLine" id="cb38-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb38-10" data-line-number="10">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb38-11" data-line-number="11">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
-<a class="sourceLine" id="cb38-12" data-line-number="12">  <span class="dt">metalearner =</span> ls_metalearner</a>
-<a class="sourceLine" id="cb38-13" data-line-number="13">)</a>
-<a class="sourceLine" id="cb38-14" data-line-number="14">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb38-15" data-line-number="15">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
-<a class="sourceLine" id="cb38-16" data-line-number="16">  <span class="dt">metalearner =</span> mn_metalearner</a>
-<a class="sourceLine" id="cb38-17" data-line-number="17">)</a>
-<a class="sourceLine" id="cb38-18" data-line-number="18">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># choose base learners</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">lrnr_xgboost &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_xgboost)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co"># define metalearners appropriate to data types</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">ls_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_nnls)</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">mn_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">  Lrnr_solnp, metalearner_linear_multinomial,</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">  loss_loglik_multinomial</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
+<a class="sourceLine" id="cb35-12" data-line-number="12">  <span class="dt">metalearner =</span> ls_metalearner</a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">)</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
+<a class="sourceLine" id="cb35-16" data-line-number="16">  <span class="dt">metalearner =</span> mn_metalearner</a>
+<a class="sourceLine" id="cb35-17" data-line-number="17">)</a>
+<a class="sourceLine" id="cb35-18" data-line-number="18">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
 <p>Here, we use a Super Learner as defined in the previous <code>sl3</code> section. In the
 future, we plan to include reasonable default learners.</p>
 </div>
 <div id="fit-the-tmle" class="section level3 unnumbered">
 <h3>4. Fit the TMLE</h3>
 <p>We now have everything we need to fit the tmle using <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(ate_spec, washb_data, node_list, learner_list)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(ate_spec, washb_data, node_list, learner_list)</a></code></pre></div>
 </div>
 <div id="evaluate-the-estimates" class="section level3 unnumbered">
 <h3>5. Evaluate the Estimates</h3>
 <p>We can see the summary results by printing the fit object. Alternatively, we
 can extra results from the summary by indexing into it:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                    param    init_est    tmle_est
 1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] 0.002440166 0.002494379
@@ -550,8 +549,8 @@ can extra results from the summary by indexing into it:</p>
 1: 0.05066932 -0.09681566 0.1018044     0.002494379       -0.09681566
    upper_transformed
 1:         0.1018044</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">print</span>(estimates)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">print</span>(estimates)</a></code></pre></div>
 <pre><code>[1] 0.002494379</code></pre>
 </div>
 </div>
@@ -565,8 +564,8 @@ generate the objects necessary to define and fit a TMLE.</p>
 <p>First is, a <code>tmle3_Task</code>, analogous to an <code>sl3_Task</code>, containing the data we’re
 fitting the TMLE to, as well as an NPSEM generated from the <code>node_list</code> defined
 above, describing the variables and their relationships.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">tmle_task &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_tmle_task</span>(washb_data, node_list)</a></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">tmle_task<span class="op">$</span>npsem</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">tmle_task &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_tmle_task</span>(washb_data, node_list)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">tmle_task<span class="op">$</span>npsem</a></code></pre></div>
 <pre><code>$W
 tmle3_Node: W
     Variables: month, aged, sex, momedu, hfiacat, Nlt18, Ncomp, watmin, elec, floor, walls, roof, asset_wardrobe, asset_table, asset_chair, asset_khat, asset_chouki, asset_tv, asset_refrig, asset_bike, asset_moto, asset_sewmach, asset_mobile, momage, momheight, delta_momage, delta_momheight
@@ -586,11 +585,11 @@ tmle3_Node: Y
 <h3><span class="header-section-number">4.4.2</span> Initial Likelihood</h3>
 <p>Next, is an object representing the likelihood, factorized according to the
 NPSEM described above:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">initial_likelihood &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_initial_likelihood</span>(</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">  tmle_task,</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">  learner_list</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="kw">print</span>(initial_likelihood)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">initial_likelihood &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_initial_likelihood</span>(</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">  tmle_task,</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">  learner_list</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="kw">print</span>(initial_likelihood)</a></code></pre></div>
 <pre><code>W: Lf_emp
 A: LF_fit
 Y: LF_fit</code></pre>
@@ -600,7 +599,7 @@ distributions of <span class="math inline">\(A\)</span> and <span class="math in
 the <code>learner_list</code>) above.</p>
 <p>We can use this in tandem with the <code>tmle_task</code> object to obtain likelihood
 estimates for each observation:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
 <pre><code>                 W         A          Y
    1: 0.0002129925 0.2482971 -0.6616029
    2: 0.0002129925 0.2540885 -0.6351630
@@ -621,23 +620,23 @@ estimates for each observation:</p>
 of likelihood that is able to be updated using an <code>tmle3_Update</code> object. This
 object defines the update strategy (e.g. submodel, loss function, CV-TMLE or
 not, etc).</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a></code></pre></div>
 <p>When constructing the targeted likelihood, you can specify different update
 options. See the documentation for <code>tmle3_Update</code> for details of the different
 options. For example, you can disable CV-TMLE (the default in <code>tmle3</code>) as
 follows:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">targeted_likelihood_no_cv &lt;-</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="st">  </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood,</a>
-<a class="sourceLine" id="cb52-3" data-line-number="3">    <span class="dt">updater =</span> <span class="kw">list</span>(<span class="dt">cvtmle =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb52-4" data-line-number="4">  )</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">targeted_likelihood_no_cv &lt;-</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">  </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood,</a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">    <span class="dt">updater =</span> <span class="kw">list</span>(<span class="dt">cvtmle =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">  )</a></code></pre></div>
 </div>
 <div id="parameter-mapping" class="section level3">
 <h3><span class="header-section-number">4.4.4</span> Parameter Mapping</h3>
 <p>Finally, we need to define the parameters of interest. Here, the spec defines a
 single parameter, the ATE. In the next section, we’ll see how to add additional
 parameters.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">tmle_params &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">print</span>(tmle_params)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">tmle_params &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">print</span>(tmle_params)</a></code></pre></div>
 <pre><code>[[1]]
 Param_ATE: ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}]</code></pre>
 </div>
@@ -645,11 +644,11 @@ Param_ATE: ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}]</code></pre>
 <h3><span class="header-section-number">4.4.5</span> Putting it all together</h3>
 <p>Having used the spec to manually generate all these components, we can now
 manually fit a <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">tmle_fit_manual &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">  tmle_task, targeted_likelihood, tmle_params,</a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">  targeted_likelihood<span class="op">$</span>updater</a>
-<a class="sourceLine" id="cb55-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb55-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">tmle_fit_manual &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">  tmle_task, targeted_likelihood, tmle_params,</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">  targeted_likelihood<span class="op">$</span>updater</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                    param    init_est    tmle_est
 1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] 0.002365312 0.007351927
@@ -665,10 +664,10 @@ manually fit a <code>tmle3</code>:</p>
 <p>Above, we fit a <code>tmle3</code> with just one parameter. <code>tmle3</code> also supports fitting
 multiple parameters simultaneously. To illustrate this, we’ll use the
 <code>tmle_TSM_all</code> spec:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">tsm_spec &lt;-<span class="st"> </span><span class="kw">tmle_TSM_all</span>()</a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a>
-<a class="sourceLine" id="cb57-3" data-line-number="3">all_tsm_params &lt;-<span class="st"> </span>tsm_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
-<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="kw">print</span>(all_tsm_params)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">tsm_spec &lt;-<span class="st"> </span><span class="kw">tmle_TSM_all</span>()</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3">all_tsm_params &lt;-<span class="st"> </span>tsm_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
+<a class="sourceLine" id="cb54-4" data-line-number="4"><span class="kw">print</span>(all_tsm_params)</a></code></pre></div>
 <pre><code>[[1]]
 Param_TSM: E[Y_{A=Control}]
 
@@ -698,12 +697,12 @@ likelihood we fit above, saving us a super learner step.</p>
 <p>We can also define parameters based on Delta Method Transformations of other
 parameters. For instance, we can estimate a ATE using the delta method and two
 of the above TSM parameters:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">ate_param &lt;-<span class="st"> </span><span class="kw">define_param</span>(</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">  Param_delta, targeted_likelihood,</a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">  delta_param_ATE,</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">  <span class="kw">list</span>(all_tsm_params[[<span class="dv">1</span>]], all_tsm_params[[<span class="dv">4</span>]])</a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="kw">print</span>(ate_param)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">ate_param &lt;-<span class="st"> </span><span class="kw">define_param</span>(</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">  Param_delta, targeted_likelihood,</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">  delta_param_ATE,</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">  <span class="kw">list</span>(all_tsm_params[[<span class="dv">1</span>]], all_tsm_params[[<span class="dv">4</span>]])</a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6"><span class="kw">print</span>(ate_param)</a></code></pre></div>
 <pre><code>Param_delta: E[Y_{A=Nutrition + WSH}] - E[Y_{A=Control}]</code></pre>
 <p>This can similarly be used to estimate other derived parameters like Relative
 Risks, and Population Attributable Risks</p>
@@ -712,12 +711,12 @@ Risks, and Population Attributable Risks</p>
 <h3><span class="header-section-number">4.5.2</span> Fit</h3>
 <p>We can now fit a TMLE simultaneously for all TSM parameters, as well as the
 above defined ATE parameter</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">all_params &lt;-<span class="st"> </span><span class="kw">c</span>(all_tsm_params, ate_param)</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">tmle_fit_multiparam &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">  tmle_task, targeted_likelihood, all_params,</a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">  targeted_likelihood<span class="op">$</span>updater</a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb61-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">all_params &lt;-<span class="st"> </span><span class="kw">c</span>(all_tsm_params, ate_param)</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">tmle_fit_multiparam &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">  tmle_task, targeted_likelihood, all_params,</a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">  targeted_likelihood<span class="op">$</span>updater</a>
+<a class="sourceLine" id="cb58-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb58-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                       param     init_est     tmle_est
 1:  TSM                            E[Y_{A=Control}] -0.597539939 -0.623611880
@@ -757,10 +756,10 @@ with stratification.</p>
 <span class="math inline">\(ATE = \mathbb{E}_0(Y(1)-Y(0) \mid V=v ) = \mathbb{E}_0\left(\mathbb{E}_0[Y \mid A=1,W]-\mathbb{E}_0[Y \mid A=0,W] \mid V=v \right)\)</span></p>
 <p>For example, we can stratify the above ATE spec to estimate the ATE in strata of
 sex:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;sex&quot;</span>)</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, washb_data, node_list,</a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">                        learner_list)</a>
-<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="kw">print</span>(stratified_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;sex&quot;</span>)</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, washb_data, node_list,</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">                        learner_list)</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="kw">print</span>(stratified_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
              type                                               param
 1:            ATE            ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}]
@@ -794,12 +793,12 @@ answers to the following:</p>
 <li>Did your group face any challenges?</li>
 <li>Any additional comments/questions about this <code>tmle3</code> section of the workshop?</li>
 </ol>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co"># load the data set</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">data</span>(cpp)</a>
-<a class="sourceLine" id="cb65-3" data-line-number="3">cpp &lt;-<span class="st"> </span>cpp[<span class="op">!</span><span class="kw">is.na</span>(cpp[, <span class="st">&quot;haz&quot;</span>]), ]</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4">cpp<span class="op">$</span>parity01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>parity <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb65-5" data-line-number="5">cpp[<span class="kw">is.na</span>(cpp)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb65-6" data-line-number="6">cpp<span class="op">$</span>haz01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>haz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># load the data set</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">data</span>(cpp)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">cpp &lt;-<span class="st"> </span>cpp[<span class="op">!</span><span class="kw">is.na</span>(cpp[, <span class="st">&quot;haz&quot;</span>]), ]</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">cpp<span class="op">$</span>parity01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>parity <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb62-5" data-line-number="5">cpp[<span class="kw">is.na</span>(cpp)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">cpp<span class="op">$</span>haz01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>haz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <!--
 We're interested in using this simplified data to estimate an Average Treatment
 Effect (ATE):
@@ -835,10 +834,10 @@ above.</li>
 learners for estimation of <span class="math inline">\(Q = E(Y|A,Y)\)</span> and <span class="math inline">\(g=P(A|W)\)</span>.</li>
 <li>Define the metalearner like below</li>
 </ol>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_solnp,</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">  <span class="dt">loss_function =</span> loss_loglik_binomial,</a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">  <span class="dt">learner_function =</span> metalearner_logistic_binomial</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_solnp,</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">  <span class="dt">loss_function =</span> loss_loglik_binomial,</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">  <span class="dt">learner_function =</span> metalearner_logistic_binomial</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">)</a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Define one super learner for estimating <span class="math inline">\(Q\)</span> and another for estimating <span class="math inline">\(g\)</span>.
 Use the metalearner above for both <span class="math inline">\(Q\)</span> and <span class="math inline">\(g\)</span> super learners.</li>
