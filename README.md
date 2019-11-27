@@ -8,7 +8,8 @@ Statistics, December 4-6, 2019.
 
 * 9:00A-10:30A: Overview of Targeted (Machine) Learning 
 * 10:30A-10:45P: Break
-* 10:45A-12:00P: Case Study with Software Exercise in `R` 
+* 10:45A-12:00P: TMLE for the Causal Impact of a Single 
+      Time-Point Intervention on Survival with Software Exercise in `R`
 
 ## 2-Day Short Course on December 5-6, 2019
 ### Day 1: December 5, 2019  
@@ -28,19 +29,17 @@ Statistics, December 4-6, 2019.
 ### Day 2: December 5, 2019  
 
 * 8:00A-9:30A: Targeted Minimum Loss-Based Estimation of the Effects of Optimal 
-  Dynamic and Shift Interventions.
+  Dynamic and Shift Interventions in the `tlverse` software ecosystem
 * 9:30A-9:50A: Break
 * 9:50A-11:20P: Targeted Minimum Loss-Based Estimation of the Treatment 
-  Specific Survival Function for Right-Censored Survival Data
+  Specific Survival Function for Right-Censored Survival Data with `MOSS`
 * 11:20A-12:40P: Lunch
-* 12:40P-2:10P: Targeted Minimum Loss-Based Estimation of the Point Treatment 
-  Effect for Longitudinal Data with Time-Varying Confounding and Time-Varying Censoring 
+* 12:40P-2:10P: Targeted Minimum Loss-Based Estimation for Longitudinal Data 
+  with `ltmle` 
 * 2:10P-2:30P: Break
-* 2:30P-4:00P: Discussion
-* 4:00P-4:20P: Break
-* 4:20P-5:00P: Discussion
+* 2:30P- : Discussion
 
-The software materials related to point treatment interventions are based on an 
+Most of the software materials are based on an 
 early draft of the (eventually forthcoming) book **The Hitchhiker's Guide to the 
 `tlverse`, or a Targeted Learning Practitioner's Handbook**, by Mark van der 
 Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, and Rachael 
