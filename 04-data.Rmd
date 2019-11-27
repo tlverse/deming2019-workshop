@@ -1,0 +1,134 @@
+# Datasets {#data}
+
+## International Stroke Trial Example Dataset {#ist}
+
+The International Stroke Trial database contains individual patient data
+from the International Stroke Trial (IST), a multi-national randomized trial 
+conducted between 1991 and 1996 (pilot phase between 1991 and 1993) that aimed 
+to assess whether early administration of aspirin, heparin, both or neither 
+influenced the clinical course of acute ischaemic stroke 
+[@sandercock1997international]. The IST dataset includes data on 19,435 patients 
+with acute stroke, with 99\% complete follow-up. De-identified data are 
+available for download at https://datashare.is.ed. ac.uk/handle/10283/128. This 
+study is described in more detail at the bottom of this page, and in the 
+corresponding block quote reference. In the example data for this workshop, we 
+consider a sample of 5,000 patients and the binary outcome of recurrent ischemic 
+stroke within 14 days after randomization. Also in our example data, we ensure 
+that we have subjects with a missing outcome. 
+
+```{r load_ist_data_intro, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# read in data
+dat <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/data/ist_sample.csv")
+dat
+```
+
+For the purposes of this workshop, we we start by treating the data as
+independent and identically distributed (i.i.d.) random draws from a very large
+target population. We could, with available options, account for the clustering
+of the data (within sampled geographic regions), but, for simplification, we 
+avoid these details in these workshop presentations, although modifications of 
+our methodology for biased samples, repeated measures, etc., are available.
+
+We have 26 variables measured, of which 1 variable is set to be the outcome of
+interest. This outcome, $Y$, indicates recurrent ischemic stroke within 14 days 
+after randomization (`DRSISC` in `dat`); the variable $\Delta$ indicates whether 
+or not our outcome $Y$ is missing (`Delta` in `dat`); the treatment of interest, 
+$A$, is the randomized aspirin vs. no aspirin treatment allocation (`RXASP` in 
+`dat`); and the adjustment set, $W$, consists simply of other variable measured 
+at baseline. This results in our observed data structure being $n$ i.i.d. copies 
+of $O_i = (W_i, A_i, \Delta_i, Y_i)$, for $i = 1, \ldots, n$.
+
+Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
+quickly summarize the variables in our data:
+
+```{r skim_ist_data, message=FALSE, warning=FALSE}
+library(skimr)
+skim(dat)
+```
+
+A convenient summary of the relevant variables is given just above.
+
+> "The study had a prospective, randomised, open treatment, blinded outcome 
+> (PROBE) design. The inclusion criteria were: clinical diagnosis of acute 
+> ischaemic stroke, with onset within the previous 48 hours and no clear 
+> indication for, or clear contraindication to, treatment with aspirin or 
+> subcutaneous heparin. Unlike many stroke trials of that era (and 
+> subsequently), the study did not set an upper age limit. Patients were to 
+> have a CT brain scan to confirm the diagnosis of stroke, and this was to be 
+> done before randomisation if at all possible. To enter a patient in the 
+> study, the clinician telephoned a central randomisation service (at the 
+> Clinical Trial Service Unit, Oxford) during this telephone call, the baseline 
+> variables were entered and checked, and once validated, the computer 
+> allocated the treatment and the telephonist then informed the clinician. The 
+> patients and treating clinicians were not blinded to the treatment given. 
+> Early outcome data were collected by the treating physician who completed a 
+> follow-up form at 14 days, death or hospital discharge (whichever occurred 
+> first). This form recorded data on events in hospital within 14 days, and the 
+> doctor's opinion on the final diagnosis of the initial event that led to 
+> randomisation. These unblinded data, may therefore be subject to some degree 
+> of bias. The primary outcome was the proportion of patients who were either 
+> dead or dependent on other people for activities of daily living at six 
+> months after randomisation. This outcome was collected by postal 
+> questionnaire mailed directly to the patient, or (in Italy) by telephone 
+> interview of the patient by a trained researcher, blinded to treatment 
+> allocation. The primary outcome was therefore assessed - as far as 
+> practicable - blind to treatment allocation and hence should be free from 
+> bias. We re-checked the data set for inaccuracies and inconsistencies and 
+> extracted data on the variables assessed at randomisation, and at the two 
+> outcome assessment points: at 14-days after randomisation, death or prior 
+> hospital discharge (whichever occurred first) and at 6-months.
+>
+> --- @sandercock2011international
+
+## WASH Benefits Example Dataset {#wash}
+
+The data come from a study of the effect of water quality, sanitation, hand
+washing, and nutritional interventions on child development in rural Bangladesh
+(WASH Benefits Bangladesh): a cluster-randomised controlled trial
+[@luby2018effects]. The study enrolled pregnant women in their first or second
+trimester from the rural villages of Gazipur, Kishoreganj, Mymensingh, and
+Tangail districts of central Bangladesh, with an average of eight women per
+cluster. Groups of eight geographically adjacent clusters were block-randomised,
+using a random number generator, into six intervention groups (all of which
+received weekly visits from a community health promoter for the first 6 months
+and every 2 weeks for the next 18 months) and a double-sized control group (no
+intervention or health promoter visit). The six intervention groups were:
+
+1. chlorinated drinking water;
+2. improved sanitation;
+3. hand-washing with soap;
+4. combined water, sanitation, and hand washing;
+5. improved nutrition through counseling and provision of lipid-based nutrient
+   supplements; and
+6. combined water, sanitation, handwashing, and nutrition.
+
+In the workshop, we concentrate on child growth (size for age) as the outcome of
+interest. For reference, this trial was registered with ClinicalTrials.gov as
+NCT01590095.
+
+```{r load_washb_data_intro, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# read in data
+dat <- read_csv("https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv")
+dat
+```
+
+We have 28 variables measured, of which 1 variable is set to be the outcome of
+interest. This outcome, $Y$, is the weight-for-height Z-score (`whz` in `dat`);
+the treatment of interest, $A$, is the randomized treatment group (`tr` in
+`dat`); and the adjustment set, $W$, consists simply of *everything else*. This
+results in our observed data structure being $n$ i.i.d. copies of $O_i = (W_i,
+A_i, Y_i)$, for $i = 1, \ldots, n$.
+
+Like before, we can summarize the variables measured in the WASH Benefits data 
+set with `skimr`:
+
+```{r skim_washb_data, message=FALSE, warning=FALSE}
+skim(dat)
+```
+
+Note that the *asset* variables reflect socio-economic status of the study 
+participants. 
