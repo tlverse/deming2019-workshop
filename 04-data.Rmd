@@ -20,8 +20,8 @@ that we have subjects with a missing outcome.
 library(tidyverse)
 
 # read in data
-dat <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/data/ist_sample.csv")
-dat
+ist <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv")
+ist
 ```
 
 For the purposes of this workshop, we we start by treating the data as
@@ -33,19 +33,23 @@ our methodology for biased samples, repeated measures, etc., are available.
 
 We have 26 variables measured, of which 1 variable is set to be the outcome of
 interest. This outcome, $Y$, indicates recurrent ischemic stroke within 14 days 
-after randomization (`DRSISC` in `dat`); the variable $\Delta$ indicates whether 
-or not our outcome $Y$ is missing (`Delta` in `dat`); the treatment of interest, 
+after randomization (`DRSISC` in `ist`); the treatment of interest, 
 $A$, is the randomized aspirin vs. no aspirin treatment allocation (`RXASP` in 
-`dat`); and the adjustment set, $W$, consists simply of other variable measured 
-at baseline. This results in our observed data structure being $n$ i.i.d. copies 
-of $O_i = (W_i, A_i, \Delta_i, Y_i)$, for $i = 1, \ldots, n$.
+`ist`); and the adjustment set, $W$, consists simply of other variable measured 
+at baseline. In this data our outcome is occasionally missing, but we do not 
+need to create a variable indicating this missingness (such as $\Delta$) for 
+analyses in the `tlverse`. If we let $\Delta$ denote the indicator that 
+the outcome is missing such that $\Delta = 1$ when the outcome is observed and 
+$\Delta = 0$ when the outcome is not observed, then we can denote our observed 
+data structure as $n$ i.i.d. copies of $O_i = (W_i, A_i, \Delta_i, \DeltaY_i)$, 
+for $i = 1, \ldots, n$.
 
 Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
 quickly summarize the variables in our data:
 
 ```{r skim_ist_data, message=FALSE, warning=FALSE}
 library(skimr)
-skim(dat)
+skim(ist)
 ```
 
 A convenient summary of the relevant variables is given just above.
@@ -132,3 +136,28 @@ skim(dat)
 
 Note that the *asset* variables reflect socio-economic status of the study 
 participants. 
+
+## Veterans’ Administration Lung Cancer Trial Dataset {#vet}
+
+This data corresponds to a study conducted by the US Veterans Administration. 
+Male patients with advanced inoperable lung cancer were given either the 
+standard therapy or a test chemotherapy. The primary goal of the study was to 
+assess if the test chemotherapy improved survival. This data set has been 
+published in @kalbfleisch2011statistical and it is available in the `MASS` and 
+`survival` `R` packages. Time to death was recorded for 128 patients, and 9 
+patients left the study before death. Various covariates were also documented 
+for each patient. 
+
+```{r load_ist_data_intro, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# read in data
+vet <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/veteran.csv")
+vet
+```
+
+A snapshot of the data set in shown below:
+
+```{r skim_vet_data, message=FALSE, warning=FALSE}
+skim(vet)
+```

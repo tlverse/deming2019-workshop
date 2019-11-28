@@ -168,8 +168,8 @@ The `sl3` implementation consists of the following steps:
 
 ### WASH Benefits Study Example {-}
 
-Using the WASH data, we are interested in predicting weight-for-height z-score
-`whz` using the available covariate data.
+Using the IST data, we are interested in predicting recurrent stroke `DRSISC` 
+using the available covariate data.
 
 ### 0. Load the necessary libraries and data {-}
 
@@ -184,10 +184,9 @@ library(SuperLearner)
 library(origami)
 set.seed(7194)
 # load data set and take a peek
-washb_data <- fread("https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv",
-  stringsAsFactors = TRUE
-)
-head(washb_data) %>%
+ist_data <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv")
+
+head(ist_data) %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
   scroll_box(width = "100%", height = "250px")
@@ -195,26 +194,29 @@ head(washb_data) %>%
 
 ### 1. Define the machine learning task {-}
 
-To define the machine learning **"task"** (predict weight-for-height z-score
-`whz` using the available covariate data), we need to create an `sl3_Task`
-object.
+To define the machine learning **"task"** (predict stroke `DRSISC` using the 
+available covariate data), we need to create an `sl3_Task` object.
 
 The `sl3_Task` keeps track of the roles the variables play in the
 machine learning problem, the data, and any metadata (e.g., observational-level
 weights, id, offset).
 
+We are not interested in predicting missing outcomes. We set 
+`drop_missing_outcome = TRUE` when we create the task. In the next chapter, we 
+estimate this missingness mechanism and account for it in the estimation. 
 ```{r task}
 # specify the outcome and covariates
-outcome <- "whz"
-covars <- colnames(washb_data)[-which(names(washb_data) == outcome)]
+outcome <- "DRSISC"
+covars <- colnames(ist_data)[-which(names(ist_data) == outcome)]
 # create the sl3 task
-washb_task <- make_sl3_Task(
-  data = washb_data,
+ist_task <- make_sl3_Task(
+  data = ist_data,
   covariates = covars,
-  outcome = outcome
+  outcome = outcome, 
+  drop_missing_outcome = TRUE
 )
 # examine the task
-washb_task
+ist_task
 ```
 
 ### 2. Make a super learner {-}
@@ -238,11 +240,11 @@ one learner.
 ```{r list-properties}
 sl3_list_properties()
 ```
-Since we have a continuous outcome, we may identify the learners that support
+Since we have a binomial outcome, we may identify the learners that support
 this outcome type with `sl3_list_learners()`.
 
 ```{r list-learners}
-sl3_list_learners(c("continuous"))
+sl3_list_learners(c("binomial"))
 ```
 
 Now that we have an idea of some learners, we can construct them using the
@@ -250,24 +252,65 @@ Now that we have an idea of some learners, we can construct them using the
 
 ```{r baselearners}
 # choose base learners
-lrnr_glm <- make_learner(Lrnr_glm)
 lrnr_mean <- make_learner(Lrnr_mean)
-lrnr_glmnet <- make_learner(Lrnr_glmnet)
+lrnr_glm <- make_learner(Lrnr_glm)
+lrnr_gam <- make_learner(Lrnr_gam)
 ```
 We can customize learner hyperparameters to incorporate a diversity of different
-settings.
-
-Documentation for the learners and their hyperparameters can be found
+settings. Documentation for the learners and their hyperparameters can be found
 in the [`sl3` Learners
 Reference](https://tlverse.org/sl3/reference/index.html#section-sl-learners).
 
+```{r extra-lrnr-awesome}
+lrnr_ranger50 <- make_learner(Lrnr_ranger, num.trees = 50)
+lrnr_hal_simple <- make_learner(Lrnr_hal9001, degrees = 1, n_folds = 2)
+lrnr_lasso <- make_learner(Lrnr_glmnet) # alpha default is 1
+lrnr_ridge <- make_learner(Lrnr_glmnet, alpha = 0)
+lrnr_elasticnet <- make_learner(Lrnr_glmnet, alpha = .5)
+```
+
 We can also include learners from the `SuperLearner` `R` package.
 
-```{r extra-lrnr}
-lrnr_ranger100 <- make_learner(Lrnr_ranger, num.trees = 100)
-lrnr_hal_simple <- make_learner(Lrnr_hal9001, degrees = 1, n_folds = 2)
-lrnr_gam <- Lrnr_pkg_SuperLearner$new("SL.gam")
+```{r extra-lrnr-woah}
 lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
+```
+
+Here is a fun trick to create customized learners over a grid of parameters.
+
+```{r extra-lrnr-mindblown}
+# I like to crock pot my super learners
+grid_params <- list(cost = c(0.01, 0.1, 1, 10, 100, 1000),
+                    gamma = c(0.001, 0.01, 0.1, 1),
+                    kernel = c("polynomial", "radial", "sigmoid"),
+                    degree = c(1, 2, 3))
+grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
+params_default <- list(nthread = getOption("sl.cores.learners", 1))
+svm_learners <- apply(grid, MARGIN = 1, function(params_tune) {
+  do.call(Lrnr_svm$new, c(params_default, as.list(params_tune)))})
+
+grid_params <- list(max_depth = c(2,4,6,8),
+                    eta = c(0.001, 0.01, 0.1, 0.2, 0.3),
+                    nrounds = c(20,50))
+grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
+params_default <- list(nthread = getOption("sl.cores.learners", 1))
+xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
+  do.call(Lrnr_xgboost$new, c(params_default, as.list(params_tune)))})
+```
+
+Did you see `Lrnr_caret` when we called `sl3_list_learners(c("binomial"))`? 
+All we need to specify is the algorithm to use, which is passed as `method` to 
+`caret::train()`. The default method for parameter selection criterion with 
+is set to "CV" instead of the `caret::train()` default `boot`. The summary 
+metric to used to select the optimal model is `RMSE` for continuous outcomes 
+and `Accuracy` for categorical and binomial outcomes.
+
+```{r, carotene}
+# I have no idea how to tune a neural net (or BART machine..)
+lrnr_caret_nnet <- make_learner(Lrnr_caret, algorithm = "nnet")
+lrnr_caret_bartMachine <- make_learner(Lrnr_caret, algorithm = "bartMachine", 
+                                       method = "boot", metric = "Accuracy")
+lrnr_caret_gbm <- make_learner(Lrnr_caret, algorithm = "gbm", 
+                               tuneLength = 10)
 ```
 
 In order to assemble the library of learners, we need to **"stack"** them
@@ -279,19 +322,12 @@ by training them simultaneously, so that their predictions can be either
 combined or compared.
 
 ```{r stack}
-stack <- make_learner(
-  Stack,
-  lrnr_glm, lrnr_mean, lrnr_ranger100, lrnr_glmnet,
-  lrnr_gam, lrnr_bayesglm
+stack <- make_learner(Stack, 
+  lrnr_glm, lrnr_mean, lrnr_ranger50, lrnr_lasso, lrnr_gam, 
+  lrnr_bayesglm, lrnr_ridge, lrnr_elasticnet
 )
 ```
 
-We will fit a non-negative least squares metalearner using `Lrnr_nnls`. Note
-that any learner can be used as a metalearner.
-
-```{r metalearner}
-metalearner <- make_learner(Lrnr_nnls)
-```
 We can optionally select a subset of available covariates and pass only
 those variables to the modeling algorithm.
 
@@ -301,7 +337,7 @@ of interest (`cor.test` p-value $\leq 0.1$).
 ```{r screener}
 screen_cor <- Lrnr_pkg_SuperLearner_screener$new("screen.corP")
 # which covariates are selected on the full data?
-screen_cor$train(washb_task)
+screen_cor$train(ist_task)
 ```
 To **"pipe"** only the selected covariates to the modeling algorithm, we need to
 make a `Pipeline`, which is a just set of learners to be fit sequentially, where
@@ -322,8 +358,15 @@ learner.
 ```{r screeners-stack}
 fancy_stack <- make_learner(Stack, cor_pipeline, stack)
 # we can visualize the stack
-dt_stack <- delayed_learner_train(fancy_stack, washb_task)
+dt_stack <- delayed_learner_train(fancy_stack, ist_task)
 plot(dt_stack, color = FALSE, height = "400px", width = "100%")
+```
+
+We will fit a non-negative least squares metalearner using `Lrnr_nnls`. Note
+that any learner can be used as a metalearner.
+
+```{r metalearner}
+metalearner <- make_learner(Lrnr_nnls)
 ```
 
 We have made a library/stack of base learners and a metalearner, so we
@@ -336,7 +379,7 @@ sl <- make_learner(Lrnr_sl,
   metalearner = metalearner
 )
 # we can visualize the super learner
-dt_sl <- delayed_learner_train(sl, washb_task)
+dt_sl <- delayed_learner_train(sl, ist_task)
 plot(dt_sl, color = FALSE, height = "400px", width = "100%")
 ```
 
@@ -353,10 +396,10 @@ in all the places you could otherwise use any other `sl3` learners, including
 ### 3. Train the super learner on the machine learning task {-}
 
 Now we are ready to **"train"** our super learner on our `sl3_task` object,
-`washb_task`.
+`ist_task`.
 
 ```{r sl-basic}
-sl_fit <- sl$train(washb_task)
+sl_fit <- sl$train(ist_task)
 ```
 
 ### 4. Obtain predicted values {-}
@@ -389,13 +432,13 @@ Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
 ```{r CVsl}
-washb_task_new <- make_sl3_Task(
-  data = washb_data,
+ist_task_new <- make_sl3_Task(
+  data = ist_data,
   covariates = covars,
   outcome = outcome,
-  folds = make_folds(washb_data, fold_fun = folds_vfold, V = 2)
+  folds = make_folds(ist_data, fold_fun = folds_vfold, V = 2)
 )
-CVsl <- CV_lrnr_sl(sl_fit, washb_task_new, loss_squared_error)
+CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
 CVsl %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
@@ -413,8 +456,8 @@ In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
 ```{r varimp}
-washb_varimp <- varimp(sl_fit, loss_squared_error)
-washb_varimp %>%
+ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
+ist_varimp %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
   scroll_box(width = "100%", height = "250px")
