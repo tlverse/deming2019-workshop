@@ -148,7 +148,7 @@ published in @kalbfleisch2011statistical and it is available in the `MASS` and
 patients left the study before death. Various covariates were also documented 
 for each patient. 
 
-```{r load_ist_data_intro, message=FALSE, warning=FALSE}
+```{r load_vet_data_intro, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 # read in data
