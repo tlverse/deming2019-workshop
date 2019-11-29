@@ -308,9 +308,8 @@ and `Accuracy` for categorical and binomial outcomes.
 # I have no idea how to tune a neural net (or BART machine..)
 lrnr_caret_nnet <- make_learner(Lrnr_caret, algorithm = "nnet")
 lrnr_caret_bartMachine <- make_learner(Lrnr_caret, algorithm = "bartMachine", 
-                                       method = "boot", metric = "Accuracy")
-lrnr_caret_gbm <- make_learner(Lrnr_caret, algorithm = "gbm", 
-                               tuneLength = 10)
+                                       method = "boot", metric = "Accuracy",
+                                       tuneLength = 10)
 ```
 
 In order to assemble the library of learners, we need to **"stack"** them
