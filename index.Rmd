@@ -1,8 +1,10 @@
 ---
-title: "Targeted Learning with the `tlverse` Software Ecosystem"
-subtitle: "Half-Day Tutorial (4 December 2019) and 2-Day Short Course (5-6 December 2019), Deming Conference on Applied Statistics"
-author: "Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana
-  Malenica, Rachael Phillips"
+title: "Targeted (Machine) Learning for Real-World Data Science and Causal 
+Inference with the `tlverse` Software Ecosystem"
+subtitle: "Software Workshops at Deming Conference on Applied Statistics (4-6 
+  December 2019)"
+author: "Rachael Phillips, Nima Hejazi, Jeremy Coyle, Ivana Malenica, Alan 
+Hubbard, Mark van der Laan"
 date: "updated: `r format(Sys.time(), '%B %d, %Y')`"
 documentclass: book
 output: bookdown::gitbook
@@ -21,10 +23,9 @@ always_allow_html: yes
 url: 'https\://tlverse.org/deming2019-workshop/'
 github-repo: tlverse/deming2019-workshop
 graphics: yes
-description: "An open-source and fully-reproducible electronic set of teaching
-  materials accompanying an invited short-course and half-day tutorial on 
-  applying Targeted Learning using the [`tlverse` software
-  ecosystem](https://github.com/tlverse)."
+description: "An open-source and fully-reproducible electronic set of software
+  materials accompanying an invited half-day tutorial and 2-day short-course at 
+  the Deming Conference on Applied Statistics."
 #cover-image: "img/tlverse_book_cover.png"
 #apple-touch-icon: "img/logos/favicons/apple-touch-icon.png"
 favicon: "img/logos/favicons/favicon.png"
@@ -66,14 +67,13 @@ knitr::write_bib(c(
 <br>
 
 This is an open source and fully-reproducible electronic vignette for the 
-[`tlverse` software](https://github.com/tlverse) workshops incorporated in the 
-half-day tutorial (4 December 2019) and 2-day short course (5-6 December 2019) 
-on applying the targeted learning methodology in practice given at the Deming
-Conference on Applied Statistics. [*The Hitchhiker's Guide to the `tlverse`, or 
-a Targeted Learning Practitioner's 
+software workshops incorporated in the half-day tutorial (4 December 2019) and 
+2-day short course (5-6 December 2019) on applying Targeted Learning in practice 
+given at the Deming Conference on Applied Statistics. [*The Hitchhiker's Guide 
+to the `tlverse`, or a Targeted Learning Practitioner's 
 Handbook*](https://tlverse.org/tlverse-handbook/) is an in-draft book covering 
-the same topics in greater detail and may serve as a useful accompanying 
-resource to these workshop materials.
+the [`tlverse` software](https://github.com/tlverse) topics in greater detail 
+and may serve as a useful accompanying resource to these workshop materials.
 
 ## Important links {-}
 
@@ -91,8 +91,9 @@ repository for the short course.
 
 ## About {-}
 
-#### Half-Day Tutorial -- 9:00A-12:00P on 4 December 2019
-#### Targeted Maximum Likelihood Estimation (TMLE) for Machine Learning: A Gentle Introduction
+### Half-Day Tutorial -- 9:00A-12:00P on 4 December 2019**
+*Targeted Maximum Likelihood Estimation (TMLE) for Machine Learning: A Gentle 
+Introduction*
 During this half-day tutorial, we will delve into the utility of the roadmap of 
 targeted learning for translating real-world data applications to a mathematical 
 and statistical formulation of the relevant research question of interest. 
@@ -110,8 +111,9 @@ intervals, hypothesis tests, and regression. Advanced knowledge of mathematical
 statistics may be useful but is not necessary. Familiarity with the R programming 
 language will be essential. 
 
-#### 2-Day Short Course -- 8:00A-5:50P on 5 December 2019 and 8:00A-1:10P on 6 December 2019
-#### Targeted Learning in Data Science: Causal Inference for Observational and Experimental Data
+### 2-Day Short Course -- 8:00A-5:50P on 5-6 December 2019**
+*Targeted Learning in Data Science: Causal Inference for Observational and 
+Experimental Data*
 This 2-day short course will provide a comprehensive introduction to the field 
 of targeted learning for causal inference and the corresponding `tlverse` 
 software ecosystem. We will focus on targeted minimum loss-based estimators of 
@@ -126,8 +128,10 @@ settings possibly subject to competing risks. We will discuss the utility of
 this robust estimation strategy in comparison to conventional techniques, which
 often rely on restrictive statistical models and may therefore lead to severely 
 biased inference. In addition to discussion, this course will incorporate both
-interactive activities and hands-on, guided `R` programming exercises, to allow participants the opportunity to familiarize themselves with methodology and 
-tools that will translate to real-world analyses. It is highly recommended for participants to have an understanding of basic statistical concepts such as 
+interactive activities and hands-on, guided `R` programming exercises, to allow 
+participants the opportunity to familiarize themselves with methodology and 
+tools that will translate to real-world analyses. It is highly recommended for 
+participants to have an understanding of basic statistical concepts such as 
 confounding, probability distributions, confidence intervals, hypothesis tests, 
 and regression. Advanced knowledge of mathematical statistics may be useful but 
 is not necessary. Familiarity with the `R` programming language will be 
@@ -155,7 +159,7 @@ for assessing the causal claim of interest. Topics include
     package
 * Stochastic treatment regimes and the
     [`tmle3shift`](https://github.com/tlverse/tmle3shift) `tlverse` `R` package
-* Treatment specific survival functions with the
+* One-step TMLE for time-to-event outcomes with the 
     [`MOSS`](https://github.com/wilsoncai1992/MOSS) `R` package
 * Treatment specific mean outcome or marginal structural model for longitudinal 
     data with the [`ltmle`](https://cran.r-project.org/web/packages/ltmle/) `R` 
