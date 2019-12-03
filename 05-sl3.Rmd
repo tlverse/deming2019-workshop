@@ -464,7 +464,7 @@ ist_varimp %>%
 
 ## Exercise
 
-### Predicting Myocardial Infarction with `sl3`
+### Predicting Myocardial Infarction with `sl3` {#sl3ex}
 
 Follow the steps below to predict myocardial infarction (`mi`) using the
 available covariate data. We thank Prof. David Benkeser at Emory University for
@@ -525,3 +525,42 @@ head(chspred) %>%
   TMLE.
 
 ### Exercise Solutions
+
+Here is a potential solution to the (`sl3` Exercise -- Predicting Myocardial
+Infarction with `sl3`)[@sl3ex].
+
+```{r ex-key, eval=FALSE}
+chspred_task <- make_sl3_Task(
+  data = chspred,
+  covariates = head(colnames(chspred), -1),
+  outcome = "mi"
+)
+glm_learner <- Lrnr_glm$new()
+lasso_learner <- Lrnr_glmnet$new(alpha = 1)
+ridge_learner <- Lrnr_glmnet$new(alpha = 0)
+enet_learner <- Lrnr_glmnet$new(alpha = 0.5)
+curated_glm_learner <- Lrnr_glm_fast$new(formula = "mi ~ smoke + beta + waist")
+mean_learner <- Lrnr_mean$new() # That is one mean learner!
+glm_fast_learner <- Lrnr_glm_fast$new()
+ranger_learner <- Lrnr_ranger$new()
+svm_learner <- Lrnr_svm$new()
+xgb_learner <- Lrnr_xgboost$new()
+screen_cor <- Lrnr_pkg_SuperLearner_screener$new("screen.corP")
+glm_pipeline <- make_learner(Pipeline, screen_cor, glm_learner)
+stack <- make_learner(
+  Stack,
+  glm_pipeline, glm_learner,
+  lasso_learner, ridge_learner, enet_learner,
+  curated_glm_learner, mean_learner, glm_fast_learner,
+  ranger_learner, svm_learner, xgb_learner
+)
+metalearner <- make_learner(Lrnr_nnls)
+sl <- Lrnr_sl$new(
+  learners = stack,
+  metalearner = metalearner
+)
+sl_fit <- sl$train(task)
+sl_fit$print()
+CVsl <- CV_lrnr_sl(sl_fit, chspred_task, loss_squared_error)
+CVsl
+```
