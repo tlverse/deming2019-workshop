@@ -32,26 +32,29 @@ Imports:
   randomForest,
   RFCDE,
   SuperLearner,
+  ltmle,
   hal9001,
   delayed,
   origami,
   sl3,
+  MOSS,
   tmle3,
   tmle3mopttx,
   tmle3shift,
   haldensify
 Remotes:
   github::rstudio/bookdown,
-  github::osofr/simcausal,
-  github::osofr/condensier,
-  github::tpospisi/RFCDE/r,
+  github::osofr/simcausal@master,
+  github::osofr/condensier@master,
+  github::tpospisi/RFCDE/r@master,
   github::tlverse/hal9001@master,
   github::tlverse/delayed@master,
   github::tlverse/origami@master,
   github::tlverse/sl3@master,
-  github::tlverse/tmle3@master,
+  github::tlverse/tmle3@missing-outcome,
   github::tlverse/tmle3mopttx@5ba5f65,
   github::tlverse/tmle3shift@master,
   github::nhejazi/haldensify@master
+  github::wilsoncai1992/MOSS@master
 URL: https://github.com/tlverse/deming2019-workshop
 BugReports: https://github.com/tlverse/deming2019-workshop/issues
