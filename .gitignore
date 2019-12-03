@@ -5,4 +5,6 @@
 _book/*
 _bookdown_files/*
 handbook_files/*
-data/*.R
+data/prep_IST.R
+data/IST_corrected.csv
+data/IST_region.csv

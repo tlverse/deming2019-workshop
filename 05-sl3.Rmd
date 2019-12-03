@@ -184,7 +184,7 @@ library(SuperLearner)
 library(origami)
 set.seed(7194)
 # load data set and take a peek
-ist_data <- read_csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv")
+ist_data <- read.csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv")
 
 head(ist_data) %>%
   kable(digits = 4) %>%
@@ -334,9 +334,9 @@ Let's consider screening covariates based on their correlation with our outcome
 of interest (`cor.test` p-value $\leq 0.1$).
 
 ```{r screener}
-screen_cor <- Lrnr_pkg_SuperLearner_screener$new("screen.corP")
+screen_cor <- make_learner(Lrnr_screener_corP)
 # which covariates are selected on the full data?
-screen_cor$train(ist_task)
+screen_cor$train(task)
 ```
 To **"pipe"** only the selected covariates to the modeling algorithm, we need to
 make a `Pipeline`, which is a just set of learners to be fit sequentially, where
