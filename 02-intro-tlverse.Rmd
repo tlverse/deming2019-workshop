@@ -81,6 +81,9 @@ above. There are currently two featured examples of this:
 
 ## Installation {#installtlverse}
 
+Before installing packages, please [update your version of 
+`R`](https://cloud.r-project.org).
+
 The `tlverse` ecosystem of packages are currently hosted at
 https://github.com/tlverse, not yet on [CRAN](http://cran.r-project.org/). You
 can use the `devtools` package to install them:
