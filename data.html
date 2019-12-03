@@ -250,13 +250,12 @@ to assess whether early administration of aspirin, heparin, both or neither
 influenced the clinical course of acute ischaemic stroke
 <span class="citation">(Sandercock et al. <a href="#ref-sandercock1997international">1997</a>)</span>. The IST dataset includes data on 19,435 patients
 with acute stroke, with 99% complete follow-up. De-identified data are
-available for download at <a href="https://datashare.is.ed.ac.uk/handle/10283/128" class="uri">https://datashare.is.ed.ac.uk/handle/10283/128</a>.
-This study is described in more detail at the bottom of this page, and in the
+available for download at <a href="https://datashare.is.ed" class="uri">https://datashare.is.ed</a>. ac.uk/handle/10283/128. This
+study is described in more detail at the bottom of this page, and in the
 corresponding block quote reference. In the example data for this workshop, we
 consider a sample of 5,000 patients and the binary outcome of recurrent ischemic
 stroke within 14 days after randomization. Also in our example data, we ensure
-that we have subjects with a missing outcome. The data dictionary is available
-in the data folder,<a href="https://github.com/tlverse/deming2019-workshop/blob/master/data/ist_variables.pdf">ist_variables.pdf</a>.</p>
+that we have subjects with a missing outcome.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># read in data</span></a>
@@ -296,7 +295,7 @@ need to create a variable indicating this missingness (such as <span class="math
 analyses in the <code>tlverse</code>. If we let <span class="math inline">\(\Delta\)</span> denote the indicator that
 the outcome is missing such that <span class="math inline">\(\Delta = 1\)</span> when the outcome is observed and
 <span class="math inline">\(\Delta = 0\)</span> when the outcome is not observed, then we can denote our observed
-data structure as <span class="math inline">\(n\)</span> i.i.d. copies of <span class="math inline">\(O_i = (W_i, A_i, \Delta_i, \Delta Y_i)\)</span>,
+data structure as <span class="math inline">\(n\)</span> i.i.d. copies of <span class="math inline">\(O_i = (W_i, A_i, \Delta_i, \DeltaY_i)\)</span>,
 for <span class="math inline">\(i = 1, \ldots, n\)</span>.</p>
 <p>Using the <a href="https://CRAN.R-project.org/package=skimr"><code>skimr</code> package</a>, we can
 quickly summarize the variables in our data:</p>
