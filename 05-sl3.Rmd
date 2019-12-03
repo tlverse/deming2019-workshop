@@ -304,7 +304,7 @@ is set to "CV" instead of the `caret::train()` default `boot`. The summary
 metric to used to select the optimal model is `RMSE` for continuous outcomes 
 and `Accuracy` for categorical and binomial outcomes.
 
-```{r, carotene}
+```{r, carotene, eval = FALSE}
 # I have no idea how to tune a neural net (or BART machine..)
 lrnr_caret_nnet <- make_learner(Lrnr_caret, algorithm = "nnet")
 lrnr_caret_bartMachine <- make_learner(Lrnr_caret, algorithm = "bartMachine", 
