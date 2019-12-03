@@ -9,12 +9,13 @@ to assess whether early administration of aspirin, heparin, both or neither
 influenced the clinical course of acute ischaemic stroke 
 [@sandercock1997international]. The IST dataset includes data on 19,435 patients 
 with acute stroke, with 99\% complete follow-up. De-identified data are 
-available for download at https://datashare.is.ed. ac.uk/handle/10283/128. This 
-study is described in more detail at the bottom of this page, and in the 
+available for download at https://datashare.is.ed.ac.uk/handle/10283/128. 
+This study is described in more detail at the bottom of this page, and in the 
 corresponding block quote reference. In the example data for this workshop, we 
 consider a sample of 5,000 patients and the binary outcome of recurrent ischemic 
 stroke within 14 days after randomization. Also in our example data, we ensure 
-that we have subjects with a missing outcome. 
+that we have subjects with a missing outcome. The data dictionary is available 
+in the data folder,[ist_variables.pdf](https://github.com/tlverse/deming2019-workshop/blob/master/data/ist_variables.pdf). 
 
 ```{r load_ist_data_intro, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -41,7 +42,7 @@ need to create a variable indicating this missingness (such as $\Delta$) for
 analyses in the `tlverse`. If we let $\Delta$ denote the indicator that 
 the outcome is missing such that $\Delta = 1$ when the outcome is observed and 
 $\Delta = 0$ when the outcome is not observed, then we can denote our observed 
-data structure as $n$ i.i.d. copies of $O_i = (W_i, A_i, \Delta_i, \DeltaY_i)$, 
+data structure as $n$ i.i.d. copies of $O_i = (W_i, A_i, \Delta_i, \Delta Y_i)$, 
 for $i = 1, \ldots, n$.
 
 Using the [`skimr` package](https://CRAN.R-project.org/package=skimr), we can
