@@ -1,4 +1,4 @@
-# Targeted Learning Workshop at 2019 Deming Conference on Applied Statistics
+# Targeted Learning Workshops at 2019 Deming Conference on Applied Statistics
 
 Welcome to the GitHub repository accompanying the half-day tutorial and 2-day 
 short course on Targeted Learning, given at the Deming Conference on Applied 
@@ -26,7 +26,7 @@ Statistics, December 4-6, 2019.
 * 4:20P-5:00P: Targeted Maximum Likelihood Estimation of the Average Treatment 
   Effect in the `tlverse` software ecosystem
 
-### Day 2: December 5, 2019  
+### Day 2: December 6, 2019  
 
 * 8:00A-9:30A: Targeted Minimum Loss-Based Estimation of the Effects of Optimal 
   Dynamic and Shift Interventions in the `tlverse` software ecosystem
