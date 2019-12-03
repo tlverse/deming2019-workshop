@@ -263,7 +263,7 @@ Reference](https://tlverse.org/sl3/reference/index.html#section-sl-learners).
 
 ```{r extra-lrnr-awesome}
 lrnr_ranger50 <- make_learner(Lrnr_ranger, num.trees = 50)
-lrnr_hal_simple <- make_learner(Lrnr_hal9001, degrees = 1, n_folds = 2)
+lrnr_hal_simple <- make_learner(Lrnr_hal9001, max_degree = 2, n_folds = 2)
 lrnr_lasso <- make_learner(Lrnr_glmnet) # alpha default is 1
 lrnr_ridge <- make_learner(Lrnr_glmnet, alpha = 0)
 lrnr_elasticnet <- make_learner(Lrnr_glmnet, alpha = .5)
@@ -277,6 +277,10 @@ lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
 
 Here is a fun trick to create customized learners over a grid of parameters.
 
+```{r extra-lrnr-mindblown-hide, echo = FALSE}
+library(e1071)
+```
+
 ```{r extra-lrnr-mindblown}
 # I like to crock pot my super learners
 grid_params <- list(cost = c(0.01, 0.1, 1, 10, 100, 1000),
@@ -288,9 +292,9 @@ params_default <- list(nthread = getOption("sl.cores.learners", 1))
 svm_learners <- apply(grid, MARGIN = 1, function(params_tune) {
   do.call(Lrnr_svm$new, c(params_default, as.list(params_tune)))})
 
-grid_params <- list(max_depth = c(2,4,6,8),
+grid_params <- list(max_depth = c(2, 4, 6, 8),
                     eta = c(0.001, 0.01, 0.1, 0.2, 0.3),
-                    nrounds = c(20,50))
+                    nrounds = c(20, 50))
 grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
 params_default <- list(nthread = getOption("sl.cores.learners", 1))
 xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
@@ -470,12 +474,6 @@ Follow the steps below to predict myocardial infarction (`mi`) using the
 available covariate data. We thank Prof. David Benkeser at Emory University for
 making the this Cardiovascular Health Study (CHS) data accessible.
 
-1. Which learner was the discrete super learner? What was the cross validated
-mean risk of the discrete super learner?
-2. What was the cross-validated risk of the continuous super learner?
-3. Did your group face any challenges?
-4. Any additional comments/questions about this `sl3` section of the workshop?
-
 ```{r ex-setup, message=FALSE, warning=FALSE}
 # load the data set
 db_data <-
@@ -498,11 +496,13 @@ head(chspred) %>%
 4. Fit the metalearning step with non-negative least squares, `Lrnr_nnls`.
 5. With the metalearner and base learners, make the super learner and train it
    on the task.
-6. Print your super learner fit by calling `print()` with `$`.
+6. Print your super learner fit by calling `print()` with `$`. Which learner 
+   is the discrete super learner? 
 7. Cross-validate your super learner fit to see how well it performs on unseen
    data. Specify `loss_squared_error` as the loss function to evaluate the
    super learner. Like above, create a new task with 2 folds of external 
-   cross-validation for computational efficiency.
+   cross-validation for computational efficiency. Report the cross-validated
+   mean risk of the discrete super learner and the super learner.
 
 ## Summary
 
@@ -527,3 +527,5 @@ head(chspred) %>%
 * In the chapters that follow, we focus on the targeted maximum likelihood
   estimator and the targeted minimum loss-based estimator, both referred to as
   TMLE.
+
+### Exercise Solutions

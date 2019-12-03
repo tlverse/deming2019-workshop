@@ -139,16 +139,15 @@ These materials are feature modules centered around distinct causal questions,
 each motivated by a case study, alongside statistical methodology and software 
 for assessing the causal claim of interest. Topics include
 
-* Introduction to the [`tlverse` software
-    ecosystem](https://tlverse.org)
-* The roadmap of statistical learning, and the [WASH
-    Benefits](http://www.washbenefits.net/) data
 * [Why we need a statistical
     revolution](https://senseaboutscienceusa.org/super-learning-and-the-revolution-in-knowledge/)
-* Ensemble machine learning with the
+* Introduction to the [`tlverse` software
+    ecosystem](https://tlverse.org)
+* Roadmap of statistical learning with causal inference
+* International Stroke Trial (IST), WASH Benefits, and Veterans’ 
+  Administration Lung Cancer Trial data
+* Super (ensemble machine) learning with the
     [`sl3`](https://github.com/tlverse/sl3) `tlverse` `R` package
-* Targeted learning for causal inference with the
-    [`tmle3`](https://github.com/tlverse/tmle3) `tlverse` `R` package
 * Targeted learning for causal inference with the
     [`tmle3`](https://github.com/tlverse/tmle3) `tlverse` `R` package
 * Optimal treatment regimes and the
@@ -185,6 +184,18 @@ statistical and causal inference. Most recently, Mark's group has focused in
 part on the development of a centralized, principled set of software tools for
 targeted learning, the `tlverse`. For more information, see
 https://vanderlaan-lab.org.
+
+### Rachael Phillips {-}
+
+Rachael is a Ph.D.~student in biostatistics, advised by Alan Hubbard and Mark
+van der Laan. She has an M.A.~in Biostatistics, B.S.~in Biology with a
+Chemistry minor and a B.A.~in Mathematics with a Spanish minor. Rachael's 
+research focuses on narrowing the gap between the theory for and application of 
+modern statistics for real-world data science. Specifically, Rachael is 
+motivated by issues arising in healthcare, and she leverages strategies rooted 
+in causal inference and nonparametric estimation to build clinician-tailored, 
+machine-driven solutions. Rachael is also passionate about free, 
+online-mediated education and its corresponding pedagogy.
 
 ### Jeremy Coyle {-}
 
@@ -230,15 +241,3 @@ interests span non/semi-parametric theory, probability theory, machine learning,
 causal inference and high-dimensional statistics. Most of her current work
 involves complex dependent settings (dependence through time and network) and
 adaptive sequential designs.
-
-### Rachael Phillips {-}
-
-Rachael is a Ph.D.~student in biostatistics, advised by Alan Hubbard and Mark
-van der Laan. She has an M.A.~in Biostatistics, B.S.~in Biology with a
-Chemistry minor and a B.A.~in Mathematics with a Spanish minor. Rachael's 
-research focuses on narrowing the gap between the theory for and application of 
-modern statistics for real-world data science. Specifically, Rachael is 
-motivated by issues arising in healthcare, and she leverages strategies rooted 
-in causal inference and nonparametric estimation to build clinician-tailored, 
-machine-driven solutions. Rachael is also passionate about free, 
-online-mediated education and its corresponding pedagogy.
