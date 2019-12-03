@@ -277,11 +277,7 @@ lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
 
 Here is a fun trick to create customized learners over a grid of parameters.
 
-```{r extra-lrnr-mindblown-hide, echo = FALSE}
-library(e1071)
-```
-
-```{r extra-lrnr-mindblown}
+```{r extra-lrnr-mindblown, eval = FALSE}
 # I like to crock pot my super learners
 grid_params <- list(cost = c(0.01, 0.1, 1, 10, 100, 1000),
                     gamma = c(0.001, 0.01, 0.1, 1),
