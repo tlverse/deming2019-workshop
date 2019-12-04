@@ -259,7 +259,7 @@ hazard_fit_ate <- MOSS_hazard_ate$new(
   initial_fit$g1W
 )
 psi_ate <- hazard_fit_ate$iterate_onestep()
-range(psi_ate)
+summary(psi_ate)
 ```
 
 ### 4. Compute standard error estimates for simultaneous inference {-}
@@ -344,13 +344,12 @@ plot_testA <- ggplot(data = plotdf_testA, aes(x = time, y = est)) +
 plot_testA
 ```
 
-```{r moss-4-ate}
-# estimate survival curve for ate
-survival_ate <- survival_curve$new(t = k_grid, survival = psi_testA)
-survival_ate$display(type = 'survival')
-# TO-DO: fix simultaneous inference for ATE
-```
+
 ```{r moss-4-ate-broken, eval=FALSE, echo=FALSE}
+# estimate survival curve for ate
+survival_ate <- survival_curve$new(t = k_grid, survival = psi_ate)
+survival_ate$display(type = 'survival')
+
 eic_ate <- eic$new(
   A = A,
   T_tilde = T_tilde,
