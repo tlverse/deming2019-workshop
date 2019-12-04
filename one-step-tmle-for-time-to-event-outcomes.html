@@ -392,14 +392,17 @@ tutorial crafted a few years ago by our colleague Chris Kennedy is freely
 available: <a href="https://cran.r-project.org/web/packages/SuperLearner/vignettes/Guide-to-SuperLearner.html">Guide to
 SuperLearner</a>.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># recall treatment was randomized</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">sl_lib_decent &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SL.mean&quot;</span>, <span class="st">&quot;SL.glm&quot;</span>, <span class="st">&quot;SL.step.forward&quot;</span>, <span class="st">&quot;SL.bayesglm&quot;</span>, </a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">                   <span class="st">&quot;SL.ranger&quot;</span>, <span class="st">&quot;SL.gam&quot;</span>)</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">initial_fit &lt;-<span class="st"> </span><span class="kw">initial_sl_fit</span>(T_tilde, Delta, A, W, t_max, </a>
-<a class="sourceLine" id="cb42-6" data-line-number="6">                              <span class="dt">sl_censoring =</span> sl_lib_decent, </a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">                              <span class="dt">sl_failure =</span> sl_lib_decent)</a>
-<a class="sourceLine" id="cb42-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb42-9" data-line-number="9"><span class="kw">names</span>(initial_fit)</a></code></pre></div>
+<a class="sourceLine" id="cb42-2" data-line-number="2">SL.ranger.faster =<span class="st"> </span><span class="cf">function</span>(...) {</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">  <span class="kw">SL.ranger</span>(..., <span class="dt">num.trees =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">sl_lib_decent &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SL.mean&quot;</span>, <span class="st">&quot;SL.glm&quot;</span>, <span class="st">&quot;SL.step.forward&quot;</span>, <span class="st">&quot;SL.bayesglm&quot;</span>, </a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">                   <span class="st">&quot;SL.ranger.faster&quot;</span>, <span class="st">&quot;SL.gam&quot;</span>)</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">initial_fit &lt;-<span class="st"> </span><span class="kw">initial_sl_fit</span>(T_tilde, Delta, A, W, t_max, </a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">                              <span class="dt">sl_censoring =</span> sl_lib_decent, </a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">                              <span class="dt">sl_failure =</span> sl_lib_decent)</a>
+<a class="sourceLine" id="cb42-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb42-12" data-line-number="12"><span class="kw">names</span>(initial_fit)</a></code></pre></div>
 <pre><code>[1] &quot;density_failure_1&quot; &quot;density_failure_0&quot; &quot;density_censor_1&quot; 
 [4] &quot;density_censor_0&quot;  &quot;g1W&quot;              </code></pre>
 <p>The <code>initial_fit</code> object contains the fitted conditional densities for the
@@ -417,7 +420,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0099128605414299 0.00824679350837686 0.009726476042320 ...
+    hazard: 0.00949146643554085 0.00735066982443049 0.00893108123068 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -436,7 +439,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0099128605414299 0.00824679350837686 0.009726476042320 ...
+    hazard: 0.00949146643554085 0.00735066982443049 0.00893108123068 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
