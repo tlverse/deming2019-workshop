@@ -361,21 +361,23 @@ dt_stack <- delayed_learner_train(fancy_stack, ist_task)
 plot(dt_stack, color = FALSE, height = "400px", width = "100%")
 ```
 
-We will fit a non-negative least squares metalearner using `Lrnr_nnls`. Note
-that any learner can be used as a metalearner.
+We will use the [default 
+metalearner](https://github.com/tlverse/sl3/blob/master/R/default_metalearner.R), 
+which uses [`Lrnr_solnp()`](https://github.com/tlverse/sl3/blob/master/R/Lrnr_solnp.R) 
+to provide fitting procedures for a pairing of [loss 
+function](https://github.com/tlverse/sl3/blob/master/R/loss_functions.R) and 
+[metalearner 
+function](https://github.com/tlverse/sl3/blob/master/R/metalearners.R). The
+default metalearner chooses loss and metalearner pairing based on the outcome 
+type. Note that any learner can be used as a metalearner.
 
-```{r metalearner}
-metalearner <- make_learner(Lrnr_nnls)
-```
-
-We have made a library/stack of base learners and a metalearner, so we
-are ready to make the super learner. The super learner algorithm fits a
-metalearner on the validation-set predictions.
+We have made a library/stack of base learners, so we are ready to make the super 
+learner. The super learner algorithm fits a metalearner on the validation-set 
+predictions.
 
 ```{r make-sl}
 sl <- make_learner(Lrnr_sl,
-  learners = fancy_stack,
-  metalearner = metalearner
+  learners = fancy_stack
 )
 # we can visualize the super learner
 dt_sl <- delayed_learner_train(sl, ist_task)
@@ -435,7 +437,8 @@ ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
   outcome = outcome,
-  folds = make_folds(ist_data, fold_fun = folds_vfold, V = 2)
+  folds = make_folds(ist_data, fold_fun = folds_vfold, V = 2),
+  drop_missing_outcome = TRUE
 )
 CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
 CVsl %>%
