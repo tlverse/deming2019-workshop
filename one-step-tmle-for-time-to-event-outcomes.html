@@ -417,7 +417,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0104111844194175 0.00879865751370899 0.010271713639341 ...
+    hazard: 0.0099128605414299 0.00824679350837686 0.009726476042320 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -436,7 +436,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0104111844194175 0.00879865751370899 0.010271713639341 ...
+    hazard: 0.0099128605414299 0.00824679350837686 0.009726476042320 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -512,8 +512,9 @@ the <code>iterate_onestep()</code> method for this object. <code>MOSS_hazard</co
 <a class="sourceLine" id="cb51-9" data-line-number="9">  initial_fit<span class="op">$</span>g1W</a>
 <a class="sourceLine" id="cb51-10" data-line-number="10">)</a>
 <a class="sourceLine" id="cb51-11" data-line-number="11">psi_ate &lt;-<span class="st"> </span>hazard_fit_ate<span class="op">$</span><span class="kw">iterate_onestep</span>()</a>
-<a class="sourceLine" id="cb51-12" data-line-number="12"><span class="kw">range</span>(psi_ate)</a></code></pre></div>
-<pre><code>[1] 0 0</code></pre>
+<a class="sourceLine" id="cb51-12" data-line-number="12"><span class="kw">summary</span>(psi_ate)</a></code></pre></div>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0       0       0       0       0       0 </code></pre>
 </div>
 <div id="compute-standard-error-estimates-for-simultaneous-inference" class="section level3 unnumbered">
 <h3>4. Compute standard error estimates for simultaneous inference</h3>
@@ -591,11 +592,6 @@ simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai201
 <a class="sourceLine" id="cb54-28" data-line-number="28"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
 <a class="sourceLine" id="cb54-29" data-line-number="29">plot_testA</a></code></pre></div>
 <p><img src="deming2019_workshop_files/figure-html/moss-4-test-1.png" width="  extwidth" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co"># estimate survival curve for ate</span></a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">survival_ate &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_testA)</a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">survival_ate<span class="op">$</span><span class="kw">display</span>(<span class="dt">type =</span> <span class="st">&#39;survival&#39;</span>)</a></code></pre></div>
-<p><img src="deming2019_workshop_files/figure-html/moss-4-ate-1.png" width="   extwidth" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># TO-DO: fix simultaneous inference for ATE</span></a></code></pre></div>
 
 </div>
 </div>
