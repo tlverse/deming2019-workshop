@@ -91,9 +91,11 @@ repository for the short course.
 
 ## About {-}
 
-### Half-Day Tutorial -- 9:00A-12:00P on 4 December 2019**
+### Half-Day Tutorial -- 9:00A-12:00P on 4 December 2019 {-}
+
 *Targeted Maximum Likelihood Estimation (TMLE) for Machine Learning: A Gentle 
 Introduction*
+
 During this half-day tutorial, we will delve into the utility of the roadmap of 
 targeted learning for translating real-world data applications to a mathematical 
 and statistical formulation of the relevant research question of interest. 
@@ -111,9 +113,11 @@ intervals, hypothesis tests, and regression. Advanced knowledge of mathematical
 statistics may be useful but is not necessary. Familiarity with the R programming 
 language will be essential. 
 
-### 2-Day Short Course -- 8:00A-5:50P on 5-6 December 2019**
+### 2-Day Short Course -- 8:00A-5:50P on 5-6 December 2019 {-}
+
 *Targeted Learning in Data Science: Causal Inference for Observational and 
 Experimental Data*
+
 This 2-day short course will provide a comprehensive introduction to the field 
 of targeted learning for causal inference and the corresponding `tlverse` 
 software ecosystem. We will focus on targeted minimum loss-based estimators of 
