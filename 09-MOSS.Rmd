@@ -333,7 +333,7 @@ plot_testA <- ggplot(data = plotdf_testA, aes(x = time, y = est)) +
 plot_testA
 ```
 
-```{r, eval=FALSE, echo=FALSE}
+```{r moss-4-ate, eval=FALSE, echo=FALSE}
 # estimate and obtain inference for survival curve for ate
 survival_ate <- survival_curve$new(t = k_grid, survival = psi_testA)
 survival_curve_ate <- as.vector(survival_ate$survival)
