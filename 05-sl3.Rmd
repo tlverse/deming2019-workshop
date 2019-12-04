@@ -433,7 +433,14 @@ We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-```{r CVsl, message=FALSE, warning=FALSE}
+```{r CVsl-faster, message=FALSE, warning=FALSE}
+sl_faster <- make_learner(Lrnr_sl,
+  learners = stack
+)
+sl_faster_fit <- sl_faster$train(ist_task)
+```
+
+``````{r CVsl, message=FALSE, warning=FALSE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -441,7 +448,7 @@ ist_task_new <- make_sl3_Task(
   folds = make_folds(ist_data, fold_fun = folds_vfold, V = 2),
   drop_missing_outcome = TRUE
 )
-CVsl <- CV_lrnr_sl(sl_fit, ist_task, loss_loglik_binomial)
+CVsl <- CV_lrnr_sl(sl_faster_fit, ist_task, loss_loglik_binomial)
 CVsl %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
