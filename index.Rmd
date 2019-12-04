@@ -89,7 +89,7 @@ repository for the short course.
 
 * [https://github.com/tlverse/deming2019-workshop/tree/master/R](https://github.com/tlverse/deming2019-workshop/tree/master/R)
 
-## About {-}
+## Abstract {-}
 
 ### Half-Day Tutorial -- 9:00A-12:00P on 4 December 2019 {-}
 
