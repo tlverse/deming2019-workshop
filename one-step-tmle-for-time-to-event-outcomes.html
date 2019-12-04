@@ -207,8 +207,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#specify-right-censored-survival-data-arguments"><i class="fa fa-check"></i>1. Specify right-censored survival data arguments</a></li>
 <li><a href="one-step-tmle-for-time-to-event-outcomes.html#obtain-initial-estimates-with-superlearner-r-package">2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</a></li>
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#perform-tmle-adjustment-of-the-initial-conditional-survival-estimate"><i class="fa fa-check"></i>3. Perform TMLE adjustment of the initial conditional survival estimate</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#compute-standard-error-estimates-for-simultaneous-inference"><i class="fa fa-check"></i>4. Compute standard error estimates for simultaneous inference</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>6</b> A Primer on the <code>R6</code> Class System</a><ul>
 <li class="chapter" data-level="6.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>6.1</b> Classes, Fields, and Methods</a></li>
@@ -417,7 +417,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0094647782022588 0.00767596572066229 0.009435110938755 ...
+    hazard: 0.0104111844194175 0.00879865751370899 0.010271713639341 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -436,7 +436,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.0094647782022588 0.00767596572066229 0.009435110938755 ...
+    hazard: 0.0104111844194175 0.00879865751370899 0.010271713639341 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -515,9 +515,8 @@ the <code>iterate_onestep()</code> method for this object. <code>MOSS_hazard</co
 <a class="sourceLine" id="cb51-12" data-line-number="12"><span class="kw">range</span>(psi_ate)</a></code></pre></div>
 <pre><code>[1] 0 0</code></pre>
 </div>
-</div>
-<div id="compute-standard-error-estimates-for-simultaneous-inference" class="section level2 unnumbered">
-<h2>4. Compute standard error estimates for simultaneous inference</h2>
+<div id="compute-standard-error-estimates-for-simultaneous-inference" class="section level3 unnumbered">
+<h3>4. Compute standard error estimates for simultaneous inference</h3>
 <p>The simultaneous confidence bands for the survival curve estimates can be
 constructed based on asymptotic linearity of the TMLE uniform in all time points
 considered.</p>
@@ -598,6 +597,7 @@ simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai201
 <p><img src="deming2019_workshop_files/figure-html/moss-4-ate-1.png" width="   extwidth" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># TO-DO: fix simultaneous inference for ATE</span></a></code></pre></div>
 
+</div>
 </div>
 </div>
 <h3>References</h3>
