@@ -53,6 +53,7 @@
 <link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
 <script src="libs/vis-4.20.1/vis.min.js"></script>
 <script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -214,9 +215,33 @@ essential.</a></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#wash"><i class="fa fa-check"></i><b>3.2</b> WASH Benefits Example Dataset</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#vet"><i class="fa fa-check"></i><b>3.3</b> Veterans’ Administration Lung Cancer Trial Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>4</b> A Primer on the <code>R6</code> Class System</a><ul>
-<li class="chapter" data-level="4.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>4.1</b> Classes, Fields, and Methods</a></li>
-<li class="chapter" data-level="4.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>4.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+<li class="chapter" data-level="4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Super (Ensemble Machine) Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#super-learning"><i class="fa fa-check"></i><b>4.1.1</b> Super Learning</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#train-the-super-learner-on-the-machine-learning-task"><i class="fa fa-check"></i>3. Train the super learner on the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#obtain-predicted-values"><i class="fa fa-check"></i>4. Obtain predicted values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#extensions"><i class="fa fa-check"></i><b>4.3</b> Extensions</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#cross-validated-super-learner"><i class="fa fa-check"></i><b>4.3.1</b> Cross-validated Super Learner</a></li>
+<li class="chapter" data-level="4.3.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#variable-importance-measures-with-sl3"><i class="fa fa-check"></i><b>4.3.2</b> Variable Importance Measures with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise"><i class="fa fa-check"></i><b>4.4</b> Exercise</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3ex"><i class="fa fa-check"></i><b>4.4.1</b> Predicting Myocardial Infarction with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#summary"><i class="fa fa-check"></i><b>4.5</b> Summary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise-solutions"><i class="fa fa-check"></i><b>4.5.1</b> Exercise Solutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>5</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="5.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>5.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="5.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>5.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -243,7 +268,7 @@ essential.</a></li>
 <h1 class="title">Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the <code>tlverse</code> Software Ecosystem</h1>
 <h2 class="subtitle"><em>Software Workshops at Deming Conference on Applied Statistics (4-6 December 2019)</em></h2>
 <p class="author"><em>Rachael Phillips, Nima Hejazi, Jeremy Coyle, Ivana Malenica, Alan Hubbard, Mark van der Laan</em></p>
-<p class="date"><em>updated: December 03, 2019</em></p>
+<p class="date"><em>updated: December 04, 2019</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -383,9 +408,9 @@ targeted learning, the <code>tlverse</code>. For more information, see
 </div>
 <div id="rachael-phillips" class="section level3 unnumbered">
 <h3>Rachael Phillips</h3>
-<p>Rachael is a Ph.D.~student in biostatistics, advised by Alan Hubbard and Mark
-van der Laan. She has an M.A.~in Biostatistics, B.S.~in Biology with a
-Chemistry minor and a B.A.~in Mathematics with a Spanish minor. Rachael’s
+<p>Rachael is a Ph.D. student in biostatistics, advised by Alan Hubbard and Mark
+van der Laan. She has an M.A. in Biostatistics, B.S. in Biology with a
+Chemistry minor and a B.A. in Mathematics with a Spanish minor. Rachael’s
 research focuses on narrowing the gap between the theory for and application of
 modern statistics for real-world data science. Specifically, Rachael is
 motivated by issues arising in healthcare, and she leverages strategies rooted
