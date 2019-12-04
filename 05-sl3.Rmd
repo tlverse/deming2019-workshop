@@ -322,7 +322,7 @@ combined or compared.
 
 ```{r stack, message=FALSE, warning=FALSE}
 stack <- make_learner(Stack, 
-  lrnr_glm, lrnr_mean, lrnr_ranger50, lrnr_lasso, lrnr_gam, 
+  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_gam, 
   lrnr_bayesglm, lrnr_ridge, lrnr_elasticnet
 )
 ```
