@@ -191,9 +191,9 @@ https://vanderlaan-lab.org.
 
 ### Rachael Phillips {-}
 
-Rachael is a Ph.D.~student in biostatistics, advised by Alan Hubbard and Mark
-van der Laan. She has an M.A.~in Biostatistics, B.S.~in Biology with a
-Chemistry minor and a B.A.~in Mathematics with a Spanish minor. Rachael's 
+Rachael is a Ph.D. student in biostatistics, advised by Alan Hubbard and Mark
+van der Laan. She has an M.A. in Biostatistics, B.S. in Biology with a
+Chemistry minor and a B.A. in Mathematics with a Spanish minor. Rachael's 
 research focuses on narrowing the gap between the theory for and application of 
 modern statistics for real-world data science. Specifically, Rachael is 
 motivated by issues arising in healthcare, and she leverages strategies rooted 
