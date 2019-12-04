@@ -216,7 +216,7 @@ the `iterate_onestep()` method for this object. `MOSS_hazard` and
 
 **One-step TMLE of the Treatment-Specific Survival**
 
-```{r moss-3-marginal, warning=FALSE, message=FALSE}
+```{r moss-3-standard, warning=FALSE, message=FALSE}
 # estimate survival curve for standard treatment group
 hazard_fit_standardA <- MOSS_hazard$new(
   A,
@@ -229,7 +229,8 @@ hazard_fit_standardA <- MOSS_hazard$new(
   k_grid
 )
 psi_standardA <- hazard_fit_standardA$iterate_onestep()
-
+```
+```{r moss-3-test, warning=FALSE, message=FALSE}
 # estimate survival curve for test treatment group
 hazard_fit_testA <- MOSS_hazard$new(
   A,
