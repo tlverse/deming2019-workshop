@@ -334,7 +334,7 @@ Let's consider screening covariates based on their `randomForest` variable
 importance ranking (ordered by mean decrease in accuracy)
 
 ```{r screener, message=FALSE, warning=FALSE}
-screen_rf <- make_learner(Lrnr_screener_randomForest, nVar = 5, ntree = 100)
+screen_rf <- make_learner(Lrnr_screener_randomForest, nVar = 5, ntree = 50)
 # which covariates are selected on the full data?
 screen_rf$train(ist_task)
 ```
