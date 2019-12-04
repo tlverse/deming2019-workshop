@@ -204,7 +204,7 @@ weights, id, offset).
 We are not interested in predicting missing outcomes. We set 
 `drop_missing_outcome = TRUE` when we create the task. In the next chapter, we 
 estimate this missingness mechanism and account for it in the estimation. 
-```{r task}
+```{r task, message=FALSE, warning=FALSE}
 # specify the outcome and covariates
 outcome <- "DRSISC"
 covars <- colnames(ist_data)[-which(names(ist_data) == outcome)]
@@ -237,20 +237,20 @@ Learners have properties that indicate what features they support. We may use
 `sl3_list_properties()` to get a list of all properties supported by at least
 one learner.
 
-```{r list-properties}
+```{r list-properties, message=FALSE, warning=FALSE}
 sl3_list_properties()
 ```
 Since we have a binomial outcome, we may identify the learners that support
 this outcome type with `sl3_list_learners()`.
 
-```{r list-learners}
+```{r list-learners, message=FALSE, warning=FALSE}
 sl3_list_learners(c("binomial"))
 ```
 
 Now that we have an idea of some learners, we can construct them using the
 `make_learner` function.
 
-```{r baselearners}
+```{r baselearners, message=FALSE, warning=FALSE}
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_glm <- make_learner(Lrnr_glm)
@@ -261,7 +261,7 @@ settings. Documentation for the learners and their hyperparameters can be found
 in the [`sl3` Learners
 Reference](https://tlverse.org/sl3/reference/index.html#section-sl-learners).
 
-```{r extra-lrnr-awesome}
+```{r extra-lrnr-awesome, message=FALSE, warning=FALSE}
 lrnr_ranger50 <- make_learner(Lrnr_ranger, num.trees = 50)
 lrnr_hal_simple <- make_learner(Lrnr_hal9001, max_degree = 2, n_folds = 2)
 lrnr_lasso <- make_learner(Lrnr_glmnet) # alpha default is 1
@@ -271,7 +271,7 @@ lrnr_elasticnet <- make_learner(Lrnr_glmnet, alpha = .5)
 
 We can also include learners from the `SuperLearner` `R` package.
 
-```{r extra-lrnr-woah}
+```{r extra-lrnr-woah, message=FALSE, warning=FALSE}
 lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
 ```
 
@@ -320,7 +320,7 @@ other learners. What makes a stack special is that it combines multiple learners
 by training them simultaneously, so that their predictions can be either
 combined or compared.
 
-```{r stack}
+```{r stack, message=FALSE, warning=FALSE}
 stack <- make_learner(Stack, 
   lrnr_glm, lrnr_mean, lrnr_ranger50, lrnr_lasso, lrnr_gam, 
   lrnr_bayesglm, lrnr_ridge, lrnr_elasticnet
@@ -330,20 +330,21 @@ stack <- make_learner(Stack,
 We can optionally select a subset of available covariates and pass only
 those variables to the modeling algorithm.
 
-Let's consider screening covariates based on their correlation with our outcome
-of interest (`cor.test` p-value $\leq 0.1$).
+Let's consider screening covariates based on their `randomForest` variable 
+importance ranking (ordered by mean decrease in accuracy)
 
-```{r screener}
-screen_cor <- make_learner(Lrnr_screener_corP)
+```{r screener, message=FALSE, warning=FALSE}
+screen_rf <- make_learner(Lrnr_screener_randomForest, nVar = 5, ntree = 100)
 # which covariates are selected on the full data?
-screen_cor$train(ist_task)
+screen_rf$train(ist_task)
 ```
+
 To **"pipe"** only the selected covariates to the modeling algorithm, we need to
 make a `Pipeline`, which is a just set of learners to be fit sequentially, where
 the fit from one learner is used to define the task for the next learner.
 
-```{r screener-pipe}
-cor_pipeline <- make_learner(Pipeline, screen_cor, stack)
+```{r screener-pipe, message=FALSE, warning=FALSE}
+screen_rf_pipeline <- make_learner(Pipeline, screen_rf, stack)
 ```
 Now our learners will be preceded by a screening step.
 
@@ -354,8 +355,8 @@ Analogous to what we have seen before, we have to stack the pipeline and
 original `stack` together, so we may use them as base learners in our super
 learner.
 
-```{r screeners-stack}
-fancy_stack <- make_learner(Stack, cor_pipeline, stack)
+```{r screeners-stack, message=FALSE, warning=FALSE}
+fancy_stack <- make_learner(Stack, screen_rf_pipeline, stack)
 # we can visualize the stack
 dt_stack <- delayed_learner_train(fancy_stack, ist_task)
 plot(dt_stack, color = FALSE, height = "400px", width = "100%")
@@ -375,7 +376,7 @@ We have made a library/stack of base learners, so we are ready to make the super
 learner. The super learner algorithm fits a metalearner on the validation-set 
 predictions.
 
-```{r make-sl}
+```{r make-sl, message=FALSE, warning=FALSE}
 sl <- make_learner(Lrnr_sl,
   learners = fancy_stack
 )
@@ -399,7 +400,7 @@ in all the places you could otherwise use any other `sl3` learners, including
 Now we are ready to **"train"** our super learner on our `sl3_task` object,
 `ist_task`.
 
-```{r sl-basic}
+```{r sl-basic, message=FALSE, warning=FALSE}
 sl_fit <- sl$train(ist_task)
 ```
 
@@ -408,7 +409,7 @@ sl_fit <- sl$train(ist_task)
 Now that we have fit the super learner, we are ready to obtain our predicted
 values, and we can also obtain a summary of the results.
 
-```{r sl-basic-summary}
+```{r sl-basic-summary, message=FALSE, warning=FALSE}
 sl_preds <- sl_fit$predict()
 head(sl_preds)
 sl_fit$print()
@@ -432,7 +433,7 @@ We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-```{r CVsl}
+```{r CVsl, message=FALSE, warning=FALSE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -440,7 +441,7 @@ ist_task_new <- make_sl3_Task(
   folds = make_folds(ist_data, fold_fun = folds_vfold, V = 2),
   drop_missing_outcome = TRUE
 )
-CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
+CVsl <- CV_lrnr_sl(sl_fit, ist_task, loss_loglik_binomial)
 CVsl %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
@@ -457,7 +458,7 @@ fit with the true covariate, across all covariates.
 In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
-```{r varimp}
+```{r varimp, message=FALSE, warning=FALSE}
 ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
 ist_varimp %>%
   kable(digits = 4) %>%
@@ -532,7 +533,7 @@ head(chspred) %>%
 Here is a potential solution to the (`sl3` Exercise -- Predicting Myocardial
 Infarction with `sl3`)[@sl3ex].
 
-```{r ex-key, eval=FALSE}
+```{r ex-key, eval=FALSE, message=FALSE, warning=FALSE}
 chspred_task <- make_sl3_Task(
   data = chspred,
   covariates = head(colnames(chspred), -1),
