@@ -160,7 +160,7 @@ SuperLearner](https://cran.r-project.org/web/packages/SuperLearner/vignettes/Gui
 ```{r moss-2, message=FALSE, warning=FALSE}
 # recall treatment was randomized
 sl_lib_decent <- c("SL.mean", "SL.glm", "SL.step.forward", "SL.bayesglm", 
-                   "SL.ranger", "SL.gam", "SL.polymars")
+                   "SL.ranger", "SL.gam")
 
 initial_fit <- initial_sl_fit(T_tilde, Delta, A, W, t_max, 
                               sl_censoring = sl_lib_decent, 
@@ -266,6 +266,16 @@ range(psi_ate)
 The simultaneous confidence bands for the survival curve estimates can be 
 constructed based on asymptotic linearity of the TMLE uniform in all time points 
 considered. 
+
+After creating a vector of survival curve estimates by defining a new 
+`survival_curve` object, we will estimate the efficient influence curve 
+using the TML-estimates generated in the previous step. We obtain estimates for 
+all times specified in `k_grid` by calling the `all_t()` method for `eic` 
+objects. The eic estimates are obtained for each subject and time, so we 
+construct a matrix of these estimates and calculate a simultaneous confidence 
+band with this matrix by calling the method `compute_simultaneous_ci()`. See the 
+manuscript accompanying the `MOSS` package for more details on constructing 
+simultaneous inference [@cai2019one].  
 
 ```{r moss-4-standard}
 # estimate and obtain inference for survival curve for standard treatment group
