@@ -434,8 +434,12 @@ Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
 ```{r CVsl-faster, message=FALSE, warning=FALSE}
+stack_smaller <- make_learner(Stack, 
+  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_ridge, lrnr_elasticnet
+)
+
 sl_faster <- make_learner(Lrnr_sl,
-  learners = stack
+  learners = stack_smaller
 )
 sl_faster_fit <- sl_faster$train(ist_task)
 ```
