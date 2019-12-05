@@ -293,7 +293,7 @@ hold. We discuss this in greater detail in the sequel.
 
 ### Targeted Estimation of Stochastic Interventions Effects
 
-```{r fit_tmle-shift, message=FALSE, warning=FALSE, cache=TRUE}
+```{r fit_tmle-shift, message=FALSE, warning=FALSE}
 tmle_fit <- tmle3(tmle_spec, data, node_list, learner_list)
 tmle_fit
 ```
@@ -366,7 +366,7 @@ simply invoke the `tmle3` wrapper function  to fit the series of TML estimators
 (one for each parameter defined by the grid delta) in a single function call.
 For convenience, we choose the latter:
 
-```{r fit_tmle_wrapper_vimshift, message=FALSE, warning=FALSE, cache=TRUE}
+```{r fit_tmle_wrapper_vimshift, message=FALSE, warning=FALSE}
 tmle_fit <- tmle3(tmle_spec, data, node_list, learner_list)
 tmle_fit
 ```
@@ -423,7 +423,7 @@ parameters of the working marginal structural model, we may use the
 `tmle_vimshift_msm` Spec (instead of the `tmle_vimshift_delta` Spec that
 appears above):
 
-```{r vim_targeted_msm_fit, message=FALSE, warning=FALSE, cache=TRUE}
+```{r vim_targeted_msm_fit, message=FALSE, warning=FALSE}
 # initialize a tmle specification
 tmle_msm_spec <- tmle_vimshift_msm(
   shift_grid = delta_grid,
@@ -452,7 +452,7 @@ we'll consider the outcome to be the weight-for-height Z-score (as in previous
 sections), the intervention of interest to be the mother's age at time of
 child's birth, and take all other covariates to be potential confounders.
 
-```{r washb-data-npsem-shift, message=FALSE, warning=FALSE, cache=FALSE}
+```{r washb-data-npsem-shift, message=FALSE, warning=FALSE}
 node_list <- list(
   W = names(washb_data)[!(names(washb_data) %in%
     c("whz", "momage"))],
@@ -485,7 +485,7 @@ we'll estimate the effect of this shift $\delta = 2$ while stratifying on the
 mother's education level (`momedu`, a categorical variable with three levels).
 For this, we augment our initialized `tmle3_Spec` object like so
 
-```{r shift_spec_emm_washb, message=FALSE, warning=FALSE, cache = TRUE}
+```{r shift_spec_emm_washb, message=FALSE, warning=FALSE}
 # initialize effect modification specification around previous specification
 washb_shift_strat_spec <-  tmle_stratified(washb_shift_spec, "momedu")
 ```
@@ -517,7 +517,7 @@ learner_list <- list(Y = sl_lrn, A = lrn_cv_rfcde)
 Now we're ready to construct a TML estimate of the shift parameter at
 $\delta = 2$, stratified across levels of our variable of interest:
 
-```{r fit_shift_emm_washb, message=FALSE, warning=FALSE, cache = TRUE}
+```{r fit_shift_emm_washb, message=FALSE, warning=FALSE}
 # fit stratified TMLE
 washb_shift_strat_fit <- tmle3(washb_shift_strat_spec, washb_data, node_list,
                                learner_list)
@@ -531,7 +531,7 @@ by two years ($\delta = 2$), incrementing by a single year between the two. To
 do this, we simply initialize a `Spec` `tmle_vimshift_delta` similar to how we
 did in a previous example:
 
-```{r vim_spec_init_washb, message=FALSE, warning=FALSE, cache = TRUE}
+```{r vim_spec_init_washb, message=FALSE, warning=FALSE}
 # initialize a tmle specification for the variable importance parameter
 washb_vim_spec <- tmle_vimshift_delta(
   shift_grid = seq(from = -2, to = 2, by = 1),
@@ -544,7 +544,7 @@ counterfactual mean of the weight-for-height Z-score under a small grid of
 shifts in the mother's age at child's birth. Just as before, we do this through
 a simple call to our `tmle3` wrapper function:
 
-```{r fit_tmle_wrapper_washb, message=FALSE, warning=FALSE, cache = TRUE}
+```{r fit_tmle_wrapper_washb, message=FALSE, warning=FALSE}
 washb_tmle_fit <- tmle3(washb_vim_spec, washb_data, node_list, learner_list)
 washb_tmle_fit
 ```

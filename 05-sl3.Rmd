@@ -43,7 +43,7 @@ estimator.
   study designs and data structures.
 - The figure below shows an example of 10-fold cross-validation.  
   
-```{r cv_fig, fig.show="hold", echo = FALSE}
+```{r cv_fig, echo = FALSE}
 knitr::include_graphics("img/misc/vs.pdf")
 ```
 
@@ -77,7 +77,7 @@ knitr::include_graphics("img/misc/vs.pdf")
 Note, this entire procedure can be itself cross-validated to get a consistent
 estimate of the future performance of the SL fit.
 
-```{r cv_fig2, fig.show="hold", echo = FALSE}
+```{r cv_fig2, echo = FALSE}
 knitr::include_graphics("img/misc/SLKaiserNew.pdf")
 ``` 
 
@@ -111,7 +111,7 @@ knitr::include_graphics("img/misc/SLKaiserNew.pdf")
 - Below shows the results of such a study, comparing the fits of several different learners, 
   including the SL algorithms.
 
-```{r cv_fig3, fig.show="hold", echo = FALSE}
+```{r cv_fig3, echo = FALSE}
 knitr::include_graphics("img/misc/ericSL.pdf")
 ```
 
@@ -304,7 +304,7 @@ is set to "CV" instead of the `caret::train()` default `boot`. The summary
 metric to used to select the optimal model is `RMSE` for continuous outcomes 
 and `Accuracy` for categorical and binomial outcomes.
 
-```{r, carotene, eval = FALSE}
+```{r carotene, eval = FALSE}
 # I have no idea how to tune a neural net (or BART machine..)
 lrnr_caret_nnet <- make_learner(Lrnr_caret, algorithm = "nnet")
 lrnr_caret_bartMachine <- make_learner(Lrnr_caret, algorithm = "bartMachine", 
@@ -333,7 +333,7 @@ those variables to the modeling algorithm.
 Let's consider screening covariates based on their `randomForest` variable 
 importance ranking (ordered by mean decrease in accuracy)
 
-```{r screener, cache = TRUE}
+```{r screener}
 screen_rf <- make_learner(Lrnr_screener_randomForest, nVar = 5, ntree = 100)
 # which covariates are selected on the full data?
 screen_rf$train(ist_task)
@@ -400,7 +400,7 @@ in all the places you could otherwise use any other `sl3` learners, including
 Now we are ready to **"train"** our super learner on our `sl3_task` object,
 `ist_task`.
 
-```{r sl-basic, message=FALSE, warning=FALSE, cache = TRUE}
+```{r sl-basic, message=FALSE, warning=FALSE}
 sl_fit <- sl$train(ist_task)
 ```
 
@@ -433,7 +433,7 @@ We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-``````{r CVsl, message=FALSE, warning=FALSE, cache = TRUE}
+``````{r CVsl, message=FALSE, warning=FALSE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -460,7 +460,7 @@ fit with the true covariate, across all covariates.
 In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
-```{r varimp, message=FALSE, warning=FALSE, cache = TRUE}
+```{r varimp, message=FALSE, warning=FALSE}
 ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
 ist_varimp %>%
   kable(digits = 4) %>%
