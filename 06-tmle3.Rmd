@@ -251,14 +251,29 @@ to be estimated with `sl3`:
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_glm <- make_learner(Lrnr_glm)
-lrnr_xgboost <- make_learner(Lrnr_xgboost)
-# default metalearner appropriate to data types
+lrnr_lasso <- make_learner(Lrnr_glmnet)
+lrnr_ridge <- make_learner(Lrnr_glmnet, alpha = 0)
+lrnr_ranger <- make_learner(Lrnr_ranger)
 
+grid_params <- list(max_depth = c(2, 5, 8),
+                    eta = c(0.01, 0.1, 0.3))
+grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
+params_default <- list(nthread = getOption("sl.cores.learners", 1))
+xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
+  do.call(Lrnr_xgboost$new, c(params_default, as.list(params_tune)))})
+
+learners_Y <- make_learner(Stack, unlist(list(xgb_learners, lrnr_ridge, 
+                                              lrnr_mean, lrnr_ranger, 
+                                              lrnr_lasso, lrnr_glm), 
+                                       recursive = TRUE))
+                                            
+# default metalearner appropriate to data types
 sl_Y <- Lrnr_sl$new(
-  learners = list(lrnr_mean, lrnr_glm, lrnr_xgboost)
+  learners = unlist(list(xgb_learners, lrnr_ridge, lrnr_mean, lrnr_ranger, 
+                         lrnr_lasso, lrnr_glm), recursive = TRUE)
   )
 sl_Delta <- Lrnr_sl$new(
-  learners = list(lrnr_mean, lrnr_glm, lrnr_xgboost)
+  learners = list(lrnr_mean, lrnr_glm, lrnr_lasso, lrnr_ridge)
   )
 sl_A <- Lrnr_sl$new(
   learners = list(lrnr_mean, lrnr_glm)
@@ -449,7 +464,7 @@ $ATE = \mathbb{E}_0(Y(1)-Y(0) \mid V=v ) =
 
 For example, we can stratify the above ATE spec to estimate the ATE in strata of
 country region:
-```{r stratified_ate}
+```{r stratified_ate, warning = FALSE, message = FALSE}
 stratified_ate_spec <- tmle_stratified(ate_spec, "REGION")
 stratified_fit <- tmle3(stratified_ate_spec, ist_data, node_list, learner_list)
 print(stratified_fit)

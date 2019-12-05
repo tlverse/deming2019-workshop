@@ -166,7 +166,7 @@ The `sl3` implementation consists of the following steps:
 3. Train the super learner on the machine learning task
 4. Obtain predicted values
 
-### WASH Benefits Study Example {-}
+### International Stroke Trial Example {-}
 
 Using the IST data, we are interested in predicting recurrent stroke `DRSISC` 
 using the available covariate data.
@@ -422,18 +422,18 @@ We can cross-validate the super learner to see how well the super learner
 performs on unseen data, and obtain an estimate of the cross-validated risk of
 the super learner.
 
-This estimation procedure requires an "external" layer of cross-validation,
+This estimation procedure requires an ``external'' layer of cross-validation,
 also called nested cross-validation, which involves setting aside a separate
-holdout sample that we don’t use to fit the super learner. This
-external cross-validation procedure may also incorporate 10 folds, which is the
-default in `sl3`. However, we will incorporate 2 outer/external folds of
+holdout sample that we don’t use to fit the super learner. This external 
+cross-validation procedure may also incorporate 10 folds, which is the default 
+in `sl3`. However, we will incorporate 2 outer/external folds of
 cross-validation for computational efficiency.
 
 We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-``````{r CVsl, message=FALSE, warning=FALSE}
+```{r CVsl, message=FALSE, warning=FALSE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -461,7 +461,7 @@ In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
 ```{r varimp, message=FALSE, warning=FALSE}
-ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
+ist_varimp <- varimp(sl_fit, loss_squared_error)
 ist_varimp %>%
   kable(digits = 4) %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
@@ -494,7 +494,7 @@ head(chspred) %>%
    not consider BART or HAL). Customize hyperparameters for one of your
    learners. Feel free to use learners from `sl3` or `SuperLearner`. You may
    use the same base learning library that is presented above.
-3. Incorporate feature selection with the `SuperLearner` screener `screen.corP`.
+3. Incorporate feature selection with the screener `Lrnr_screener_corP`.
 4. Fit the metalearning step with non-negative least squares, `Lrnr_nnls`.
 5. With the metalearner and base learners, make the super learner and train it
    on the task.
@@ -551,7 +551,7 @@ glm_fast_learner <- Lrnr_glm_fast$new()
 ranger_learner <- Lrnr_ranger$new()
 svm_learner <- Lrnr_svm$new()
 xgb_learner <- Lrnr_xgboost$new()
-screen_cor <- Lrnr_pkg_SuperLearner_screener$new("screen.corP")
+screen_cor <- make_learner(Lrnr_screener_corP)
 glm_pipeline <- make_learner(Pipeline, screen_cor, glm_learner)
 stack <- make_learner(
   Stack,
@@ -565,7 +565,7 @@ sl <- Lrnr_sl$new(
   learners = stack,
   metalearner = metalearner
 )
-sl_fit <- sl$train(task)
+sl_fit <- sl$train(chspred_task)
 sl_fit$print()
 CVsl <- CV_lrnr_sl(sl_fit, chspred_task, loss_squared_error)
 CVsl

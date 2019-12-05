@@ -21,23 +21,23 @@ Statistics, December 4-6, 2019.
 * 12:40P-2:10P: Super (Machine) Learning and Targeted Minimum Loss-Based 
   Estimation 
 * 2:10P-2:30P: Break
-* 2:30P-4:00P: Super Learning in the `tlverse` software ecosystem
-* 4:00P-4:20P: Break
-* 4:20P-5:00P: Targeted Maximum Likelihood Estimation of the Average Treatment 
-  Effect in the `tlverse` software ecosystem
+* 2:30P-4:10P: Super Learning in the `tlverse` software ecosystem
+* 4:10P-4:40P: Break
+* 4:40P-5:50P: Super Learning in the `tlverse` software ecosystem
 
 ### Day 2: December 6, 2019  
 
-* 8:00A-9:30A: Targeted Minimum Loss-Based Estimation of the Effects of Optimal 
-  Dynamic and Shift Interventions in the `tlverse` software ecosystem
+* 8:00A-9:30A: Targeted Maximum Likelihood Estimation of the Average Treatment 
+  Effect in the `tlverse` software ecosystem
 * 9:30A-9:50A: Break
-* 9:50A-11:20P: Targeted Minimum Loss-Based Estimation of the Treatment 
-  Specific Survival Function for Right-Censored Survival Data with `MOSS`
-* 11:20A-12:40P: Lunch
-* 12:40P-2:10P: Targeted Minimum Loss-Based Estimation for Longitudinal Data 
-  with `ltmle` 
-* 2:10P-2:30P: Break
-* 2:30P- : Discussion
+* 9:50A-11:20A: Targeted Minimum Loss-Based Estimation of the Effects of Optimal 
+  Dynamic and Shift Interventions in the `tlverse` software ecosystem
+* 11:20A-11:40A: Break
+* 11:40A-1:10P: Targeted Minimum Loss-Based Estimation of Time-to-Event 
+  Outcomes with `MOSS`
+* 1:10P-2:00P: Lunch Break
+* 2:00P-: Targeted Minimum Loss-Based Estimation for Longitudinal Data with 
+  `ltmle`
 
 Most of the software materials are based on an 
 early draft of the (eventually forthcoming) book **The Hitchhiker's Guide to the 
