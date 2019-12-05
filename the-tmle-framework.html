@@ -528,15 +528,15 @@ can extra results from the summary by indexing into it:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183 -0.004888 0.004317
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004757 0.004323
       lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.01335 0.003574       -0.004888          -0.01335          0.003574</code></pre>
+1: -0.01323 0.003716       -0.004757          -0.01323          0.003716</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># in most cases the transformation that&#39;s applied to tmle3 estimates and </span></a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># inference (psi_transformed) is nothing -- it comes up for estimands like ORs, </span></a>
 <a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co"># which are estimated on the log scale</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">print</span>(estimates)</a></code></pre></div>
-<pre><code>[1] -0.004888</code></pre>
+<pre><code>[1] -0.004757</code></pre>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
@@ -599,8 +599,8 @@ estimates for each observation:</p>
    5: 2e-04 0.5157 0.01532  0.9974
   ---                             
 4996: 2e-04 0.4952 0.01268  0.9996
-4997: 2e-04 0.4930 0.02620  0.9985
-4998: 2e-04 0.4928 0.01231  0.9988
+4997: 2e-04 0.4930 0.02619  0.9985
+4998: 2e-04 0.4928 0.01232  0.9988
 4999: 2e-04 0.4791 0.03180  0.9994
 5000: 2e-04 0.4949 0.01583  0.9982</code></pre>
 <!-- TODO: make helper to get learners out of fit objects -->
@@ -642,9 +642,9 @@ manually fit a <code>tmle3</code>:</p>
 <a class="sourceLine" id="cb63-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004676 0.004306
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004394 0.004317
       lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.01311 0.003763       -0.004676          -0.01311          0.003763</code></pre>
+1: -0.01286 0.004068       -0.004394          -0.01286          0.004068</code></pre>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
@@ -693,17 +693,17 @@ above defined ATE parameter</p>
 <a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                         param  init_est  tmle_est
-1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022008  0.025995
-2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824  0.021300
-3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002184 -0.004695
+1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022008  0.025795
+2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824  0.021400
+3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002184 -0.004395
          se    lower    upper psi_transformed lower_transformed
-1: 0.003182  0.01976 0.032231        0.025995           0.01976
-2: 0.002906  0.01560 0.026997        0.021300           0.01560
-3: 0.004306 -0.01313 0.003744       -0.004695          -0.01313
+1: 0.003176  0.01957 0.032019        0.025795           0.01957
+2: 0.002925  0.01567 0.027133        0.021400           0.01567
+3: 0.004318 -0.01286 0.004069       -0.004395          -0.01286
    upper_transformed
-1:          0.032231
-2:          0.026997
-3:          0.003744</code></pre>
+1:          0.032019
+2:          0.027133
+3:          0.004069</code></pre>
 </div>
 </div>
 <div id="stratified-effect-estimates" class="section level2">
@@ -762,23 +762,23 @@ Error in xgboost::xgb.DMatrix(Xmat) :
 7:              ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=North America
 8:         ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Sub-Saharan Africa
      init_est   tmle_est        se     lower    upper psi_transformed
-1: -2.183e-03 -0.0045235 0.0043081 -0.012967 0.003920      -0.0045235
-2: -2.181e-03 -0.0041622 0.0046189 -0.013215 0.004891      -0.0041622
-3: -2.780e-03  0.0053347 0.0211896 -0.036196 0.046865       0.0053347
-4: -3.395e-05 -0.0001376 0.0009806 -0.002060 0.001784      -0.0001376
-5: -2.613e-03 -0.0263782 0.0228970 -0.071256 0.018499      -0.0263782
-6: -7.065e-06  0.0014967 0.0013940 -0.001236 0.004229       0.0014967
-7: -2.851e-03 -0.0076848 0.0467717 -0.099356 0.083986      -0.0076848
-8: -4.578e-03 -0.1000446 0.1100080 -0.315656 0.115567      -0.1000446
+1: -2.184e-03 -0.0048506 0.0043302 -0.013338 0.003636      -0.0048506
+2: -2.182e-03 -0.0043958 0.0046506 -0.013511 0.004719      -0.0043958
+3: -2.780e-03  0.0037339 0.0209696 -0.037366 0.044834       0.0037339
+4: -3.395e-05 -0.0001279 0.0009791 -0.002047 0.001791      -0.0001279
+5: -2.613e-03 -0.0254582 0.0231325 -0.070797 0.019881      -0.0254582
+6: -7.064e-06  0.0014708 0.0014162 -0.001305 0.004246       0.0014708
+7: -2.852e-03 -0.0080380 0.0468481 -0.099859 0.083783      -0.0080380
+8: -4.579e-03 -0.1166796 0.1127567 -0.337679 0.104319      -0.1166796
    lower_transformed upper_transformed
-1:         -0.012967          0.003920
-2:         -0.013215          0.004891
-3:         -0.036196          0.046865
-4:         -0.002060          0.001784
-5:         -0.071256          0.018499
-6:         -0.001236          0.004229
-7:         -0.099356          0.083986
-8:         -0.315656          0.115567</code></pre>
+1:         -0.013338          0.003636
+2:         -0.013511          0.004719
+3:         -0.037366          0.044834
+4:         -0.002047          0.001791
+5:         -0.070797          0.019881
+6:         -0.001305          0.004246
+7:         -0.099859          0.083783
+8:         -0.337679          0.104319</code></pre>
 <p>This TMLE is consistent for both the marginal ATE as well as the ATEs in strata
 of <span class="math inline">\(V\)</span>. For continuous <span class="math inline">\(V\)</span>, this could be extended using a working Marginal
 Structural Model (MSM), although that has not yet been implemented in <code>tmle3</code>.</p>
