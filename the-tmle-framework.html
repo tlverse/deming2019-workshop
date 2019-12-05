@@ -360,7 +360,7 @@ model efficiency theory.</li>
 <li>Thus, every effort is made to achieve minimal bias and the asymptotic
 semi-parametric efficiency bound for the variance.</li>
 </ul>
-<embed src="img/misc/TMLEimage.pdf" width=" extwidth" style="display: block; margin: auto;" type="application/pdf" />
+<embed src="img/misc/TMLEimage.pdf" width="70%" style="display: block; margin: auto;" type="application/pdf" />
 <ul>
 <li>There are different types of TMLE, sometimes for the same set of parameters,
 but below is an example of the algorithm for estimating the ATE.</li>
@@ -561,17 +561,17 @@ can extra results from the summary by indexing into it:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param     init_est     tmle_est
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183712 -0.004789243
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183617 -0.005059162
             se       lower       upper psi_transformed lower_transformed
-1: 0.004320523 -0.01325731 0.003678826    -0.004789243       -0.01325731
+1: 0.004293012 -0.01347331 0.003354986    -0.005059162       -0.01347331
    upper_transformed
-1:       0.003678826</code></pre>
+1:       0.003354986</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># in most cases the transformation that&#39;s applied to tmle3 estimates and </span></a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># inference (psi_transformed) is nothing -- it comes up for estimands like ORs, </span></a>
 <a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co"># which are estimated on the log scale</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">print</span>(estimates)</a></code></pre></div>
-<pre><code>[1] -0.004789243</code></pre>
+<pre><code>[1] -0.005059162</code></pre>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
@@ -627,17 +627,17 @@ defined with the <code>learner_list</code>) above.</p>
 estimates for each observation:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
 <pre><code>          W         A          Y   delta_Y
-   1: 2e-04 0.4931489 0.01830207 0.9996849
-   2: 2e-04 0.5322987 0.02620549 0.9996298
-   3: 2e-04 0.4768974 0.01374835 0.9995944
-   4: 2e-04 0.5162369 0.02242328 0.9995865
-   5: 2e-04 0.5157461 0.01532110 0.9974412
+   1: 2e-04 0.4931465 0.01830323 0.9996849
+   2: 2e-04 0.5323064 0.02620713 0.9996298
+   3: 2e-04 0.4768909 0.01374789 0.9995944
+   4: 2e-04 0.5162405 0.02242263 0.9995865
+   5: 2e-04 0.5157507 0.01532140 0.9974412
   ---                                     
-4996: 2e-04 0.4952086 0.01268525 0.9996025
-4997: 2e-04 0.4930104 0.02619468 0.9985074
-4998: 2e-04 0.4928078 0.01231529 0.9987709
-4999: 2e-04 0.4790922 0.03180140 0.9993951
-5000: 2e-04 0.4948690 0.01583199 0.9982467</code></pre>
+4996: 2e-04 0.4952079 0.01268487 0.9996026
+4997: 2e-04 0.4930092 0.02619456 0.9985074
+4998: 2e-04 0.4928054 0.01231614 0.9987710
+4999: 2e-04 0.4790863 0.03180069 0.9993951
+5000: 2e-04 0.4948682 0.01583178 0.9982467</code></pre>
 <!-- TODO: make helper to get learners out of fit objects -->
 </div>
 <div id="targeted-likelihood-updater" class="section level3">
@@ -677,11 +677,11 @@ manually fit a <code>tmle3</code>:</p>
 <a class="sourceLine" id="cb63-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param     init_est     tmle_est
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183462 -0.004798667
-            se       lower      upper psi_transformed lower_transformed
-1: 0.004313869 -0.01325369 0.00365636    -0.004798667       -0.01325369
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183602 -0.005007265
+            se       lower       upper psi_transformed lower_transformed
+1: 0.004310214 -0.01345513 0.003440598    -0.005007265       -0.01345513
    upper_transformed
-1:        0.00365636</code></pre>
+1:       0.003440598</code></pre>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
@@ -729,18 +729,18 @@ above defined ATE parameter</p>
 <a class="sourceLine" id="cb69-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type                                         param     init_est     tmle_est
-1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022007860  0.026008394
-2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824399  0.021186741
-3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002183462 -0.004821652
-            se       lower       upper psi_transformed lower_transformed
-1: 0.003189488  0.01975711 0.032259675     0.026008394        0.01975711
-2: 0.002903174  0.01549663 0.026876857     0.021186741        0.01549663
-3: 0.004315252 -0.01327939 0.003636086    -0.004821652       -0.01327939
+   type                                         param     init_est    tmle_est
+1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022007937  0.02609672
+2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824334  0.02104429
+3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002183602 -0.00505243
+            se       lower      upper psi_transformed lower_transformed
+1: 0.003189725  0.01984498 0.03234847      0.02609672        0.01984498
+2: 0.002899878  0.01536064 0.02672795      0.02104429        0.01536064
+3: 0.004311309 -0.01350244 0.00339758     -0.00505243       -0.01350244
    upper_transformed
-1:       0.032259675
-2:       0.026876857
-3:       0.003636086</code></pre>
+1:        0.03234847
+2:        0.02672795
+3:        0.00339758</code></pre>
 </div>
 </div>
 <div id="stratified-effect-estimates" class="section level2">
@@ -755,6 +755,18 @@ country region:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;REGION&quot;</span>)</a>
 <a class="sourceLine" id="cb71-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, ist_data, node_list, learner_list)</a></code></pre></div>
 <pre><code>Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
   REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
 Error in xgboost::xgb.DMatrix(Xmat) : 
   REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
@@ -799,23 +811,23 @@ Error in xgboost::xgb.DMatrix(Xmat) :
 7:              ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=North America
 8:         ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Sub-Saharan Africa
         init_est      tmle_est           se        lower       upper
-1: -2.183748e-03 -0.0047173479 0.0043052812 -0.013155544 0.003720848
-2: -2.181735e-03 -0.0043570420 0.0046255759 -0.013423004 0.004708920
-3: -2.780636e-03  0.0043900815 0.0207525243 -0.036284119 0.045064282
-4: -3.393405e-05 -0.0001042741 0.0009770074 -0.002019173 0.001810625
-5: -2.613295e-03 -0.0257579555 0.0231701216 -0.071170559 0.019654648
-6: -7.060910e-06  0.0014983530 0.0013862748 -0.001218696 0.004215402
-7: -2.851834e-03 -0.0084873346 0.0478456103 -0.102263008 0.085288338
-8: -4.579117e-03 -0.0928775761 0.1026262009 -0.294021234 0.108266082
+1: -2.183722e-03 -0.0047706296 0.0043007487 -0.013199942 0.003658683
+2: -2.181708e-03 -0.0042524096 0.0046201520 -0.013307741 0.004802922
+3: -2.780591e-03  0.0033733104 0.0207706327 -0.037336382 0.044083002
+4: -3.393726e-05 -0.0001851985 0.0009804838 -0.002106912 0.001736514
+5: -2.613270e-03 -0.0269898304 0.0229914797 -0.072052303 0.018072642
+6: -7.061544e-06  0.0014387680 0.0013923662 -0.001290220 0.004167756
+7: -2.851797e-03 -0.0101291276 0.0479169102 -0.104044546 0.083786291
+8: -4.579059e-03 -0.0942601959 0.1045629262 -0.299199765 0.110679374
    psi_transformed lower_transformed upper_transformed
-1:   -0.0047173479      -0.013155544       0.003720848
-2:   -0.0043570420      -0.013423004       0.004708920
-3:    0.0043900815      -0.036284119       0.045064282
-4:   -0.0001042741      -0.002019173       0.001810625
-5:   -0.0257579555      -0.071170559       0.019654648
-6:    0.0014983530      -0.001218696       0.004215402
-7:   -0.0084873346      -0.102263008       0.085288338
-8:   -0.0928775761      -0.294021234       0.108266082</code></pre>
+1:   -0.0047706296      -0.013199942       0.003658683
+2:   -0.0042524096      -0.013307741       0.004802922
+3:    0.0033733104      -0.037336382       0.044083002
+4:   -0.0001851985      -0.002106912       0.001736514
+5:   -0.0269898304      -0.072052303       0.018072642
+6:    0.0014387680      -0.001290220       0.004167756
+7:   -0.0101291276      -0.104044546       0.083786291
+8:   -0.0942601959      -0.299199765       0.110679374</code></pre>
 <p>This TMLE is consistent for both the marginal ATE as well as the ATEs in strata
 of <span class="math inline">\(V\)</span>. For continuous <span class="math inline">\(V\)</span>, this could be extended using a working Marginal
 Structural Model (MSM), although that has not yet been implemented in <code>tmle3</code>.</p>

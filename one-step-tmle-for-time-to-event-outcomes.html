@@ -614,7 +614,7 @@ simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai201
 <a class="sourceLine" id="cb126-29" data-line-number="29"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Standard Treatment Group in</span></a>
 <a class="sourceLine" id="cb126-30" data-line-number="30"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
 <a class="sourceLine" id="cb126-31" data-line-number="31">plot_standardA</a></code></pre></div>
-<p><img src="deming2019_workshop_files/figure-html/moss-4-standard-1.png" width="  extwidth" style="display: block; margin: auto;" /></p>
+<p><img src="deming2019_workshop_files/figure-html/moss-4-standard-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for test treatment group</span></a>
 <a class="sourceLine" id="cb127-2" data-line-number="2">survival_testA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_testA)</a>
 <a class="sourceLine" id="cb127-3" data-line-number="3">survival_curve_testA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_testA<span class="op">$</span>survival)</a>
@@ -644,7 +644,7 @@ simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai201
 <a class="sourceLine" id="cb127-27" data-line-number="27"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Test Treatment Group in</span></a>
 <a class="sourceLine" id="cb127-28" data-line-number="28"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
 <a class="sourceLine" id="cb127-29" data-line-number="29">plot_testA</a></code></pre></div>
-<p><img src="deming2019_workshop_files/figure-html/moss-4-test-1.png" width="  extwidth" style="display: block; margin: auto;" /></p>
+<p><img src="deming2019_workshop_files/figure-html/moss-4-test-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
