@@ -44,7 +44,7 @@ that are relevant to the question under study [@pearl2009causality].
 Ignoring error terms, we will assume the following ordering of the variables in
 $O$.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.show = 'hold'}
 library(visNetwork)
 nodes <- data.frame(id = c("W", "A", "Y"))
 nodes$label <- nodes$id

@@ -43,7 +43,7 @@ estimator.
   study designs and data structures.
 - The figure below shows an example of 10-fold cross-validation.  
   
-```{r cv_fig, echo = FALSE}
+```{r cv_fig, echo = FALSE, fig.show = 'hold'}
 knitr::include_graphics("img/misc/vs.pdf")
 ```
 
@@ -77,7 +77,7 @@ knitr::include_graphics("img/misc/vs.pdf")
 Note, this entire procedure can be itself cross-validated to get a consistent
 estimate of the future performance of the SL fit.
 
-```{r cv_fig2, echo = FALSE}
+```{r cv_fig2, echo = FALSE, fig.show = 'hold'}
 knitr::include_graphics("img/misc/SLKaiserNew.pdf")
 ``` 
 
@@ -111,7 +111,7 @@ knitr::include_graphics("img/misc/SLKaiserNew.pdf")
 - Below shows the results of such a study, comparing the fits of several different learners, 
   including the SL algorithms.
 
-```{r cv_fig3, echo = FALSE}
+```{r cv_fig3, echo = FALSE, fig.show = 'hold'}
 knitr::include_graphics("img/misc/ericSL.pdf")
 ```
 
