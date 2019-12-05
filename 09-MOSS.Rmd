@@ -160,7 +160,7 @@ SuperLearner](https://cran.r-project.org/web/packages/SuperLearner/vignettes/Gui
 ```{r moss-2, message=FALSE, warning=FALSE, cache = TRUE}
 # recall treatment was randomized
 SL.ranger.faster = function(...) {
-  SL.ranger(..., num.trees = 100)
+  SL.ranger(..., num.trees = 50)
 }
 sl_lib_decent <- c("SL.mean", "SL.glm", "SL.step.forward", "SL.bayesglm", 
                    "SL.ranger.faster", "SL.gam")
