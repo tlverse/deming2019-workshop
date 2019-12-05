@@ -73,7 +73,6 @@ desirable performance of the point-wise TMLE [@cai2019one].
 ### 0. Load necessary libraries and data {-}
 
 ```{r moss-0, message=FALSE, warning=FALSE}
-knitr::opts_chunk(cache = TRUE)
 library(MOSS)
 
 vet_data <- read.csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/veteran.csv")
@@ -158,7 +157,7 @@ tutorial crafted a few years ago by our colleague Chris Kennedy is freely
 available: [Guide to 
 SuperLearner](https://cran.r-project.org/web/packages/SuperLearner/vignettes/Guide-to-SuperLearner.html).
 
-```{r moss-2, message=FALSE, warning=FALSE}
+```{r moss-2, message=FALSE, warning=FALSE, cache = TRUE}
 # recall treatment was randomized
 SL.ranger.faster = function(...) {
   SL.ranger(..., num.trees = 100)
@@ -220,7 +219,7 @@ the `iterate_onestep()` method for this object. `MOSS_hazard` and
 
 **One-step TMLE of the Treatment-Specific Survival**
 
-```{r moss-3-standard, warning=FALSE, message=FALSE}
+```{r moss-3-standard, warning=FALSE, message=FALSE, cache = TRUE}
 # estimate survival curve for standard treatment group
 hazard_fit_standardA <- MOSS_hazard$new(
   A,
@@ -234,7 +233,7 @@ hazard_fit_standardA <- MOSS_hazard$new(
 )
 psi_standardA <- hazard_fit_standardA$iterate_onestep()
 ```
-```{r moss-3-test, warning=FALSE, message=FALSE}
+```{r moss-3-test, warning=FALSE, message=FALSE, cache = TRUE}
 # estimate survival curve for test treatment group
 hazard_fit_testA <- MOSS_hazard$new(
   A,
@@ -251,7 +250,7 @@ psi_testA <- hazard_fit_testA$iterate_onestep()
 
 
 **One-step TMLE of ATE on Survival**
-```{r moss-3-ate, warning=FALSE, message=FALSE}
+```{r moss-3-ate, warning=FALSE, message=FALSE, cache = TRUE}
 hazard_fit_ate <- MOSS_hazard_ate$new(
   A,
   T_tilde,
@@ -282,7 +281,7 @@ band with this matrix by calling the method `compute_simultaneous_ci()`. See the
 manuscript accompanying the `MOSS` package for more details on constructing 
 simultaneous inference [@cai2019one].  
 
-```{r moss-4-standard}
+```{r moss-4-standard, cache = TRUE}
 # estimate and obtain inference for survival curve for standard treatment group
 survival_standardA <- survival_curve$new(t = k_grid, survival = psi_standardA)
 survival_curve_standardA <- as.vector(survival_standardA$survival)
@@ -316,7 +315,7 @@ plot_standardA <- ggplot(data = plotdf_standardA, aes(x = time, y = est)) +
 plot_standardA
 ```
 
-```{r moss-4-test}
+```{r moss-4-test, cache = TRUE}
 # estimate and obtain inference for survival curve for test treatment group
 survival_testA <- survival_curve$new(t = k_grid, survival = psi_testA)
 survival_curve_testA <- as.vector(survival_testA$survival)
