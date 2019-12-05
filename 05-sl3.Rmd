@@ -400,7 +400,7 @@ in all the places you could otherwise use any other `sl3` learners, including
 Now we are ready to **"train"** our super learner on our `sl3_task` object,
 `ist_task`.
 
-```{r sl-basic, message=FALSE, warning=FALSE}
+```{r sl-basic, message=FALSE, warning=FALSE, cache = TRUE}
 sl_fit <- sl$train(ist_task)
 ```
 
@@ -433,7 +433,7 @@ We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-``````{r CVsl, message=FALSE, warning=FALSE}
+``````{r CVsl, message=FALSE, warning=FALSE, cache = TRUE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -460,7 +460,7 @@ fit with the true covariate, across all covariates.
 In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
-```{r varimp, message=FALSE, warning=FALSE}
+```{r varimp, message=FALSE, warning=FALSE, cache = TRUE}
 ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
 ist_varimp %>%
   kable(digits = 4) %>%
