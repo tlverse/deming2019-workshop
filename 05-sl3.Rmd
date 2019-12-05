@@ -182,6 +182,7 @@ library(data.table)
 library(sl3)
 library(SuperLearner)
 library(origami)
+knitr::opts_chunk(cache = TRUE)
 set.seed(7194)
 # load data set and take a peek
 ist_data <- read.csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv")
@@ -204,7 +205,7 @@ weights, id, offset).
 We are not interested in predicting missing outcomes. We set 
 `drop_missing_outcome = TRUE` when we create the task. In the next chapter, we 
 estimate this missingness mechanism and account for it in the estimation. 
-```{r task, message=FALSE, warning=FALSE}
+```{r task}
 # specify the outcome and covariates
 outcome <- "DRSISC"
 covars <- colnames(ist_data)[-which(names(ist_data) == outcome)]
@@ -333,7 +334,7 @@ those variables to the modeling algorithm.
 Let's consider screening covariates based on their `randomForest` variable 
 importance ranking (ordered by mean decrease in accuracy)
 
-```{r screener, message=FALSE, warning=FALSE}
+```{r screener}
 screen_rf <- make_learner(Lrnr_screener_randomForest, nVar = 5, ntree = 100)
 # which covariates are selected on the full data?
 screen_rf$train(ist_task)
@@ -343,7 +344,7 @@ To **"pipe"** only the selected covariates to the modeling algorithm, we need to
 make a `Pipeline`, which is a just set of learners to be fit sequentially, where
 the fit from one learner is used to define the task for the next learner.
 
-```{r screener-pipe, message=FALSE, warning=FALSE}
+```{r screener-pipe}
 screen_rf_pipeline <- make_learner(Pipeline, screen_rf, stack)
 ```
 Now our learners will be preceded by a screening step.
@@ -400,7 +401,7 @@ in all the places you could otherwise use any other `sl3` learners, including
 Now we are ready to **"train"** our super learner on our `sl3_task` object,
 `ist_task`.
 
-```{r sl-basic, message=FALSE, warning=FALSE, cache = TRUE}
+```{r sl-basic, message=FALSE, warning=FALSE}
 sl_fit <- sl$train(ist_task)
 ```
 
@@ -433,7 +434,7 @@ We also need to specify a loss function to evaluate super learner.
 Documentation for the available loss functions can be found in the [`sl3` Loss
 Function Reference](https://tlverse.org/sl3/reference/loss_functions.html).
 
-``````{r CVsl, message=FALSE, warning=FALSE, cache = TRUE}
+``````{r CVsl, message=FALSE, warning=FALSE}
 ist_task_new <- make_sl3_Task(
   data = ist_data,
   covariates = covars,
@@ -460,7 +461,7 @@ fit with the true covariate, across all covariates.
 In this manner, the larger the risk difference, the more important the variable
 is in the prediction.
 
-```{r varimp, message=FALSE, warning=FALSE, cache = TRUE}
+```{r varimp, message=FALSE, warning=FALSE}
 ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
 ist_varimp %>%
   kable(digits = 4) %>%

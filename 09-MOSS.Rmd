@@ -73,6 +73,7 @@ desirable performance of the point-wise TMLE [@cai2019one].
 ### 0. Load necessary libraries and data {-}
 
 ```{r moss-0, message=FALSE, warning=FALSE}
+knitr::opts_chunk(cache = TRUE)
 library(MOSS)
 
 vet_data <- read.csv("https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/veteran.csv")
