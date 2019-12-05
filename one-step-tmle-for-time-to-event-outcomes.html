@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
+  <title>Chapter 6 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
   <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
-  <meta name="generator" content="bookdown 0.16.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.4 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
+  <meta property="og:title" content="Chapter 6 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://tlverse.org/deming2019-workshop/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="tlverse/deming2019-workshop" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
+  <meta name="twitter:title" content="Chapter 6 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   
   <meta name="twitter:description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/logos/favicons/favicon.png" type="image/x-icon" />
-<link rel="prev" href="data.html"/>
+<link rel="prev" href="the-tmle-framework.html"/>
 <link rel="next" href="r6.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -53,6 +53,7 @@
 <link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
 <script src="libs/vis-4.20.1/vis.min.js"></script>
 <script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -172,12 +173,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#wash"><i class="fa fa-check"></i><b>3.2</b> WASH Benefits Example Dataset</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#vet"><i class="fa fa-check"></i><b>3.3</b> Veterans’ Administration Lung Cancer Trial Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html"><i class="fa fa-check"></i><b>4</b> One-Step TMLE for Time-to-Event Outcomes</a><ul>
-<li class="chapter" data-level="4.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#learning-objectives-1"><i class="fa fa-check"></i><b>4.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="4.2" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#introduction"><i class="fa fa-check"></i><b>4.2</b> Introduction</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#existing-methods-for-observational-survival-analysis"><i class="fa fa-check"></i><b>4.2.1</b> Existing Methods for Observational Survival Analysis</a></li>
+<li class="chapter" data-level="4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Super (Ensemble Machine) Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#super-learning"><i class="fa fa-check"></i><b>4.1.1</b> Super Learning</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#using-moss-for-one-step-tmle-for-time-to-event-outcomes"><i class="fa fa-check"></i><b>4.3</b> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#train-the-super-learner-on-the-machine-learning-task"><i class="fa fa-check"></i>3. Train the super learner on the machine learning task</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#obtain-predicted-values"><i class="fa fa-check"></i>4. Obtain predicted values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#extensions"><i class="fa fa-check"></i><b>4.3</b> Extensions</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#cross-validated-super-learner"><i class="fa fa-check"></i><b>4.3.1</b> Cross-validated Super Learner</a></li>
+<li class="chapter" data-level="4.3.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#variable-importance-measures-with-sl3"><i class="fa fa-check"></i><b>4.3.2</b> Variable Importance Measures with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise"><i class="fa fa-check"></i><b>4.4</b> Exercise</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3ex"><i class="fa fa-check"></i><b>4.4.1</b> Predicting Myocardial Infarction with <code>sl3</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#summary"><i class="fa fa-check"></i><b>4.5</b> Summary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise-solutions"><i class="fa fa-check"></i><b>4.5.1</b> Exercise Solutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html"><i class="fa fa-check"></i><b>5</b> The TMLE Framework</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#substitution-estimators"><i class="fa fa-check"></i><b>5.1.1</b> Substitution Estimators</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle"><i class="fa fa-check"></i><b>5.1.2</b> TMLE</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#inference-1"><i class="fa fa-check"></i><b>5.1.3</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#learning-objectives-1"><i class="fa fa-check"></i><b>5.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#easy-bake-example-tmle3-for-ate"><i class="fa fa-check"></i><b>5.3</b> Easy-Bake Example: <code>tmle3</code> for ATE</a><ul>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#load-the-data"><i class="fa fa-check"></i>0. Load the Data</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#define-the-variable-roles"><i class="fa fa-check"></i>1. Define the variable roles</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#create-a-spec-object"><i class="fa fa-check"></i>2. Create a “Spec” Object</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#define-the-relevant-super-learners"><i class="fa fa-check"></i>3. Define the Relevant Super Learners</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit-the-tmle"><i class="fa fa-check"></i>4. Fit the TMLE</a></li>
+<li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#evaluate-the-estimates"><i class="fa fa-check"></i>5. Evaluate the Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3-components"><i class="fa fa-check"></i><b>5.4</b> <code>tmle3</code> Components</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3_task"><i class="fa fa-check"></i><b>5.4.1</b> <code>tmle3_task</code></a></li>
+<li class="chapter" data-level="5.4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#initial-likelihood"><i class="fa fa-check"></i><b>5.4.2</b> Initial Likelihood</a></li>
+<li class="chapter" data-level="5.4.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#targeted-likelihood-updater"><i class="fa fa-check"></i><b>5.4.3</b> Targeted Likelihood (updater)</a></li>
+<li class="chapter" data-level="5.4.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#parameter-mapping"><i class="fa fa-check"></i><b>5.4.4</b> Parameter Mapping</a></li>
+<li class="chapter" data-level="5.4.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#putting-it-all-together"><i class="fa fa-check"></i><b>5.4.5</b> Putting it all together</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fitting-tmle3-with-multiple-parameters"><i class="fa fa-check"></i><b>5.5</b> Fitting <code>tmle3</code> with multiple parameters</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#delta-method"><i class="fa fa-check"></i><b>5.5.1</b> Delta Method</a></li>
+<li class="chapter" data-level="5.5.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit"><i class="fa fa-check"></i><b>5.5.2</b> Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#stratified-effect-estimates"><i class="fa fa-check"></i><b>5.6</b> Stratified Effect Estimates</a></li>
+<li class="chapter" data-level="5.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>5.7</b> Exercise</a></li>
+<li class="chapter" data-level="5.8" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>5.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html"><i class="fa fa-check"></i><b>6</b> One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="6.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#learning-objectives-2"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#introduction-2"><i class="fa fa-check"></i><b>6.2</b> Introduction</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#existing-methods-for-observational-survival-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Existing Methods for Observational Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#using-moss-for-one-step-tmle-for-time-to-event-outcomes"><i class="fa fa-check"></i><b>6.3</b> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</a><ul>
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#load-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load necessary libraries and data</a></li>
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#specify-right-censored-survival-data-arguments"><i class="fa fa-check"></i>1. Specify right-censored survival data arguments</a></li>
 <li><a href="one-step-tmle-for-time-to-event-outcomes.html#obtain-initial-estimates-with-superlearner-r-package">2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</a></li>
@@ -185,9 +240,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#compute-standard-error-estimates-for-simultaneous-inference"><i class="fa fa-check"></i>4. Compute standard error estimates for simultaneous inference</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>5</b> A Primer on the <code>R6</code> Class System</a><ul>
-<li class="chapter" data-level="5.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>5.1</b> Classes, Fields, and Methods</a></li>
-<li class="chapter" data-level="5.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>5.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+<li class="chapter" data-level="7" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>7</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="7.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>7.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="7.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>7.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -211,12 +266,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="one-step-tmle-for-time-to-event-outcomes" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> One-Step TMLE for Time-to-Event Outcomes</h1>
+<h1><span class="header-section-number">Chapter 6</span> One-Step TMLE for Time-to-Event Outcomes</h1>
 <p>Based on the <a href="https://github.com/wilsoncai1992/MOSS"><code>MOSS</code> <code>R</code> package</a>
 by <em>Wilson Cai and Mark van der Laan</em>.</p>
 <p>Updated: 2019-12-05</p>
-<div id="learning-objectives-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<div id="learning-objectives-2" class="section level2">
+<h2><span class="header-section-number">6.1</span> Learning Objectives</h2>
 <ol style="list-style-type: decimal">
 <li>Format right-censored survival data for <code>MOSS</code>.</li>
 <li>Fit a SuperLearner initial estimate of the conditional survival function of
@@ -228,8 +283,8 @@ failure, conditional survival function of censoring and the propensity scores
 survival across a range of time-points (<code>compute_simultaneous_ci</code>).</li>
 </ol>
 </div>
-<div id="introduction" class="section level2">
-<h2><span class="header-section-number">4.2</span> Introduction</h2>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">6.2</span> Introduction</h2>
 <p>In this section, we explore the <code>MOSS</code> <code>R</code> package. This software performs
 ensemble machine learning with the <a href="https://cran.r-project.org/web/packages/SuperLearner/index.html"><code>SuperLearner</code> <code>R</code>
 package</a> and
@@ -241,7 +296,7 @@ updates, and creates a doubly robust and semi-parametrically efficient
 estimator. Simultaneous confidence bands of the entire curve are also
 available for inference.</p>
 <div id="existing-methods-for-observational-survival-analysis" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Existing Methods for Observational Survival Analysis</h3>
+<h3><span class="header-section-number">6.2.1</span> Existing Methods for Observational Survival Analysis</h3>
 <p>To facilitate comparison with other estimation procedures, the following
 additional estimators are also included in the <code>MOSS</code> <code>R</code> package:</p>
 <ul>
@@ -270,7 +325,7 @@ desirable performance of the point-wise TMLE <span class="citation">(Cai and Laa
 </div>
 </div>
 <div id="using-moss-for-one-step-tmle-for-time-to-event-outcomes" class="section level2">
-<h2><span class="header-section-number">4.3</span> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</h2>
+<h2><span class="header-section-number">6.3</span> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</h2>
 <p><code>MOSS</code> implementation consists of the following steps:</p>
 <ol start="0" style="list-style-type: decimal">
 <li>Load the necessary libraries and data.</li>
@@ -283,10 +338,10 @@ with the <code>SuperLearner</code> <code>R</code> package.</li>
 </ol>
 <div id="load-necessary-libraries-and-data" class="section level3 unnumbered">
 <h3>0. Load necessary libraries and data</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">library</span>(MOSS)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">vet_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/veteran.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw">head</span>(vet_data)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">library</span>(MOSS)</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">vet_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/veteran.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="kw">head</span>(vet_data)</a></code></pre></div>
 <pre><code>  X trt celltype time status karno diagtime age prior
 1 1   1 squamous   72      1    60        7  69     0
 2 2   1 squamous  411      1    70        5  64    10
@@ -317,11 +372,11 @@ subsequently be used as required arguments for <code>MOSS</code> functions:</p>
 <li><code>t_max</code>: the maximum time to estimate the survival probabilities.</li>
 </ul>
 <p>We can specify these variables with our observed <code>vet_data</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">T_tilde &lt;-<span class="st"> </span>vet_data<span class="op">$</span>time</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">Delta &lt;-<span class="st"> </span>vet_data<span class="op">$</span>status</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">A &lt;-<span class="st"> </span>vet_data<span class="op">$</span>trt</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">W &lt;-<span class="st"> </span>vet_data[, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)]</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">t_max &lt;-<span class="st"> </span><span class="kw">max</span>(T_tilde)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">T_tilde &lt;-<span class="st"> </span>vet_data<span class="op">$</span>time</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">Delta &lt;-<span class="st"> </span>vet_data<span class="op">$</span>status</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">A &lt;-<span class="st"> </span>vet_data<span class="op">$</span>trt</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">W &lt;-<span class="st"> </span>vet_data[, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)]</a>
+<a class="sourceLine" id="cb79-5" data-line-number="5">t_max &lt;-<span class="st"> </span><span class="kw">max</span>(T_tilde)</a></code></pre></div>
 </div>
 <div id="obtain-initial-estimates-with-superlearner-r-package" class="section level3 unnumbered">
 <h3>2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</h3>
@@ -366,18 +421,18 @@ corresponding to learners available in the <code>SuperLearner</code> <code>R</co
 tutorial crafted a few years ago by our colleague Chris Kennedy is freely
 available: <a href="https://cran.r-project.org/web/packages/SuperLearner/vignettes/Guide-to-SuperLearner.html">Guide to
 SuperLearner</a>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># recall treatment was randomized</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">SL.ranger.faster =<span class="st"> </span><span class="cf">function</span>(...) {</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="kw">SL.ranger</span>(..., <span class="dt">num.trees =</span> <span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">sl_lib_decent &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SL.mean&quot;</span>, <span class="st">&quot;SL.glm&quot;</span>, <span class="st">&quot;SL.step.forward&quot;</span>, <span class="st">&quot;SL.bayesglm&quot;</span>, </a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">                   <span class="st">&quot;SL.ranger.faster&quot;</span>, <span class="st">&quot;SL.gam&quot;</span>)</a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">initial_fit &lt;-<span class="st"> </span><span class="kw">initial_sl_fit</span>(T_tilde, Delta, A, W, t_max, </a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">                              <span class="dt">sl_censoring =</span> sl_lib_decent, </a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">                              <span class="dt">sl_failure =</span> sl_lib_decent)</a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="kw">names</span>(initial_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co"># recall treatment was randomized</span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">SL.ranger.faster =<span class="st"> </span><span class="cf">function</span>(...) {</a>
+<a class="sourceLine" id="cb80-3" data-line-number="3">  <span class="kw">SL.ranger</span>(..., <span class="dt">num.trees =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5">sl_lib_decent &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SL.mean&quot;</span>, <span class="st">&quot;SL.glm&quot;</span>, <span class="st">&quot;SL.step.forward&quot;</span>, <span class="st">&quot;SL.bayesglm&quot;</span>, </a>
+<a class="sourceLine" id="cb80-6" data-line-number="6">                   <span class="st">&quot;SL.ranger.faster&quot;</span>, <span class="st">&quot;SL.gam&quot;</span>)</a>
+<a class="sourceLine" id="cb80-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb80-8" data-line-number="8">initial_fit &lt;-<span class="st"> </span><span class="kw">initial_sl_fit</span>(T_tilde, Delta, A, W, t_max, </a>
+<a class="sourceLine" id="cb80-9" data-line-number="9">                              <span class="dt">sl_censoring =</span> sl_lib_decent, </a>
+<a class="sourceLine" id="cb80-10" data-line-number="10">                              <span class="dt">sl_failure =</span> sl_lib_decent)</a>
+<a class="sourceLine" id="cb80-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb80-12" data-line-number="12"><span class="kw">names</span>(initial_fit)</a></code></pre></div>
 <pre><code>[1] &quot;density_failure_1&quot; &quot;density_failure_0&quot; &quot;density_censor_1&quot; 
 [4] &quot;density_censor_0&quot;  &quot;g1W&quot;              </code></pre>
 <p>The <code>initial_fit</code> object contains the fitted conditional densities for the
@@ -388,14 +443,14 @@ treatment groups, respectively), and propensity scores (a vector <code>g1W</code
 <p>The <code>density_failure_1</code> and <code>density_failure_0</code> both need to go through the
 <code>hazard_to_survival</code> method which populates the <code>survival</code> attribute of the
 object.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span><span class="op">$</span><span class="kw">hazard_to_survival</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span><span class="op">$</span><span class="kw">hazard_to_survival</span>()</a></code></pre></div>
 <pre><code>&lt;survival_curve&gt;
   Public:
     ci: function (A, T_tilde, Delta, density_failure, density_censor, 
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.00920001545523328 0.00755743669883058 0.00914420725220 ...
+    hazard: 0.00856701456146469 0.00680894623520466 0.00830563504144 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -407,14 +462,14 @@ object.</p>
     survival_to_hazard: function () 
     survival_to_pdf: function () 
     t: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 ...</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span><span class="op">$</span><span class="kw">hazard_to_survival</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span><span class="op">$</span><span class="kw">hazard_to_survival</span>()</a></code></pre></div>
 <pre><code>&lt;survival_curve&gt;
   Public:
     ci: function (A, T_tilde, Delta, density_failure, density_censor, 
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.00920001545523328 0.00755743669883058 0.00914420725220 ...
+    hazard: 0.00852788749752641 0.00677828457947116 0.00825787668212 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -442,9 +497,9 @@ step size update. The only additional argument we need to define is</p>
 <li><code>k_grid</code>: the vector of interested time points for estimation of the
 conditional survival probability.</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">k_grid &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">max</span>(T_tilde)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span><span class="op">$</span>t &lt;-<span class="st"> </span>k_grid</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span><span class="op">$</span>t &lt;-<span class="st"> </span>k_grid</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">k_grid &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">max</span>(T_tilde)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span><span class="op">$</span>t &lt;-<span class="st"> </span>k_grid</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span><span class="op">$</span>t &lt;-<span class="st"> </span>k_grid</a></code></pre></div>
 <p>We perform the TMLE adjustment of the initial conditional survival estimate by
 first creating a <code>MOSS_hazard</code> or <code>MOSS_hazard_ate</code> object and then calling
 the <code>iterate_onestep()</code> method for this object. <code>MOSS_hazard</code> and
@@ -454,45 +509,45 @@ the <code>iterate_onestep()</code> method for this object. <code>MOSS_hazard</co
 <li><code>MOSS_hazard_ate</code>: one-step TMLE of ATE on survival probabilities</li>
 </ul>
 <p><strong>One-step TMLE of the Treatment-Specific Survival</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># estimate survival curve for standard treatment group</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">hazard_fit_standardA &lt;-<span class="st"> </span>MOSS_hazard<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  A,</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  T_tilde,</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">  Delta,</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">  <span class="dt">g1W =</span> initial_fit<span class="op">$</span>g1W,</a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">  <span class="dt">A_intervene =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">  k_grid</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">)</a>
-<a class="sourceLine" id="cb22-12" data-line-number="12">psi_standardA &lt;-<span class="st"> </span>hazard_fit_standardA<span class="op">$</span><span class="kw">iterate_onestep</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># estimate survival curve for test treatment group</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">hazard_fit_testA &lt;-<span class="st"> </span>MOSS_hazard<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">  A,</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">  T_tilde,</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">  Delta,</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">  <span class="dt">g1W =</span> initial_fit<span class="op">$</span>g1W,</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">  <span class="dt">A_intervene =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">  k_grid</a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">)</a>
-<a class="sourceLine" id="cb23-12" data-line-number="12">psi_testA &lt;-<span class="st"> </span>hazard_fit_testA<span class="op">$</span><span class="kw">iterate_onestep</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="co"># estimate survival curve for standard treatment group</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">hazard_fit_standardA &lt;-<span class="st"> </span>MOSS_hazard<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">  A,</a>
+<a class="sourceLine" id="cb87-4" data-line-number="4">  T_tilde,</a>
+<a class="sourceLine" id="cb87-5" data-line-number="5">  Delta,</a>
+<a class="sourceLine" id="cb87-6" data-line-number="6">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb87-7" data-line-number="7">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb87-8" data-line-number="8">  <span class="dt">g1W =</span> initial_fit<span class="op">$</span>g1W,</a>
+<a class="sourceLine" id="cb87-9" data-line-number="9">  <span class="dt">A_intervene =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb87-10" data-line-number="10">  k_grid</a>
+<a class="sourceLine" id="cb87-11" data-line-number="11">)</a>
+<a class="sourceLine" id="cb87-12" data-line-number="12">psi_standardA &lt;-<span class="st"> </span>hazard_fit_standardA<span class="op">$</span><span class="kw">iterate_onestep</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="co"># estimate survival curve for test treatment group</span></a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">hazard_fit_testA &lt;-<span class="st"> </span>MOSS_hazard<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">  A,</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4">  T_tilde,</a>
+<a class="sourceLine" id="cb88-5" data-line-number="5">  Delta,</a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb88-7" data-line-number="7">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb88-8" data-line-number="8">  <span class="dt">g1W =</span> initial_fit<span class="op">$</span>g1W,</a>
+<a class="sourceLine" id="cb88-9" data-line-number="9">  <span class="dt">A_intervene =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb88-10" data-line-number="10">  k_grid</a>
+<a class="sourceLine" id="cb88-11" data-line-number="11">)</a>
+<a class="sourceLine" id="cb88-12" data-line-number="12">psi_testA &lt;-<span class="st"> </span>hazard_fit_testA<span class="op">$</span><span class="kw">iterate_onestep</span>()</a></code></pre></div>
 <p><strong>One-step TMLE of ATE on Survival</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">hazard_fit_ate &lt;-<span class="st"> </span>MOSS_hazard_ate<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">  A,</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">  T_tilde,</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">  Delta,</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">  <span class="dt">density_failure_0 =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">  <span class="dt">density_censor_0 =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">  initial_fit<span class="op">$</span>g1W</a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">)</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">psi_ate &lt;-<span class="st"> </span>hazard_fit_ate<span class="op">$</span><span class="kw">iterate_onestep</span>()</a>
-<a class="sourceLine" id="cb24-12" data-line-number="12"><span class="kw">summary</span>(psi_ate)</a></code></pre></div>
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-      0       0       0       0       0       0 </code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">hazard_fit_ate &lt;-<span class="st"> </span>MOSS_hazard_ate<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">  A,</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">  T_tilde,</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">  Delta,</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">  <span class="dt">density_failure =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6">  <span class="dt">density_censor =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">  <span class="dt">density_failure_0 =</span> initial_fit<span class="op">$</span>density_failure_<span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb89-8" data-line-number="8">  <span class="dt">density_censor_0 =</span> initial_fit<span class="op">$</span>density_censor_<span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb89-9" data-line-number="9">  initial_fit<span class="op">$</span>g1W</a>
+<a class="sourceLine" id="cb89-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb89-11" data-line-number="11">psi_ate &lt;-<span class="st"> </span>hazard_fit_ate<span class="op">$</span><span class="kw">iterate_onestep</span>()</a>
+<a class="sourceLine" id="cb89-12" data-line-number="12"><span class="kw">summary</span>(psi_ate)</a></code></pre></div>
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-1.50e-03 -3.79e-05  0.00e+00 -1.79e-04  0.00e+00  0.00e+00 </code></pre>
 </div>
 <div id="compute-standard-error-estimates-for-simultaneous-inference" class="section level3 unnumbered">
 <h3>4. Compute standard error estimates for simultaneous inference</h3>
@@ -508,67 +563,67 @@ construct a matrix of these estimates and calculate a simultaneous confidence
 band with this matrix by calling the method <code>compute_simultaneous_ci()</code>. See the
 manuscript accompanying the <code>MOSS</code> package for more details on constructing
 simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai2019one">2019</a>)</span>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for standard treatment group</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">survival_standardA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_standardA)</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">survival_curve_standardA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_standardA<span class="op">$</span>survival)</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">eic_standardA &lt;-<span class="st"> </span>eic<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb26-6" data-line-number="6">  <span class="dt">A =</span> A,</a>
-<a class="sourceLine" id="cb26-7" data-line-number="7">  <span class="dt">T_tilde =</span> T_tilde,</a>
-<a class="sourceLine" id="cb26-8" data-line-number="8">  <span class="dt">Delta =</span> Delta,</a>
-<a class="sourceLine" id="cb26-9" data-line-number="9">  <span class="dt">density_failure =</span> hazard_fit_standardA<span class="op">$</span>density_failure,</a>
-<a class="sourceLine" id="cb26-10" data-line-number="10">  <span class="dt">density_censor =</span> hazard_fit_standardA<span class="op">$</span>density_censor,</a>
-<a class="sourceLine" id="cb26-11" data-line-number="11">  <span class="dt">g1W =</span> hazard_fit_standardA<span class="op">$</span>g1W,</a>
-<a class="sourceLine" id="cb26-12" data-line-number="12">  <span class="dt">psi =</span> survival_curve_standardA,</a>
-<a class="sourceLine" id="cb26-13" data-line-number="13">  <span class="dt">A_intervene =</span> hazard_fit_standardA<span class="op">$</span>A_intervene</a>
-<a class="sourceLine" id="cb26-14" data-line-number="14">)</a>
-<a class="sourceLine" id="cb26-15" data-line-number="15">eic_matrix_standardA &lt;-<span class="st"> </span>eic_standardA<span class="op">$</span><span class="kw">all_t</span>(<span class="dt">k_grid =</span> k_grid)</a>
-<a class="sourceLine" id="cb26-16" data-line-number="16">std_err_standardA &lt;-<span class="st"> </span><span class="kw">compute_simultaneous_ci</span>(eic_matrix_standardA)</a>
-<a class="sourceLine" id="cb26-17" data-line-number="17">upper_bound_standardA &lt;-<span class="st"> </span>survival_curve_standardA <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_standardA)</a>
-<a class="sourceLine" id="cb26-18" data-line-number="18">lower_bound_standardA &lt;-<span class="st"> </span>survival_curve_standardA <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_standardA)</a>
-<a class="sourceLine" id="cb26-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb26-20" data-line-number="20">plotdf_standardA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> k_grid, <span class="dt">est =</span> survival_curve_standardA, </a>
-<a class="sourceLine" id="cb26-21" data-line-number="21">                               <span class="dt">upper =</span> upper_bound_standardA, </a>
-<a class="sourceLine" id="cb26-22" data-line-number="22">                               <span class="dt">lower =</span> lower_bound_standardA, </a>
-<a class="sourceLine" id="cb26-23" data-line-number="23">                               <span class="dt">type =</span> <span class="kw">rep</span>(<span class="st">&quot;standard&quot;</span>, <span class="kw">length</span>(k_grid)))</a>
-<a class="sourceLine" id="cb26-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb26-25" data-line-number="25">plot_standardA &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> plotdf_standardA, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> est)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-26" data-line-number="26"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb26-27" data-line-number="27"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="dt">data =</span> plotdf_standardA, <span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper), </a>
-<a class="sourceLine" id="cb26-28" data-line-number="28">              <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb26-29" data-line-number="29"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Standard Treatment Group in</span></a>
-<a class="sourceLine" id="cb26-30" data-line-number="30"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
-<a class="sourceLine" id="cb26-31" data-line-number="31">plot_standardA</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for standard treatment group</span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">survival_standardA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_standardA)</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">survival_curve_standardA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_standardA<span class="op">$</span>survival)</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb91-5" data-line-number="5">eic_standardA &lt;-<span class="st"> </span>eic<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6">  <span class="dt">A =</span> A,</a>
+<a class="sourceLine" id="cb91-7" data-line-number="7">  <span class="dt">T_tilde =</span> T_tilde,</a>
+<a class="sourceLine" id="cb91-8" data-line-number="8">  <span class="dt">Delta =</span> Delta,</a>
+<a class="sourceLine" id="cb91-9" data-line-number="9">  <span class="dt">density_failure =</span> hazard_fit_standardA<span class="op">$</span>density_failure,</a>
+<a class="sourceLine" id="cb91-10" data-line-number="10">  <span class="dt">density_censor =</span> hazard_fit_standardA<span class="op">$</span>density_censor,</a>
+<a class="sourceLine" id="cb91-11" data-line-number="11">  <span class="dt">g1W =</span> hazard_fit_standardA<span class="op">$</span>g1W,</a>
+<a class="sourceLine" id="cb91-12" data-line-number="12">  <span class="dt">psi =</span> survival_curve_standardA,</a>
+<a class="sourceLine" id="cb91-13" data-line-number="13">  <span class="dt">A_intervene =</span> hazard_fit_standardA<span class="op">$</span>A_intervene</a>
+<a class="sourceLine" id="cb91-14" data-line-number="14">)</a>
+<a class="sourceLine" id="cb91-15" data-line-number="15">eic_matrix_standardA &lt;-<span class="st"> </span>eic_standardA<span class="op">$</span><span class="kw">all_t</span>(<span class="dt">k_grid =</span> k_grid)</a>
+<a class="sourceLine" id="cb91-16" data-line-number="16">std_err_standardA &lt;-<span class="st"> </span><span class="kw">compute_simultaneous_ci</span>(eic_matrix_standardA)</a>
+<a class="sourceLine" id="cb91-17" data-line-number="17">upper_bound_standardA &lt;-<span class="st"> </span>survival_curve_standardA <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_standardA)</a>
+<a class="sourceLine" id="cb91-18" data-line-number="18">lower_bound_standardA &lt;-<span class="st"> </span>survival_curve_standardA <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_standardA)</a>
+<a class="sourceLine" id="cb91-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb91-20" data-line-number="20">plotdf_standardA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> k_grid, <span class="dt">est =</span> survival_curve_standardA, </a>
+<a class="sourceLine" id="cb91-21" data-line-number="21">                               <span class="dt">upper =</span> upper_bound_standardA, </a>
+<a class="sourceLine" id="cb91-22" data-line-number="22">                               <span class="dt">lower =</span> lower_bound_standardA, </a>
+<a class="sourceLine" id="cb91-23" data-line-number="23">                               <span class="dt">type =</span> <span class="kw">rep</span>(<span class="st">&quot;standard&quot;</span>, <span class="kw">length</span>(k_grid)))</a>
+<a class="sourceLine" id="cb91-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb91-25" data-line-number="25">plot_standardA &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> plotdf_standardA, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> est)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-26" data-line-number="26"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-27" data-line-number="27"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="dt">data =</span> plotdf_standardA, <span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper), </a>
+<a class="sourceLine" id="cb91-28" data-line-number="28">              <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-29" data-line-number="29"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Standard Treatment Group in</span></a>
+<a class="sourceLine" id="cb91-30" data-line-number="30"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
+<a class="sourceLine" id="cb91-31" data-line-number="31">plot_standardA</a></code></pre></div>
 <p><img src="deming2019_workshop_files/figure-html/moss-4-standard-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for test treatment group</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">survival_testA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_testA)</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">survival_curve_testA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_testA<span class="op">$</span>survival)</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">eic_testA &lt;-<span class="st"> </span>eic<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">  <span class="dt">A =</span> A,</a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">  <span class="dt">T_tilde =</span> T_tilde,</a>
-<a class="sourceLine" id="cb27-8" data-line-number="8">  <span class="dt">Delta =</span> Delta,</a>
-<a class="sourceLine" id="cb27-9" data-line-number="9">  <span class="dt">density_failure =</span> hazard_fit_testA<span class="op">$</span>density_failure,</a>
-<a class="sourceLine" id="cb27-10" data-line-number="10">  <span class="dt">density_censor =</span> hazard_fit_testA<span class="op">$</span>density_censor,</a>
-<a class="sourceLine" id="cb27-11" data-line-number="11">  <span class="dt">g1W =</span> hazard_fit_testA<span class="op">$</span>g1W,</a>
-<a class="sourceLine" id="cb27-12" data-line-number="12">  <span class="dt">psi =</span> survival_curve_testA,</a>
-<a class="sourceLine" id="cb27-13" data-line-number="13">  <span class="dt">A_intervene =</span> hazard_fit_testA<span class="op">$</span>A_intervene</a>
-<a class="sourceLine" id="cb27-14" data-line-number="14">)</a>
-<a class="sourceLine" id="cb27-15" data-line-number="15">eic_matrix_testA &lt;-<span class="st"> </span>eic_testA<span class="op">$</span><span class="kw">all_t</span>(<span class="dt">k_grid =</span> k_grid)</a>
-<a class="sourceLine" id="cb27-16" data-line-number="16">std_err_testA &lt;-<span class="st"> </span><span class="kw">compute_simultaneous_ci</span>(eic_matrix_testA)</a>
-<a class="sourceLine" id="cb27-17" data-line-number="17">upper_bound_testA &lt;-<span class="st"> </span>survival_curve_testA <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_testA)</a>
-<a class="sourceLine" id="cb27-18" data-line-number="18">lower_bound_testA &lt;-<span class="st"> </span>survival_curve_testA <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_testA)</a>
-<a class="sourceLine" id="cb27-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb27-20" data-line-number="20">plotdf_testA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> k_grid, <span class="dt">est =</span> survival_curve_testA, </a>
-<a class="sourceLine" id="cb27-21" data-line-number="21">                           <span class="dt">upper =</span> upper_bound_testA, <span class="dt">lower =</span> lower_bound_testA, </a>
-<a class="sourceLine" id="cb27-22" data-line-number="22">                           <span class="dt">type =</span> <span class="kw">rep</span>(<span class="st">&quot;test&quot;</span>, <span class="kw">length</span>(k_grid)))</a>
-<a class="sourceLine" id="cb27-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb27-24" data-line-number="24">plot_testA &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> plotdf_testA, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> est)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-26" data-line-number="26"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="dt">data =</span> plotdf_testA, <span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-27" data-line-number="27"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Test Treatment Group in</span></a>
-<a class="sourceLine" id="cb27-28" data-line-number="28"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
-<a class="sourceLine" id="cb27-29" data-line-number="29">plot_testA</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for test treatment group</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">survival_testA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_testA)</a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">survival_curve_testA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_testA<span class="op">$</span>survival)</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb92-5" data-line-number="5">eic_testA &lt;-<span class="st"> </span>eic<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb92-6" data-line-number="6">  <span class="dt">A =</span> A,</a>
+<a class="sourceLine" id="cb92-7" data-line-number="7">  <span class="dt">T_tilde =</span> T_tilde,</a>
+<a class="sourceLine" id="cb92-8" data-line-number="8">  <span class="dt">Delta =</span> Delta,</a>
+<a class="sourceLine" id="cb92-9" data-line-number="9">  <span class="dt">density_failure =</span> hazard_fit_testA<span class="op">$</span>density_failure,</a>
+<a class="sourceLine" id="cb92-10" data-line-number="10">  <span class="dt">density_censor =</span> hazard_fit_testA<span class="op">$</span>density_censor,</a>
+<a class="sourceLine" id="cb92-11" data-line-number="11">  <span class="dt">g1W =</span> hazard_fit_testA<span class="op">$</span>g1W,</a>
+<a class="sourceLine" id="cb92-12" data-line-number="12">  <span class="dt">psi =</span> survival_curve_testA,</a>
+<a class="sourceLine" id="cb92-13" data-line-number="13">  <span class="dt">A_intervene =</span> hazard_fit_testA<span class="op">$</span>A_intervene</a>
+<a class="sourceLine" id="cb92-14" data-line-number="14">)</a>
+<a class="sourceLine" id="cb92-15" data-line-number="15">eic_matrix_testA &lt;-<span class="st"> </span>eic_testA<span class="op">$</span><span class="kw">all_t</span>(<span class="dt">k_grid =</span> k_grid)</a>
+<a class="sourceLine" id="cb92-16" data-line-number="16">std_err_testA &lt;-<span class="st"> </span><span class="kw">compute_simultaneous_ci</span>(eic_matrix_testA)</a>
+<a class="sourceLine" id="cb92-17" data-line-number="17">upper_bound_testA &lt;-<span class="st"> </span>survival_curve_testA <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_testA)</a>
+<a class="sourceLine" id="cb92-18" data-line-number="18">lower_bound_testA &lt;-<span class="st"> </span>survival_curve_testA <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span><span class="op">*</span>std_err_testA)</a>
+<a class="sourceLine" id="cb92-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb92-20" data-line-number="20">plotdf_testA &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> k_grid, <span class="dt">est =</span> survival_curve_testA, </a>
+<a class="sourceLine" id="cb92-21" data-line-number="21">                           <span class="dt">upper =</span> upper_bound_testA, <span class="dt">lower =</span> lower_bound_testA, </a>
+<a class="sourceLine" id="cb92-22" data-line-number="22">                           <span class="dt">type =</span> <span class="kw">rep</span>(<span class="st">&quot;test&quot;</span>, <span class="kw">length</span>(k_grid)))</a>
+<a class="sourceLine" id="cb92-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb92-24" data-line-number="24">plot_testA &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> plotdf_testA, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> est)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb92-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb92-26" data-line-number="26"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="dt">data =</span> plotdf_testA, <span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb92-27" data-line-number="27"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Treatment-Specific Survival Curves Among Test Treatment Group in</span></a>
+<a class="sourceLine" id="cb92-28" data-line-number="28"><span class="st">           Veterans’ Administration Lung Cancer Trial&quot;</span>)</a>
+<a class="sourceLine" id="cb92-29" data-line-number="29">plot_testA</a></code></pre></div>
 <p><img src="deming2019_workshop_files/figure-html/moss-4-test-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -591,7 +646,7 @@ simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai201
           </div>
         </div>
       </div>
-<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-tmle-framework.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="r6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
