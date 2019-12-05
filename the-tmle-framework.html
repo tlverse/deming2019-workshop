@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 The TMLE Framework | Targeted Learning with the tlverse Software Ecosystem</title>
-  <meta name="description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  <title>Chapter 5 The TMLE Framework | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
+  <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   <meta name="generator" content="bookdown 0.16.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 The TMLE Framework | Targeted Learning with the tlverse Software Ecosystem" />
+  <meta property="og:title" content="Chapter 5 The TMLE Framework | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://tlverse.org/deming2019-workshop/" />
   
-  <meta property="og:description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  <meta property="og:description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   <meta name="github-repo" content="tlverse/deming2019-workshop" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 The TMLE Framework | Targeted Learning with the tlverse Software Ecosystem" />
+  <meta name="twitter:title" content="Chapter 5 The TMLE Framework | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   
-  <meta name="twitter:description" content="An open-source and fully-reproducible electronic set of teaching materials accompanying an invited short-course and half-day tutorial on applying Targeted Learning using the tlverse software ecosystem." />
+  <meta name="twitter:description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   
 
-<meta name="author" content="Mark van der Laan, Alan Hubbard, Jeremy Coyle, Nima Hejazi, Ivana Malenica, Rachael Phillips" />
+<meta name="author" content="Rachael Phillips, Nima Hejazi, Jeremy Coyle, Ivana Malenica, Alan Hubbard, Mark van der Laan" />
 
 
 
@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="img/logos/favicons/favicon.png" type="image/x-icon" />
 <link rel="prev" href="super-ensemble-machine-learning.html"/>
-<link rel="next" href="optimal-individualized-treatment-regimes.html"/>
+<link rel="next" href="stochastic-treatment-regimes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -139,15 +139,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#important-links"><i class="fa fa-check"></i>Important links</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i>Abstract</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#half-day-tutorial-9a-12p-on-december-4-2019"><i class="fa fa-check"></i>Half-Day Tutorial – 9A-12P on December 4, 2019</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#day-short-course-8a-5p-on-december-5-6-2019"><i class="fa fa-check"></i>2-Day Short Course – 8A-5P on December 5-6, 2019</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contents"><i class="fa fa-check"></i>Contents</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-instructors-and-authors"><i class="fa fa-check"></i>About the instructors and authors</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#mark-van-der-laan"><i class="fa fa-check"></i>Mark van der Laan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#rachael-phillips"><i class="fa fa-check"></i>Rachael Phillips</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#jeremy-coyle"><i class="fa fa-check"></i>Jeremy Coyle</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#alan-hubbard"><i class="fa fa-check"></i>Alan Hubbard</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#nima-hejazi"><i class="fa fa-check"></i>Nima Hejazi</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#ivana-malenica"><i class="fa fa-check"></i>Ivana Malenica</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#rachael-phillips"><i class="fa fa-check"></i>Rachael Phillips</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i>Motivation</a></li>
@@ -165,12 +168,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#estimation-targeted-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>2.5</b> Estimation: Targeted Maximum Likelihood Estimation</a></li>
 <li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#inference"><i class="fa fa-check"></i><b>2.6</b> Inference</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html"><i class="fa fa-check"></i><b>3</b> Super (Ensemble Machine) Learning</a><ul>
-<li class="chapter" data-level="3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#super-learning"><i class="fa fa-check"></i><b>3.1.1</b> Super Learning</a></li>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Datasets</a><ul>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#ist"><i class="fa fa-check"></i><b>3.1</b> International Stroke Trial Example Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#wash"><i class="fa fa-check"></i><b>3.2</b> WASH Benefits Example Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#vet"><i class="fa fa-check"></i><b>3.3</b> Veterans’ Administration Lung Cancer Trial Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Super (Ensemble Machine) Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#super-learning"><i class="fa fa-check"></i><b>4.1.1</b> Super Learning</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>3.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
+<li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
@@ -178,23 +186,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#train-the-super-learner-on-the-machine-learning-task"><i class="fa fa-check"></i>3. Train the super learner on the machine learning task</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#obtain-predicted-values"><i class="fa fa-check"></i>4. Obtain predicted values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#extensions"><i class="fa fa-check"></i><b>3.3</b> Extensions</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#cross-validated-super-learner"><i class="fa fa-check"></i><b>3.3.1</b> Cross-validated Super Learner</a></li>
-<li class="chapter" data-level="3.3.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#variable-importance-measures-with-sl3"><i class="fa fa-check"></i><b>3.3.2</b> Variable Importance Measures with <code>sl3</code></a></li>
+<li class="chapter" data-level="4.3" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#extensions"><i class="fa fa-check"></i><b>4.3</b> Extensions</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#cross-validated-super-learner"><i class="fa fa-check"></i><b>4.3.1</b> Cross-validated Super Learner</a></li>
+<li class="chapter" data-level="4.3.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#variable-importance-measures-with-sl3"><i class="fa fa-check"></i><b>4.3.2</b> Variable Importance Measures with <code>sl3</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise"><i class="fa fa-check"></i><b>3.4</b> Exercise</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#predicting-myocardial-infarction-with-sl3"><i class="fa fa-check"></i><b>3.4.1</b> Predicting Myocardial Infarction with <code>sl3</code></a></li>
+<li class="chapter" data-level="4.4" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise"><i class="fa fa-check"></i><b>4.4</b> Exercise</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3ex"><i class="fa fa-check"></i><b>4.4.1</b> Predicting Myocardial Infarction with <code>sl3</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#summary"><i class="fa fa-check"></i><b>3.5</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#summary"><i class="fa fa-check"></i><b>4.5</b> Summary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#exercise-solutions"><i class="fa fa-check"></i><b>4.5.1</b> Exercise Solutions</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html"><i class="fa fa-check"></i><b>4</b> The TMLE Framework</a><ul>
-<li class="chapter" data-level="4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#substitution-estimators"><i class="fa fa-check"></i><b>4.1.1</b> Substitution Estimators</a></li>
-<li class="chapter" data-level="4.1.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle"><i class="fa fa-check"></i><b>4.1.2</b> TMLE</a></li>
-<li class="chapter" data-level="4.1.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#inference-1"><i class="fa fa-check"></i><b>4.1.3</b> Inference</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#learning-objectives-1"><i class="fa fa-check"></i><b>4.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="4.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#easy-bake-example-tmle3-for-ate"><i class="fa fa-check"></i><b>4.3</b> Easy-Bake Example: <code>tmle3</code> for ATE</a><ul>
+<li class="chapter" data-level="5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html"><i class="fa fa-check"></i><b>5</b> The TMLE Framework</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#substitution-estimators"><i class="fa fa-check"></i><b>5.1.1</b> Substitution Estimators</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle"><i class="fa fa-check"></i><b>5.1.2</b> TMLE</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#inference-1"><i class="fa fa-check"></i><b>5.1.3</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#learning-objectives-1"><i class="fa fa-check"></i><b>5.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="5.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#easy-bake-example-tmle3-for-ate"><i class="fa fa-check"></i><b>5.3</b> Easy-Bake Example: <code>tmle3</code> for ATE</a><ul>
 <li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#load-the-data"><i class="fa fa-check"></i>0. Load the Data</a></li>
 <li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#define-the-variable-roles"><i class="fa fa-check"></i>1. Define the variable roles</a></li>
 <li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#create-a-spec-object"><i class="fa fa-check"></i>2. Create a “Spec” Object</a></li>
@@ -202,55 +212,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit-the-tmle"><i class="fa fa-check"></i>4. Fit the TMLE</a></li>
 <li class="chapter" data-level="" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#evaluate-the-estimates"><i class="fa fa-check"></i>5. Evaluate the Estimates</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3-components"><i class="fa fa-check"></i><b>4.4</b> <code>tmle3</code> Components</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3_task"><i class="fa fa-check"></i><b>4.4.1</b> <code>tmle3_task</code></a></li>
-<li class="chapter" data-level="4.4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#initial-likelihood"><i class="fa fa-check"></i><b>4.4.2</b> Initial Likelihood</a></li>
-<li class="chapter" data-level="4.4.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#targeted-likelihood-updater"><i class="fa fa-check"></i><b>4.4.3</b> Targeted Likelihood (updater)</a></li>
-<li class="chapter" data-level="4.4.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#parameter-mapping"><i class="fa fa-check"></i><b>4.4.4</b> Parameter Mapping</a></li>
-<li class="chapter" data-level="4.4.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#putting-it-all-together"><i class="fa fa-check"></i><b>4.4.5</b> Putting it all together</a></li>
+<li class="chapter" data-level="5.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3-components"><i class="fa fa-check"></i><b>5.4</b> <code>tmle3</code> Components</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#tmle3_task"><i class="fa fa-check"></i><b>5.4.1</b> <code>tmle3_task</code></a></li>
+<li class="chapter" data-level="5.4.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#initial-likelihood"><i class="fa fa-check"></i><b>5.4.2</b> Initial Likelihood</a></li>
+<li class="chapter" data-level="5.4.3" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#targeted-likelihood-updater"><i class="fa fa-check"></i><b>5.4.3</b> Targeted Likelihood (updater)</a></li>
+<li class="chapter" data-level="5.4.4" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#parameter-mapping"><i class="fa fa-check"></i><b>5.4.4</b> Parameter Mapping</a></li>
+<li class="chapter" data-level="5.4.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#putting-it-all-together"><i class="fa fa-check"></i><b>5.4.5</b> Putting it all together</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fitting-tmle3-with-multiple-parameters"><i class="fa fa-check"></i><b>4.5</b> Fitting <code>tmle3</code> with multiple parameters</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#delta-method"><i class="fa fa-check"></i><b>4.5.1</b> Delta Method</a></li>
-<li class="chapter" data-level="4.5.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit"><i class="fa fa-check"></i><b>4.5.2</b> Fit</a></li>
+<li class="chapter" data-level="5.5" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fitting-tmle3-with-multiple-parameters"><i class="fa fa-check"></i><b>5.5</b> Fitting <code>tmle3</code> with multiple parameters</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#delta-method"><i class="fa fa-check"></i><b>5.5.1</b> Delta Method</a></li>
+<li class="chapter" data-level="5.5.2" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#fit"><i class="fa fa-check"></i><b>5.5.2</b> Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#stratified-effect-estimates"><i class="fa fa-check"></i><b>4.6</b> Stratified Effect Estimates</a></li>
-<li class="chapter" data-level="4.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>4.7</b> Exercise</a></li>
-<li class="chapter" data-level="4.8" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>4.8</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html"><i class="fa fa-check"></i><b>5</b> Optimal Individualized Treatment Regimes</a><ul>
-<li class="chapter" data-level="5.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#learning-objectives-2"><i class="fa fa-check"></i><b>5.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="5.2" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#introduction-to-optimal-individualized-interventions"><i class="fa fa-check"></i><b>5.2</b> Introduction to Optimal Individualized Interventions</a></li>
-<li class="chapter" data-level="5.3" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#data-structure-and-notation"><i class="fa fa-check"></i><b>5.3</b> Data Structure and Notation</a></li>
-<li class="chapter" data-level="5.4" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#defining-the-causal-effect-of-an-optimal-individualized-intervention"><i class="fa fa-check"></i><b>5.4</b> Defining the Causal Effect of an Optimal Individualized Intervention</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#why-cv-tmle"><i class="fa fa-check"></i><b>5.4.1</b> Why CV-TMLE?</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#binary-treatment"><i class="fa fa-check"></i><b>5.5</b> Binary Treatment</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#evaluating-the-causal-effect-of-an-optimal-itr-with-binary-treatment"><i class="fa fa-check"></i><b>5.5.1</b> Evaluating the Causal Effect of an optimal ITR with Binary Treatment</a></li>
-</ul></li>
-<li class="chapter" data-level="5.6" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#categorical-treatment"><i class="fa fa-check"></i><b>5.6</b> Categorical Treatment</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#evaluating-the-causal-effect-of-an-optimal-itr-with-categorical-treatment"><i class="fa fa-check"></i><b>5.6.1</b> Evaluating the Causal Effect of an optimal ITR with Categorical Treatment</a></li>
-</ul></li>
-<li class="chapter" data-level="5.7" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#extensions-to-causal-effect-of-an-oit"><i class="fa fa-check"></i><b>5.7</b> Extensions to Causal Effect of an OIT</a><ul>
-<li class="chapter" data-level="5.7.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#simpler-rules"><i class="fa fa-check"></i><b>5.7.1</b> Simpler Rules</a></li>
-<li class="chapter" data-level="5.7.2" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#realistic-optimal-individual-regimes"><i class="fa fa-check"></i><b>5.7.2</b> Realistic Optimal Individual Regimes</a></li>
-<li class="chapter" data-level="5.7.3" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#variable-importance-analysis"><i class="fa fa-check"></i><b>5.7.3</b> Variable Importance Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="5.8" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#exercise-2"><i class="fa fa-check"></i><b>5.8</b> Exercise</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#real-world-data-and-tmle3mopttx"><i class="fa fa-check"></i><b>5.8.1</b> Real World Data and <code>tmle3mopttx</code></a></li>
-</ul></li>
-<li class="chapter" data-level="5.9" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#summary-2"><i class="fa fa-check"></i><b>5.9</b> Summary</a><ul>
-<li class="chapter" data-level="5.9.1" data-path="optimal-individualized-treatment-regimes.html"><a href="optimal-individualized-treatment-regimes.html#solutions"><i class="fa fa-check"></i><b>5.9.1</b> Solutions</a></li>
-</ul></li>
+<li class="chapter" data-level="5.6" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#stratified-effect-estimates"><i class="fa fa-check"></i><b>5.6</b> Stratified Effect Estimates</a></li>
+<li class="chapter" data-level="5.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>5.7</b> Exercise</a></li>
+<li class="chapter" data-level="5.8" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>5.8</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html"><i class="fa fa-check"></i><b>6</b> Stochastic Treatment Regimes</a><ul>
-<li class="chapter" data-level="6.1" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#learning-objectives-3"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.1" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#learning-objectives-2"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
 <li class="chapter" data-level="6.2" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#introduction-2"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
 <li class="chapter" data-level="6.3" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#stochastic-interventions"><i class="fa fa-check"></i><b>6.3</b> Stochastic Interventions</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#identifying-the-causal-effect-of-a-stochastic-intervention"><i class="fa fa-check"></i><b>6.3.1</b> Identifying the Causal Effect of a Stochastic Intervention</a></li>
 <li class="chapter" data-level="6.3.2" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#interpreting-the-causal-effect-of-a-stochastic-intervention"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting the Causal Effect of a Stochastic Intervention</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#estimating-the-causal-effect-of-a-stochastic-intervention-with-tmle3shift"><i class="fa fa-check"></i><b>6.4</b> Estimating the Causal Effect of a Stochastic Intervention with <code>tmle3shift</code></a><ul>
-<li class="chapter" data-level="6.4.1" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#simulate-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Simulate Data</a></li>
+<li class="chapter" data-level="6.4.1" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#simulate-data"><i class="fa fa-check"></i><b>6.4.1</b> Simulate Data</a></li>
 <li class="chapter" data-level="6.4.2" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#targeted-estimation-of-stochastic-interventions-effects"><i class="fa fa-check"></i><b>6.4.2</b> Targeted Estimation of Stochastic Interventions Effects</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#stochastic-interventions-over-a-grid-of-counterfactual-shifts"><i class="fa fa-check"></i><b>6.5</b> Stochastic Interventions over a Grid of Counterfactual Shifts</a><ul>
@@ -260,11 +245,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.4" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#directly-targeting-the-msm-parameter-beta"><i class="fa fa-check"></i><b>6.5.4</b> Directly Targeting the MSM Parameter <span class="math inline">\(\beta\)</span></a></li>
 <li class="chapter" data-level="6.5.5" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#example-with-the-wash-benefits-data"><i class="fa fa-check"></i><b>6.5.5</b> Example with the WASH Benefits Data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#exercises"><i class="fa fa-check"></i><b>6.6</b> Exercises</a></li>
+<li class="chapter" data-level="6.6" data-path="stochastic-treatment-regimes.html"><a href="stochastic-treatment-regimes.html#exercise-2"><i class="fa fa-check"></i><b>6.6</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>7</b> A Primer on the <code>R6</code> Class System</a><ul>
-<li class="chapter" data-level="7.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>7.1</b> Classes, Fields, and Methods</a></li>
-<li class="chapter" data-level="7.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>7.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+<li class="chapter" data-level="7" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html"><i class="fa fa-check"></i><b>7</b> One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="7.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#learning-objectives-3"><i class="fa fa-check"></i><b>7.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#introduction-3"><i class="fa fa-check"></i><b>7.2</b> Introduction</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#existing-methods-for-observational-survival-analysis"><i class="fa fa-check"></i><b>7.2.1</b> Existing Methods for Observational Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#using-moss-for-one-step-tmle-for-time-to-event-outcomes"><i class="fa fa-check"></i><b>7.3</b> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#load-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load necessary libraries and data</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#specify-right-censored-survival-data-arguments"><i class="fa fa-check"></i>1. Specify right-censored survival data arguments</a></li>
+<li><a href="one-step-tmle-for-time-to-event-outcomes.html#obtain-initial-estimates-with-superlearner-r-package">2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#perform-tmle-adjustment-of-the-initial-conditional-survival-estimate"><i class="fa fa-check"></i>3. Perform TMLE adjustment of the initial conditional survival estimate</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#compute-standard-error-estimates-for-simultaneous-inference"><i class="fa fa-check"></i>4. Compute standard error estimates for simultaneous inference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>8</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="8.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>8.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="8.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>8.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -279,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Targeted Learning with the <code>tlverse</code> Software Ecosystem</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the <code>tlverse</code> Software Ecosystem</a>
           </h1>
         </div>
 
@@ -288,11 +286,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="the-tmle-framework" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> The TMLE Framework</h1>
+<h1><span class="header-section-number">Chapter 5</span> The TMLE Framework</h1>
 <p>Based on the <a href="https://github.com/tlverse/tmle3"><code>tmle3</code> <code>R</code> package</a>.</p>
-<p>Updated: 2019-11-27</p>
+<p>Updated: 2019-12-05</p>
 <div id="introduction-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
 <p>The first step in the estimation procedure is an initial estimate of the
 data-generating distribution, or the relevant part of this distribution that is
 needed to evaluate the target parameter. For this initial estimation, we use the
@@ -300,7 +298,7 @@ super learner <span class="citation">(van der Laan, Polley, and Hubbard <a href=
 <p>With the initial estimate of relevant parts of the data-generating distribution
 necessary to evaluate the target parameter, we are ready to construct the TMLE!</p>
 <div id="substitution-estimators" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Substitution Estimators</h3>
+<h3><span class="header-section-number">5.1.1</span> Substitution Estimators</h3>
 <ul>
 <li>Beyond a fit of the prediction function, one might also want to estimate more
 targeted parameters specific to certain scientific questions.</li>
@@ -334,7 +332,7 @@ keeping the observed <span class="math inline">\(W\)</span>, but first replacing
 </ul>
 </div>
 <div id="tmle" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> TMLE</h3>
+<h3><span class="header-section-number">5.1.2</span> TMLE</h3>
 <ul>
 <li>Though using SL over an arbitrary parametric regression is an improvement,
 it’s not sufficient to have the properties of an estimator one needs for
@@ -388,7 +386,7 @@ simultaneously (e.g., the points on a survival curve).</li>
 </ul>
 </div>
 <div id="inference-1" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Inference</h3>
+<h3><span class="header-section-number">5.1.3</span> Inference</h3>
 <ul>
 <li>The estimators we discuss are <strong>asymptotically linear</strong>, meaning that the
 difference in the estimate <span class="math inline">\(\Psi(P_n)\)</span> and the true parameter (<span class="math inline">\(\Psi(P_0)\)</span>)
@@ -420,11 +418,10 @@ fitting complex, machine learning algorithms and these methods are
 computationally quick (do not rely on re-sampling based methods like the
 bootstrap).</li>
 </ul>
-<hr />
 </div>
 </div>
 <div id="learning-objectives-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> Learning Objectives</h2>
+<h2><span class="header-section-number">5.2</span> Learning Objectives</h2>
 <ol style="list-style-type: decimal">
 <li>Use <code>tmle3</code> to estimate an Average Treatment Effect (ATE)</li>
 <li>Understand <code>tmle3</code> “Specs”</li>
@@ -433,8 +430,8 @@ bootstrap).</li>
 </ol>
 </div>
 <div id="easy-bake-example-tmle3-for-ate" class="section level2">
-<h2><span class="header-section-number">4.3</span> Easy-Bake Example: <code>tmle3</code> for ATE</h2>
-<p>We’ll illustrate the most basic use of TMLE using the WASH Benefits data
+<h2><span class="header-section-number">5.3</span> Easy-Bake Example: <code>tmle3</code> for ATE</h2>
+<p>We’ll illustrate the most basic use of TMLE using the IST example data
 introduced earlier and estimating an Average Treatment Effect (ATE).</p>
 <p>As a reminder, the ATE is identified with the following statistical parameter
 (under assumptions): <span class="math inline">\(ATE = \mathbb{E}_0(Y(1)-Y(0)) = \mathbb{E}_0\left(\mathbb{E}_0[Y \mid A=1,W]-\mathbb{E}_0[Y \mid A=0,W] \right)\)</span></p>
@@ -450,10 +447,10 @@ introduced earlier and estimating an Average Treatment Effect (ATE).</p>
 <div id="load-the-data" class="section level3 unnumbered">
 <h3>0. Load the Data</h3>
 <p>We’ll use the same WASH Benefits data as the earlier chapters:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">library</span>(tmle3)</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw">library</span>(sl3)</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4">washb_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/tlverse-data/master/wash-benefits/washb_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">library</span>(tmle3)</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="kw">library</span>(sl3)</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">ist_data &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/tlverse/deming2019-workshop/master/data/ist_sample.csv&quot;</span>))</a></code></pre></div>
 </div>
 <div id="define-the-variable-roles" class="section level3 unnumbered">
 <h3>1. Define the variable roles</h3>
@@ -462,33 +459,55 @@ introduced earlier and estimating an Average Treatment Effect (ATE).</p>
 correspond to each of these roles. We use a list of character vectors to tell
 it. We call this a <strong>“Node List”</strong> as it corresponds to the nodes in a Directed
 Acyclic Graph (DAG), a way of displaying causal relationships between variables.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">node_list &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">  <span class="dt">W =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="st">&quot;month&quot;</span>, <span class="st">&quot;aged&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;momage&quot;</span>, <span class="st">&quot;momedu&quot;</span>,</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="st">&quot;momheight&quot;</span>, <span class="st">&quot;hfiacat&quot;</span>, <span class="st">&quot;Nlt18&quot;</span>, <span class="st">&quot;Ncomp&quot;</span>, <span class="st">&quot;watmin&quot;</span>,</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">    <span class="st">&quot;elec&quot;</span>, <span class="st">&quot;floor&quot;</span>, <span class="st">&quot;walls&quot;</span>, <span class="st">&quot;roof&quot;</span>, <span class="st">&quot;asset_wardrobe&quot;</span>,</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="st">&quot;asset_table&quot;</span>, <span class="st">&quot;asset_chair&quot;</span>, <span class="st">&quot;asset_khat&quot;</span>,</a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">    <span class="st">&quot;asset_chouki&quot;</span>, <span class="st">&quot;asset_tv&quot;</span>, <span class="st">&quot;asset_refrig&quot;</span>,</a>
-<a class="sourceLine" id="cb32-8" data-line-number="8">    <span class="st">&quot;asset_bike&quot;</span>, <span class="st">&quot;asset_moto&quot;</span>, <span class="st">&quot;asset_sewmach&quot;</span>,</a>
-<a class="sourceLine" id="cb32-9" data-line-number="9">    <span class="st">&quot;asset_mobile&quot;</span></a>
-<a class="sourceLine" id="cb32-10" data-line-number="10">  ),</a>
-<a class="sourceLine" id="cb32-11" data-line-number="11">  <span class="dt">A =</span> <span class="st">&quot;tr&quot;</span>,</a>
-<a class="sourceLine" id="cb32-12" data-line-number="12">  <span class="dt">Y =</span> <span class="st">&quot;whz&quot;</span></a>
-<a class="sourceLine" id="cb32-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">node_list &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">  <span class="dt">W =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">    <span class="st">&quot;RXHEP&quot;</span>, <span class="st">&quot;REGION&quot;</span>, <span class="st">&quot;RDELAY&quot;</span>, <span class="st">&quot;RCONSC&quot;</span>, <span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;AGE&quot;</span>, <span class="st">&quot;RSLEEP&quot;</span>, <span class="st">&quot;RVISINF&quot;</span>,</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="st">&quot;RCT&quot;</span>, <span class="st">&quot;RATRIAL&quot;</span>, <span class="st">&quot;RASP3&quot;</span>, <span class="st">&quot;MISSING_RATRIAL_RASP3&quot;</span>, <span class="st">&quot;RHEP24&quot;</span>, </a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">    <span class="st">&quot;MISSING_RHEP24&quot;</span>, <span class="st">&quot;RSBP&quot;</span>, <span class="st">&quot;RDEF1&quot;</span>, <span class="st">&quot;RDEF2&quot;</span>, <span class="st">&quot;RDEF3&quot;</span>, <span class="st">&quot;RDEF4&quot;</span>, <span class="st">&quot;RDEF5&quot;</span>,</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">    <span class="st">&quot;RDEF6&quot;</span>, <span class="st">&quot;RDEF7&quot;</span>, <span class="st">&quot;RDEF8&quot;</span>, <span class="st">&quot;STYPE&quot;</span></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">    ),</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">  <span class="dt">A =</span> <span class="st">&quot;RXASP&quot;</span>,</a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">  <span class="dt">Y =</span> <span class="st">&quot;DRSISC&quot;</span></a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">)</a></code></pre></div>
 <div id="handling-missingness" class="section level4 unnumbered">
 <h4>Handling Missingness</h4>
-<p>Currently, missingness in <code>tmle3</code> is handled in a fairly simple way:</p>
+<p>Currently, missingness in <code>tlverse</code> is handled in a fairly simple way:</p>
 <ul>
 <li>Missing covariates are median (for continuous) or mode (for discrete)
 imputed, and additional covariates indicating imputation are generated</li>
-<li>Observations missing either treatment or outcome variables are excluded.</li>
+<li>Observations missing treatment variables are excluded.</li>
+<li>We implement an IPCW-TMLE to more efficiently handle missingness in the
+outcome variables.</li>
 </ul>
-<p>We plan to implement IPCW-TMLE to more efficiently handle missingness in the
-treatment and outcome variables.</p>
-<p>These steps are implemented in the <code>process_missing</code> function in <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">processed &lt;-<span class="st"> </span><span class="kw">process_missing</span>(washb_data, node_list)</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">washb_data &lt;-<span class="st"> </span>processed<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">node_list &lt;-<span class="st"> </span>processed<span class="op">$</span>node_list</a></code></pre></div>
+<p>These steps are implemented in the <code>process_missing()</code> function in <code>tmle3</code>, and
+are automatically handled in <code>sl3</code>. In this data, we already imputed missing
+covariate values which were present in <code>RATRIAL</code>, <code>RASP3</code>, <code>RHEP24</code>; and we
+created additional covariates indicating imputation <code>MISSING_RATRIAL_RASP3</code>,
+<code>MISSING_RHEP24</code>. The missingness was identical for <code>RATRIAL</code> and <code>RASP3</code>, so
+we only needed to create one covariate indicating imputation for these two
+variables.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">head</span>(ist_data)</a></code></pre></div>
+<pre><code>   RDELAY RCONSC SEX AGE RSLEEP RATRIAL RCT RVISINF RHEP24 RASP3 RSBP RDEF1
+1:     46      F   F  85      N       N   N       N      Y     N  150     N
+2:     33      F   M  71      Y       Y   Y       Y      N     Y  180     Y
+3:      6      D   M  88      N       Y   N       N      N     N  140     Y
+4:      8      F   F  68      Y       N   Y       Y      N     N  118     Y
+5:     13      F   M  60      N       N   Y       N      N     N  140     Y
+6:     16      F   F  71      Y       N   Y       N      N     N  160     N
+   RDEF2 RDEF3 RDEF4 RDEF5 RDEF6 RDEF7 RDEF8 STYPE RXHEP
+1:     Y     N     N     N     N     N     N  PACS     N
+2:     Y     Y     Y     Y     N     N     N  TACS     L
+3:     Y     Y     C     C     C     C     C  PACS     N
+4:     Y     N     N     N     N     N     N  LACS     M
+5:     Y     Y     Y     N     N     Y     Y  POCS     N
+6:     Y     N     N     N     N     N     N  PACS     N
+                    REGION MISSING_RATRIAL_RASP3 MISSING_RHEP24 RXASP DRSISC
+1: Europe and Central Asia                     0              0     0      0
+2:   East Asia and Pacific                     0              0     0      0
+3: Europe and Central Asia                     0              0     0      0
+4: Europe and Central Asia                     0              0     0      0
+5: Europe and Central Asia                     0              0     1      0
+6: Europe and Central Asia                     0              0     1      0</code></pre>
 </div>
 </div>
 <div id="create-a-spec-object" class="section level3 unnumbered">
@@ -500,305 +519,320 @@ manually specifying all of these components. Therefore, <code>tmle3</code> imple
 that, with minimal additional detail, can be run by an end-user.</p>
 <p>We’ll start with using one of the specs, and then work our way down into the
 internals of <code>tmle3</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_ATE</span>(</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">  <span class="dt">treatment_level =</span> <span class="st">&quot;Nutrition + WSH&quot;</span>,</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">  <span class="dt">control_level =</span> <span class="st">&quot;Control&quot;</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_ATE</span>(</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">  <span class="dt">treatment_level =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">  <span class="dt">control_level =</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">)</a></code></pre></div>
 </div>
 <div id="define-the-relevant-super-learners" class="section level3 unnumbered">
 <h3>3. Define the Relevant Super Learners</h3>
 <p>Currently, the only other thing a user must define are the <code>sl3</code> learners used
-to estimate the relevant factors of the likelihood: Q and g.</p>
+to estimate the relevant factors of the likelihood: <span class="math inline">\(Q\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(\Delta\)</span>.</p>
 <p>This takes the form of a list of <code>sl3</code> learners, one for each likelihood factor
 to be estimated with <code>sl3</code>:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># choose base learners</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">lrnr_xgboost &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_xgboost)</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co"># define metalearners appropriate to data types</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">ls_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_nnls)</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">mn_metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">  Lrnr_solnp, metalearner_linear_multinomial,</a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">  loss_loglik_multinomial</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
-<a class="sourceLine" id="cb35-12" data-line-number="12">  <span class="dt">metalearner =</span> ls_metalearner</a>
-<a class="sourceLine" id="cb35-13" data-line-number="13">)</a>
-<a class="sourceLine" id="cb35-14" data-line-number="14">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb35-15" data-line-number="15">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_xgboost),</a>
-<a class="sourceLine" id="cb35-16" data-line-number="16">  <span class="dt">metalearner =</span> mn_metalearner</a>
-<a class="sourceLine" id="cb35-17" data-line-number="17">)</a>
-<a class="sourceLine" id="cb35-18" data-line-number="18">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
-<p>Here, we use a Super Learner as defined in the previous <code>sl3</code> section. In the
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># choose base learners</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">lrnr_glm &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glm)</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">lrnr_xgboost &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_xgboost)</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co"># default metalearner appropriate to data types</span></a>
+<a class="sourceLine" id="cb46-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm, lrnr_xgboost)</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">  )</a>
+<a class="sourceLine" id="cb46-10" data-line-number="10">sl_Delta &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-11" data-line-number="11">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm, lrnr_xgboost)</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-14" data-line-number="14">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm)</a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">  )</a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">delta_Y =</span> sl_Delta, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
+<p>Here, we use a super learner as defined in the previous <code>sl3</code> section. In the
 future, we plan to include reasonable default learners.</p>
 </div>
 <div id="fit-the-tmle" class="section level3 unnumbered">
 <h3>4. Fit the TMLE</h3>
 <p>We now have everything we need to fit the tmle using <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(ate_spec, washb_data, node_list, learner_list)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tmle_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(ate_spec, ist_data, node_list, learner_list)</a></code></pre></div>
 </div>
 <div id="evaluate-the-estimates" class="section level3 unnumbered">
 <h3>5. Evaluate the Estimates</h3>
 <p>We can see the summary results by printing the fit object. Alternatively, we
 can extra results from the summary by indexing into it:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type                                    param    init_est    tmle_est
-1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] 0.002440166 0.002494379
-           se       lower     upper psi_transformed lower_transformed
-1: 0.05066932 -0.09681566 0.1018044     0.002494379       -0.09681566
+   type                                      param     init_est     tmle_est
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183712 -0.004789243
+            se       lower       upper psi_transformed lower_transformed
+1: 0.004320523 -0.01325731 0.003678826    -0.004789243       -0.01325731
    upper_transformed
-1:         0.1018044</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">print</span>(estimates)</a></code></pre></div>
-<pre><code>[1] 0.002494379</code></pre>
+1:       0.003678826</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># in most cases the transformation that&#39;s applied to tmle3 estimates and </span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># inference (psi_transformed) is nothing -- it comes up for estimands like ORs, </span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co"># which are estimated on the log scale</span></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">print</span>(estimates)</a></code></pre></div>
+<pre><code>[1] -0.004789243</code></pre>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
-<h2><span class="header-section-number">4.4</span> <code>tmle3</code> Components</h2>
+<h2><span class="header-section-number">5.4</span> <code>tmle3</code> Components</h2>
 <p>Now that we’ve successfully used a spec to obtain a TML estimate, let’s look
 under the hood at the components. The spec has a number of functions that
 generate the objects necessary to define and fit a TMLE.</p>
 <div id="tmle3_task" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> <code>tmle3_task</code></h3>
+<h3><span class="header-section-number">5.4.1</span> <code>tmle3_task</code></h3>
 <p>First is, a <code>tmle3_Task</code>, analogous to an <code>sl3_Task</code>, containing the data we’re
 fitting the TMLE to, as well as an NPSEM generated from the <code>node_list</code> defined
 above, describing the variables and their relationships.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">tmle_task &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_tmle_task</span>(washb_data, node_list)</a></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">tmle_task<span class="op">$</span>npsem</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">tmle_task &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_tmle_task</span>(ist_data, node_list)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">tmle_task<span class="op">$</span>npsem</a></code></pre></div>
 <pre><code>$W
 tmle3_Node: W
-    Variables: month, aged, sex, momedu, hfiacat, Nlt18, Ncomp, watmin, elec, floor, walls, roof, asset_wardrobe, asset_table, asset_chair, asset_khat, asset_chouki, asset_tv, asset_refrig, asset_bike, asset_moto, asset_sewmach, asset_mobile, momage, momheight, delta_momage, delta_momheight
+    Variables: RXHEP, REGION, RDELAY, RCONSC, SEX, AGE, RSLEEP, RVISINF, RCT, RATRIAL, RASP3, MISSING_RATRIAL_RASP3, RHEP24, MISSING_RHEP24, RSBP, RDEF1, RDEF2, RDEF3, RDEF4, RDEF5, RDEF6, RDEF7, RDEF8, STYPE
     Parents: 
 
 $A
 tmle3_Node: A
-    Variables: tr
+    Variables: RXASP
     Parents: W
 
 $Y
 tmle3_Node: Y
-    Variables: whz
+    Variables: DRSISC
+    Parents: A, W
+
+$delta_Y
+tmle3_Node: delta_Y
+    Variables: delta_Y
     Parents: A, W</code></pre>
 </div>
 <div id="initial-likelihood" class="section level3">
-<h3><span class="header-section-number">4.4.2</span> Initial Likelihood</h3>
+<h3><span class="header-section-number">5.4.2</span> Initial Likelihood</h3>
 <p>Next, is an object representing the likelihood, factorized according to the
 NPSEM described above:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">initial_likelihood &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_initial_likelihood</span>(</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">  tmle_task,</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">  learner_list</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="kw">print</span>(initial_likelihood)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">initial_likelihood &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_initial_likelihood</span>(</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">  tmle_task,</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">  learner_list</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5"><span class="kw">print</span>(initial_likelihood)</a></code></pre></div>
 <pre><code>W: Lf_emp
 A: LF_fit
-Y: LF_fit</code></pre>
+Y: LF_fit
+delta_Y: LF_fit</code></pre>
 <p>These components of the likelihood indicate how the factors were estimated: the
-marginal distribution of <span class="math inline">\(W\)</span> was estimated using NP-MLE, and the conditional
-distributions of <span class="math inline">\(A\)</span> and <span class="math inline">\(Y\)</span> were estimated using <code>sl3</code> fits (as defined with
-the <code>learner_list</code>) above.</p>
+marginal distribution of <span class="math inline">\(W\)</span> was estimated using NPMLE, and the conditional
+distributions of <span class="math inline">\(A\)</span>, <span class="math inline">\(\Delta\)</span>, and <span class="math inline">\(Y\)</span> were estimated using <code>sl3</code> fits (as
+defined with the <code>learner_list</code>) above.</p>
 <p>We can use this in tandem with the <code>tmle_task</code> object to obtain likelihood
 estimates for each observation:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
-<pre><code>                 W         A          Y
-   1: 0.0002129925 0.2482971 -0.6616029
-   2: 0.0002129925 0.2540885 -0.6351630
-   3: 0.0002129925 0.2578671 -0.6232142
-   4: 0.0002129925 0.2756704 -0.6033917
-   5: 0.0002129925 0.2532059 -0.5480529
-  ---                                  
-4691: 0.0002129925 0.1337394 -0.4698893
-4692: 0.0002129925 0.1263632 -0.4882987
-4693: 0.0002129925 0.1265693 -0.5709865
-4694: 0.0002129925 0.1678060 -0.8143882
-4695: 0.0002129925 0.1295294 -0.5452056</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
+<pre><code>          W         A          Y   delta_Y
+   1: 2e-04 0.4931489 0.01830207 0.9996849
+   2: 2e-04 0.5322987 0.02620549 0.9996298
+   3: 2e-04 0.4768974 0.01374835 0.9995944
+   4: 2e-04 0.5162369 0.02242328 0.9995865
+   5: 2e-04 0.5157461 0.01532110 0.9974412
+  ---                                     
+4996: 2e-04 0.4952086 0.01268525 0.9996025
+4997: 2e-04 0.4930104 0.02619468 0.9985074
+4998: 2e-04 0.4928078 0.01231529 0.9987709
+4999: 2e-04 0.4790922 0.03180140 0.9993951
+5000: 2e-04 0.4948690 0.01583199 0.9982467</code></pre>
 <!-- TODO: make helper to get learners out of fit objects -->
 </div>
 <div id="targeted-likelihood-updater" class="section level3">
-<h3><span class="header-section-number">4.4.3</span> Targeted Likelihood (updater)</h3>
+<h3><span class="header-section-number">5.4.3</span> Targeted Likelihood (updater)</h3>
 <p>We also need to define a “Targeted Likelihood” object. This is a special type
 of likelihood that is able to be updated using an <code>tmle3_Update</code> object. This
 object defines the update strategy (e.g. submodel, loss function, CV-TMLE or
 not, etc).</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a></code></pre></div>
 <p>When constructing the targeted likelihood, you can specify different update
 options. See the documentation for <code>tmle3_Update</code> for details of the different
 options. For example, you can disable CV-TMLE (the default in <code>tmle3</code>) as
 follows:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">targeted_likelihood_no_cv &lt;-</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">  </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood,</a>
-<a class="sourceLine" id="cb49-3" data-line-number="3">    <span class="dt">updater =</span> <span class="kw">list</span>(<span class="dt">cvtmle =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb49-4" data-line-number="4">  )</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">targeted_likelihood_no_cv &lt;-</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood,</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">    <span class="dt">updater =</span> <span class="kw">list</span>(<span class="dt">cvtmle =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">  )</a></code></pre></div>
 </div>
 <div id="parameter-mapping" class="section level3">
-<h3><span class="header-section-number">4.4.4</span> Parameter Mapping</h3>
+<h3><span class="header-section-number">5.4.4</span> Parameter Mapping</h3>
 <p>Finally, we need to define the parameters of interest. Here, the spec defines a
 single parameter, the ATE. In the next section, we’ll see how to add additional
 parameters.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">tmle_params &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">print</span>(tmle_params)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tmle_params &lt;-<span class="st"> </span>ate_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">print</span>(tmle_params)</a></code></pre></div>
 <pre><code>[[1]]
-Param_ATE: ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}]</code></pre>
+Param_ATE: ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}]</code></pre>
 </div>
 <div id="putting-it-all-together" class="section level3">
-<h3><span class="header-section-number">4.4.5</span> Putting it all together</h3>
+<h3><span class="header-section-number">5.4.5</span> Putting it all together</h3>
 <p>Having used the spec to manually generate all these components, we can now
 manually fit a <code>tmle3</code>:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">tmle_fit_manual &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2">  tmle_task, targeted_likelihood, tmle_params,</a>
-<a class="sourceLine" id="cb52-3" data-line-number="3">  targeted_likelihood<span class="op">$</span>updater</a>
-<a class="sourceLine" id="cb52-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb52-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">tmle_fit_manual &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">  tmle_task, targeted_likelihood, tmle_params,</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">  targeted_likelihood<span class="op">$</span>updater</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type                                    param    init_est    tmle_est
-1:  ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] 0.002365312 0.007351927
-          se       lower     upper psi_transformed lower_transformed
-1: 0.0508875 -0.09238574 0.1070896     0.007351927       -0.09238574
+   type                                      param     init_est     tmle_est
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183462 -0.004798667
+            se       lower      upper psi_transformed lower_transformed
+1: 0.004313869 -0.01325369 0.00365636    -0.004798667       -0.01325369
    upper_transformed
-1:         0.1070896</code></pre>
+1:        0.00365636</code></pre>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
 <div id="fitting-tmle3-with-multiple-parameters" class="section level2">
-<h2><span class="header-section-number">4.5</span> Fitting <code>tmle3</code> with multiple parameters</h2>
+<h2><span class="header-section-number">5.5</span> Fitting <code>tmle3</code> with multiple parameters</h2>
 <p>Above, we fit a <code>tmle3</code> with just one parameter. <code>tmle3</code> also supports fitting
 multiple parameters simultaneously. To illustrate this, we’ll use the
 <code>tmle_TSM_all</code> spec:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">tsm_spec &lt;-<span class="st"> </span><span class="kw">tmle_TSM_all</span>()</a>
-<a class="sourceLine" id="cb54-2" data-line-number="2">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a>
-<a class="sourceLine" id="cb54-3" data-line-number="3">all_tsm_params &lt;-<span class="st"> </span>tsm_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
-<a class="sourceLine" id="cb54-4" data-line-number="4"><span class="kw">print</span>(all_tsm_params)</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">tsm_spec &lt;-<span class="st"> </span><span class="kw">tmle_TSM_all</span>()</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">targeted_likelihood &lt;-<span class="st"> </span>Targeted_Likelihood<span class="op">$</span><span class="kw">new</span>(initial_likelihood)</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">all_tsm_params &lt;-<span class="st"> </span>tsm_spec<span class="op">$</span><span class="kw">make_params</span>(tmle_task, targeted_likelihood)</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="kw">print</span>(all_tsm_params)</a></code></pre></div>
 <pre><code>[[1]]
-Param_TSM: E[Y_{A=Control}]
+Param_TSM: E[Y_{A=0, delta_Y=1}]
 
 [[2]]
-Param_TSM: E[Y_{A=Handwashing}]
-
-[[3]]
-Param_TSM: E[Y_{A=Nutrition}]
-
-[[4]]
-Param_TSM: E[Y_{A=Nutrition + WSH}]
-
-[[5]]
-Param_TSM: E[Y_{A=Sanitation}]
-
-[[6]]
-Param_TSM: E[Y_{A=WSH}]
-
-[[7]]
-Param_TSM: E[Y_{A=Water}]</code></pre>
+Param_TSM: E[Y_{A=1, delta_Y=1}]</code></pre>
 <p>This spec generates a Treatment Specific Mean (TSM) for each level of the
 exposure variable. Note that we must first generate a new targeted likelihood,
 as the old one was targeted to the ATE. However, we can recycle the initial
 likelihood we fit above, saving us a super learner step.</p>
 <div id="delta-method" class="section level3">
-<h3><span class="header-section-number">4.5.1</span> Delta Method</h3>
+<h3><span class="header-section-number">5.5.1</span> Delta Method</h3>
 <p>We can also define parameters based on Delta Method Transformations of other
 parameters. For instance, we can estimate a ATE using the delta method and two
 of the above TSM parameters:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">ate_param &lt;-<span class="st"> </span><span class="kw">define_param</span>(</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">  Param_delta, targeted_likelihood,</a>
-<a class="sourceLine" id="cb56-3" data-line-number="3">  delta_param_ATE,</a>
-<a class="sourceLine" id="cb56-4" data-line-number="4">  <span class="kw">list</span>(all_tsm_params[[<span class="dv">1</span>]], all_tsm_params[[<span class="dv">4</span>]])</a>
-<a class="sourceLine" id="cb56-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb56-6" data-line-number="6"><span class="kw">print</span>(ate_param)</a></code></pre></div>
-<pre><code>Param_delta: E[Y_{A=Nutrition + WSH}] - E[Y_{A=Control}]</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">ate_param &lt;-<span class="st"> </span><span class="kw">define_param</span>(</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">  Param_delta, targeted_likelihood,</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3">  delta_param_ATE,</a>
+<a class="sourceLine" id="cb67-4" data-line-number="4">  <span class="kw">list</span>(all_tsm_params[[<span class="dv">1</span>]], all_tsm_params[[<span class="dv">2</span>]])</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb67-6" data-line-number="6"><span class="kw">print</span>(ate_param)</a></code></pre></div>
+<pre><code>Param_delta: E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}]</code></pre>
 <p>This can similarly be used to estimate other derived parameters like Relative
-Risks, and Population Attributable Risks</p>
+Risks, and Population Attributable Risks.</p>
 </div>
 <div id="fit" class="section level3">
-<h3><span class="header-section-number">4.5.2</span> Fit</h3>
+<h3><span class="header-section-number">5.5.2</span> Fit</h3>
 <p>We can now fit a TMLE simultaneously for all TSM parameters, as well as the
 above defined ATE parameter</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">all_params &lt;-<span class="st"> </span><span class="kw">c</span>(all_tsm_params, ate_param)</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">tmle_fit_multiparam &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
-<a class="sourceLine" id="cb58-3" data-line-number="3">  tmle_task, targeted_likelihood, all_params,</a>
-<a class="sourceLine" id="cb58-4" data-line-number="4">  targeted_likelihood<span class="op">$</span>updater</a>
-<a class="sourceLine" id="cb58-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb58-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">all_params &lt;-<span class="st"> </span><span class="kw">c</span>(all_tsm_params, ate_param)</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">tmle_fit_multiparam &lt;-<span class="st"> </span><span class="kw">fit_tmle3</span>(</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">  tmle_task, targeted_likelihood, all_params,</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">  targeted_likelihood<span class="op">$</span>updater</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-   type                                       param     init_est     tmle_est
-1:  TSM                            E[Y_{A=Control}] -0.597539939 -0.623611880
-2:  TSM                        E[Y_{A=Handwashing}] -0.609703345 -0.631852129
-3:  TSM                          E[Y_{A=Nutrition}] -0.605359130 -0.629177873
-4:  TSM                    E[Y_{A=Nutrition + WSH}] -0.595174627 -0.616086726
-5:  TSM                         E[Y_{A=Sanitation}] -0.591126610 -0.585274354
-6:  TSM                                E[Y_{A=WSH}] -0.534109850 -0.454598371
-7:  TSM                              E[Y_{A=Water}] -0.579807128 -0.527605528
-8:  ATE E[Y_{A=Nutrition + WSH}] - E[Y_{A=Control}]  0.002365312  0.007525155
-           se       lower      upper psi_transformed lower_transformed
-1: 0.02971645 -0.68185506 -0.5653687    -0.623611880       -0.68185506
-2: 0.04178946 -0.71375797 -0.5499463    -0.631852129       -0.71375797
-3: 0.04249393 -0.71246444 -0.5458913    -0.629177873       -0.71246444
-4: 0.04143352 -0.69729494 -0.5348785    -0.616086726       -0.69729494
-5: 0.04254009 -0.66865139 -0.5018973    -0.585274354       -0.66865139
-6: 0.04544601 -0.54367092 -0.3655258    -0.454598371       -0.54367092
-7: 0.03884802 -0.60374624 -0.4514648    -0.527605528       -0.60374624
-8: 0.05087455 -0.09218712  0.1072374     0.007525155       -0.09218712
+   type                                         param     init_est     tmle_est
+1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022007860  0.026008394
+2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824399  0.021186741
+3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002183462 -0.004821652
+            se       lower       upper psi_transformed lower_transformed
+1: 0.003189488  0.01975711 0.032259675     0.026008394        0.01975711
+2: 0.002903174  0.01549663 0.026876857     0.021186741        0.01549663
+3: 0.004315252 -0.01327939 0.003636086    -0.004821652       -0.01327939
    upper_transformed
-1:        -0.5653687
-2:        -0.5499463
-3:        -0.5458913
-4:        -0.5348785
-5:        -0.5018973
-6:        -0.3655258
-7:        -0.4514648
-8:         0.1072374</code></pre>
+1:       0.032259675
+2:       0.026876857
+3:       0.003636086</code></pre>
 </div>
 </div>
 <div id="stratified-effect-estimates" class="section level2">
-<h2><span class="header-section-number">4.6</span> Stratified Effect Estimates</h2>
+<h2><span class="header-section-number">5.6</span> Stratified Effect Estimates</h2>
 <p>TMLE can also be applied to estimate effects in in strata of a baseline
 covariate. The tmle_stratified spec makes it easy to extend an existing spec
 with stratification.</p>
 <p>For instance, we can estimate strata specific ATEs as follows:
 <span class="math inline">\(ATE = \mathbb{E}_0(Y(1)-Y(0) \mid V=v ) = \mathbb{E}_0\left(\mathbb{E}_0[Y \mid A=1,W]-\mathbb{E}_0[Y \mid A=0,W] \mid V=v \right)\)</span></p>
 <p>For example, we can stratify the above ATE spec to estimate the ATE in strata of
-sex:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;sex&quot;</span>)</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, washb_data, node_list,</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">                        learner_list)</a>
-<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="kw">print</span>(stratified_fit)</a></code></pre></div>
+country region:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;REGION&quot;</span>)</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, ist_data, node_list, learner_list)</a></code></pre></div>
+<pre><code>Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">print</span>(stratified_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
-             type                                               param
-1:            ATE            ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}]
-2: stratified ATE   ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] | V=male
-3: stratified ATE ATE[Y_{A=Nutrition + WSH}-Y_{A=Control}] | V=female
-      init_est     tmle_est         se      lower     upper psi_transformed
-1: 0.002348573  0.009762099 0.05099241 -0.0901812 0.1097054     0.009762099
-2: 0.002043759  0.035573930 0.07639247 -0.1141526 0.1853004     0.035573930
-3: 0.002652220 -0.015950963 0.06759695 -0.1484386 0.1165366    -0.015950963
-   lower_transformed upper_transformed
-1:        -0.0901812         0.1097054
-2:        -0.1141526         0.1853004
-3:        -0.1484386         0.1165366</code></pre>
+             type
+1:            ATE
+2: stratified ATE
+3: stratified ATE
+4: stratified ATE
+5: stratified ATE
+6: stratified ATE
+7: stratified ATE
+8: stratified ATE
+                                                                       param
+1:                                ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}]
+2:    ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Europe and Central Asia
+3:      ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=East Asia and Pacific
+4: ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Middle East &amp; North Africa
+5:  ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Latin America &amp; Caribbean
+6:                 ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=South Asia
+7:              ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=North America
+8:         ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Sub-Saharan Africa
+        init_est      tmle_est           se        lower       upper
+1: -2.183748e-03 -0.0047173479 0.0043052812 -0.013155544 0.003720848
+2: -2.181735e-03 -0.0043570420 0.0046255759 -0.013423004 0.004708920
+3: -2.780636e-03  0.0043900815 0.0207525243 -0.036284119 0.045064282
+4: -3.393405e-05 -0.0001042741 0.0009770074 -0.002019173 0.001810625
+5: -2.613295e-03 -0.0257579555 0.0231701216 -0.071170559 0.019654648
+6: -7.060910e-06  0.0014983530 0.0013862748 -0.001218696 0.004215402
+7: -2.851834e-03 -0.0084873346 0.0478456103 -0.102263008 0.085288338
+8: -4.579117e-03 -0.0928775761 0.1026262009 -0.294021234 0.108266082
+   psi_transformed lower_transformed upper_transformed
+1:   -0.0047173479      -0.013155544       0.003720848
+2:   -0.0043570420      -0.013423004       0.004708920
+3:    0.0043900815      -0.036284119       0.045064282
+4:   -0.0001042741      -0.002019173       0.001810625
+5:   -0.0257579555      -0.071170559       0.019654648
+6:    0.0014983530      -0.001218696       0.004215402
+7:   -0.0084873346      -0.102263008       0.085288338
+8:   -0.0928775761      -0.294021234       0.108266082</code></pre>
 <p>This TMLE is consistent for both the marginal ATE as well as the ATEs in strata
-of V. For continuous V, this could be extended using a working Marginal
+of <span class="math inline">\(V\)</span>. For continuous <span class="math inline">\(V\)</span>, this could be extended using a working Marginal
 Structural Model (MSM), although that has not yet been implemented in <code>tmle3</code>.</p>
 </div>
 <div id="exercise-1" class="section level2">
-<h2><span class="header-section-number">4.7</span> Exercise</h2>
-<p>Follow the steps below to estimate an average treatment effect using data from
-the Collaborative Perinatal Project (CPP), available in the <code>sl3</code> package. To
-simplify this example, we define a binary intervention variable, <code>parity01</code> –
-an indicator of having one or more children before the current child and a
-binary outcome, <code>haz01</code> – an indicator of having an above average height for
-age.</p>
-<p>Work with a buddy/team. You have 20 minutes.</p>
-<p>In the <a href="https://etherpad.net/p/acic2019-tlverse">etherpad</a>, submit your group’s
-answers to the following:</p>
-<ol style="list-style-type: decimal">
-<li>Interpret the <code>tmle3</code> fit both causally and statistically.</li>
-<li>Did your group face any challenges?</li>
-<li>Any additional comments/questions about this <code>tmle3</code> section of the workshop?</li>
-</ol>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># load the data set</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">data</span>(cpp)</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">cpp &lt;-<span class="st"> </span>cpp[<span class="op">!</span><span class="kw">is.na</span>(cpp[, <span class="st">&quot;haz&quot;</span>]), ]</a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">cpp<span class="op">$</span>parity01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>parity <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb62-5" data-line-number="5">cpp[<span class="kw">is.na</span>(cpp)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">cpp<span class="op">$</span>haz01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>haz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<h2><span class="header-section-number">5.7</span> Exercise</h2>
+<p>Follow the steps below to estimate an ATE using a simplified version of data
+from the Collaborative Perinatal Project (CPP), available in the <code>sl3</code> package.
+We define a binary intervention variable, <code>parity01</code> – an indicator of having
+one or more children before the current child and a binary outcome, <code>haz01</code> –
+an indicator of having an above average height for age.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># load the data set</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw">data</span>(cpp)</a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">cpp &lt;-<span class="st"> </span>cpp[<span class="op">!</span><span class="kw">is.na</span>(cpp[, <span class="st">&quot;haz&quot;</span>]), ]</a>
+<a class="sourceLine" id="cb75-4" data-line-number="4">cpp<span class="op">$</span>parity01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>parity <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb75-5" data-line-number="5">cpp[<span class="kw">is.na</span>(cpp)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb75-6" data-line-number="6">cpp<span class="op">$</span>haz01 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(cpp<span class="op">$</span>haz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <!--
 We're interested in using this simplified data to estimate an Average Treatment
 Effect (ATE):
@@ -834,10 +868,10 @@ above.</li>
 learners for estimation of <span class="math inline">\(Q = E(Y|A,Y)\)</span> and <span class="math inline">\(g=P(A|W)\)</span>.</li>
 <li>Define the metalearner like below</li>
 </ol>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_solnp,</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2">  <span class="dt">loss_function =</span> loss_loglik_binomial,</a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">  <span class="dt">learner_function =</span> metalearner_logistic_binomial</a>
-<a class="sourceLine" id="cb63-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">metalearner &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_solnp,</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2">  <span class="dt">loss_function =</span> loss_loglik_binomial,</a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">  <span class="dt">learner_function =</span> metalearner_logistic_binomial</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4">)</a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Define one super learner for estimating <span class="math inline">\(Q\)</span> and another for estimating <span class="math inline">\(g\)</span>.
 Use the metalearner above for both <span class="math inline">\(Q\)</span> and <span class="math inline">\(g\)</span> super learners.</li>
@@ -851,16 +885,20 @@ specified in Step 1; and (4) the list of super learners for estimating <span cla
 and <span class="math inline">\(Q\)</span>, which we defined in Step 6. <em>Note</em>: Like before, you will need to
 make a data copy to deal with <code>data.table</code> weirdness
 (<code>cpp2 &lt;- data.table::copy(cpp)</code>) and use <code>cpp2</code> as the data.</li>
+<li>Interpret the <code>tmle3</code> fit both causally and statistically.</li>
 </ol>
 </div>
 <div id="summary-1" class="section level2">
-<h2><span class="header-section-number">4.8</span> Summary</h2>
-<p><code>tmle3</code> is a general purpose framework for generating TML estimates. The
-easiest way to use it is to use a predefined spec, allowing you to just fill in
-the blanks for the data, variable roles, and <code>sl3</code> learners. However, digging
-under the hood allows users to specify a wide range of TMLEs. In the next
-sections, we’ll see how this framework can be used to estimate advanced
-parameters such as optimal treatments and shift interventions.</p>
+<h2><span class="header-section-number">5.8</span> Summary</h2>
+<ul>
+<li><code>tmle3</code> is a general purpose framework for generating TML estimates.</li>
+<li>The easiest way to use <code>tmle3</code> is to use a predefined spec, allowing you to
+just fill in the blanks for the data, variable roles, and <code>sl3</code> learners.</li>
+<li>Digging under the hood allows users to specify a wide range of TMLEs.</li>
+<li>In the next sections, we’ll see how this framework can be used to estimate
+more modern parameters such as the effect under optimal treatments and shift<br />
+interventions.</li>
+</ul>
 
 </div>
 </div>
@@ -876,7 +914,7 @@ parameters such as optimal treatments and shift interventions.</p>
         </div>
       </div>
 <a href="super-ensemble-machine-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="optimal-individualized-treatment-regimes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stochastic-treatment-regimes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -907,7 +945,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tlverse/deming2019-workshop/edit/master/05-tmle3.Rmd",
+"link": "https://github.com/tlverse/deming2019-workshop/edit/master/06-tmle3.Rmd",
 "text": "Edit"
 },
 "history": {
