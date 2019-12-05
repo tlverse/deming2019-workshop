@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 The TMLE Framework | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
   <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
-  <meta name="generator" content="bookdown 0.16.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 The TMLE Framework | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
-<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#international-stroke-trial-example"><i class="fa fa-check"></i>International Stroke Trial Example</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
@@ -500,19 +500,34 @@ to be estimated with <code>sl3</code>:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># choose base learners</span></a>
 <a class="sourceLine" id="cb46-2" data-line-number="2">lrnr_mean &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_mean)</a>
 <a class="sourceLine" id="cb46-3" data-line-number="3">lrnr_glm &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glm)</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">lrnr_xgboost &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_xgboost)</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co"># default metalearner appropriate to data types</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm, lrnr_xgboost)</a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">  )</a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">sl_Delta &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm, lrnr_xgboost)</a>
-<a class="sourceLine" id="cb46-12" data-line-number="12">  )</a>
-<a class="sourceLine" id="cb46-13" data-line-number="13">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
-<a class="sourceLine" id="cb46-14" data-line-number="14">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm)</a>
-<a class="sourceLine" id="cb46-15" data-line-number="15">  )</a>
-<a class="sourceLine" id="cb46-16" data-line-number="16">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">delta_Y =</span> sl_Delta, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
+<a class="sourceLine" id="cb46-4" data-line-number="4">lrnr_lasso &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glmnet)</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">lrnr_ridge &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_glmnet, <span class="dt">alpha =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">lrnr_ranger &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Lrnr_ranger)</a>
+<a class="sourceLine" id="cb46-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">grid_params &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">max_depth =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">                    <span class="dt">eta =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>))</a>
+<a class="sourceLine" id="cb46-10" data-line-number="10">grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(grid_params, <span class="dt">KEEP.OUT.ATTRS =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb46-11" data-line-number="11">params_default &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">nthread =</span> <span class="kw">getOption</span>(<span class="st">&quot;sl.cores.learners&quot;</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">xgb_learners &lt;-<span class="st"> </span><span class="kw">apply</span>(grid, <span class="dt">MARGIN =</span> <span class="dv">1</span>, <span class="cf">function</span>(params_tune) {</a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">  <span class="kw">do.call</span>(Lrnr_xgboost<span class="op">$</span>new, <span class="kw">c</span>(params_default, <span class="kw">as.list</span>(params_tune)))})</a>
+<a class="sourceLine" id="cb46-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">learners_Y &lt;-<span class="st"> </span><span class="kw">make_learner</span>(Stack, <span class="kw">unlist</span>(<span class="kw">list</span>(xgb_learners, lrnr_ridge, </a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">                                              lrnr_mean, lrnr_ranger, </a>
+<a class="sourceLine" id="cb46-17" data-line-number="17">                                              lrnr_lasso, lrnr_glm), </a>
+<a class="sourceLine" id="cb46-18" data-line-number="18">                                       <span class="dt">recursive =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb46-19" data-line-number="19">                                            </a>
+<a class="sourceLine" id="cb46-20" data-line-number="20"><span class="co"># default metalearner appropriate to data types</span></a>
+<a class="sourceLine" id="cb46-21" data-line-number="21">sl_Y &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-22" data-line-number="22">  <span class="dt">learners =</span> <span class="kw">unlist</span>(<span class="kw">list</span>(xgb_learners, lrnr_ridge, lrnr_mean, lrnr_ranger, </a>
+<a class="sourceLine" id="cb46-23" data-line-number="23">                         lrnr_lasso, lrnr_glm), <span class="dt">recursive =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb46-24" data-line-number="24">  )</a>
+<a class="sourceLine" id="cb46-25" data-line-number="25">sl_Delta &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-26" data-line-number="26">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm, lrnr_lasso, lrnr_ridge)</a>
+<a class="sourceLine" id="cb46-27" data-line-number="27">  )</a>
+<a class="sourceLine" id="cb46-28" data-line-number="28">sl_A &lt;-<span class="st"> </span>Lrnr_sl<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb46-29" data-line-number="29">  <span class="dt">learners =</span> <span class="kw">list</span>(lrnr_mean, lrnr_glm)</a>
+<a class="sourceLine" id="cb46-30" data-line-number="30">  )</a>
+<a class="sourceLine" id="cb46-31" data-line-number="31">learner_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> sl_A, <span class="dt">delta_Y =</span> sl_Delta, <span class="dt">Y =</span> sl_Y)</a></code></pre></div>
 <p>Here, we use a super learner as defined in the previous <code>sl3</code> section. In the
 future, we plan to include reasonable default learners.</p>
 </div>
@@ -528,15 +543,15 @@ can extra results from the summary by indexing into it:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004757 0.004323
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002307 -0.004689 0.004309
       lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.01323 0.003716       -0.004757          -0.01323          0.003716</code></pre>
+1: -0.01313 0.003757       -0.004689          -0.01313          0.003757</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># in most cases the transformation that&#39;s applied to tmle3 estimates and </span></a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># inference (psi_transformed) is nothing -- it comes up for estimands like ORs, </span></a>
 <a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co"># which are estimated on the log scale</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">print</span>(estimates)</a></code></pre></div>
-<pre><code>[1] -0.004757</code></pre>
+<pre><code>[1] -0.004689</code></pre>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
@@ -592,17 +607,17 @@ defined with the <code>learner_list</code>) above.</p>
 estimates for each observation:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">initial_likelihood<span class="op">$</span><span class="kw">get_likelihoods</span>(tmle_task)</a></code></pre></div>
 <pre><code>          W      A       Y delta_Y
-   1: 2e-04 0.4931 0.01830  0.9997
-   2: 2e-04 0.5323 0.02621  0.9996
-   3: 2e-04 0.4769 0.01375  0.9996
-   4: 2e-04 0.5162 0.02242  0.9996
-   5: 2e-04 0.5157 0.01532  0.9974
+   1: 2e-04 0.4931 0.02429  0.9995
+   2: 2e-04 0.5323 0.02870  0.9995
+   3: 2e-04 0.4769 0.01368  0.9995
+   4: 2e-04 0.5162 0.02758  0.9995
+   5: 2e-04 0.5157 0.01697  0.9978
   ---                             
-4996: 2e-04 0.4952 0.01268  0.9996
-4997: 2e-04 0.4930 0.02619  0.9985
-4998: 2e-04 0.4928 0.01232  0.9988
-4999: 2e-04 0.4791 0.03180  0.9994
-5000: 2e-04 0.4949 0.01583  0.9982</code></pre>
+4996: 2e-04 0.4952 0.01417  0.9995
+4997: 2e-04 0.4930 0.02157  0.9985
+4998: 2e-04 0.4928 0.01560  0.9985
+4999: 2e-04 0.4791 0.03593  0.9991
+5000: 2e-04 0.4949 0.01740  0.9981</code></pre>
 <!-- TODO: make helper to get learners out of fit objects -->
 </div>
 <div id="targeted-likelihood-updater" class="section level3">
@@ -642,9 +657,9 @@ manually fit a <code>tmle3</code>:</p>
 <a class="sourceLine" id="cb63-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004394 0.004317
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.001901 -0.004282 0.004314
       lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.01286 0.004068       -0.004394          -0.01286          0.004068</code></pre>
+1: -0.01274 0.004173       -0.004282          -0.01274          0.004173</code></pre>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
@@ -693,17 +708,17 @@ above defined ATE parameter</p>
 <a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                         param  init_est  tmle_est
-1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022008  0.025795
-2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824  0.021400
-3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002184 -0.004395
+1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022814  0.025736
+2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.020912  0.021458
+3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.001901 -0.004278
          se    lower    upper psi_transformed lower_transformed
-1: 0.003176  0.01957 0.032019        0.025795           0.01957
-2: 0.002925  0.01567 0.027133        0.021400           0.01567
-3: 0.004318 -0.01286 0.004069       -0.004395          -0.01286
+1: 0.003175  0.01951 0.031959        0.025736           0.01951
+2: 0.002922  0.01573 0.027185        0.021458           0.01573
+3: 0.004314 -0.01273 0.004178       -0.004278          -0.01273
    upper_transformed
-1:          0.032019
-2:          0.027133
-3:          0.004069</code></pre>
+1:          0.031959
+2:          0.027185
+3:          0.004178</code></pre>
 </div>
 </div>
 <div id="stratified-effect-estimates" class="section level2">
@@ -718,6 +733,36 @@ country region:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">stratified_ate_spec &lt;-<span class="st"> </span><span class="kw">tmle_stratified</span>(ate_spec, <span class="st">&quot;REGION&quot;</span>)</a>
 <a class="sourceLine" id="cb71-2" data-line-number="2">stratified_fit &lt;-<span class="st"> </span><span class="kw">tmle3</span>(stratified_ate_spec, ist_data, node_list, learner_list)</a></code></pre></div>
 <pre><code>Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
+  REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
+Error in xgboost::xgb.DMatrix(Xmat) : 
   REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
 Error in xgboost::xgb.DMatrix(Xmat) : 
   REAL() can only be applied to a &#39;numeric&#39;, not a &#39;logical&#39;
@@ -761,24 +806,24 @@ Error in xgboost::xgb.DMatrix(Xmat) :
 6:                 ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=South Asia
 7:              ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=North America
 8:         ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Sub-Saharan Africa
-     init_est   tmle_est        se     lower    upper psi_transformed
-1: -2.184e-03 -0.0048506 0.0043302 -0.013338 0.003636      -0.0048506
-2: -2.182e-03 -0.0043958 0.0046506 -0.013511 0.004719      -0.0043958
-3: -2.780e-03  0.0037339 0.0209696 -0.037366 0.044834       0.0037339
-4: -3.395e-05 -0.0001279 0.0009791 -0.002047 0.001791      -0.0001279
-5: -2.613e-03 -0.0254582 0.0231325 -0.070797 0.019881      -0.0254582
-6: -7.064e-06  0.0014708 0.0014162 -0.001305 0.004246       0.0014708
-7: -2.852e-03 -0.0080380 0.0468481 -0.099859 0.083783      -0.0080380
-8: -4.579e-03 -0.1166796 0.1127567 -0.337679 0.104319      -0.1166796
+     init_est   tmle_est       se     lower    upper psi_transformed
+1: -0.0019337 -0.0045945 0.004300 -0.013022 0.003833      -0.0045945
+2: -0.0019673 -0.0042241 0.004620 -0.013279 0.004830      -0.0042241
+3: -0.0019569  0.0044417 0.020849 -0.036421 0.045304       0.0044417
+4: -0.0002432  0.0001319 0.001496 -0.002799 0.003063       0.0001319
+5: -0.0022776 -0.0260576 0.023039 -0.071214 0.019099      -0.0260576
+6: -0.0002067  0.0019208 0.002027 -0.002052 0.005894       0.0019208
+7: -0.0027100 -0.0079539 0.046330 -0.098759 0.082851      -0.0079539
+8: -0.0030484 -0.0923040 0.103868 -0.295881 0.111273      -0.0923040
    lower_transformed upper_transformed
-1:         -0.013338          0.003636
-2:         -0.013511          0.004719
-3:         -0.037366          0.044834
-4:         -0.002047          0.001791
-5:         -0.070797          0.019881
-6:         -0.001305          0.004246
-7:         -0.099859          0.083783
-8:         -0.337679          0.104319</code></pre>
+1:         -0.013022          0.003833
+2:         -0.013279          0.004830
+3:         -0.036421          0.045304
+4:         -0.002799          0.003063
+5:         -0.071214          0.019099
+6:         -0.002052          0.005894
+7:         -0.098759          0.082851
+8:         -0.295881          0.111273</code></pre>
 <p>This TMLE is consistent for both the marginal ATE as well as the ATEs in strata
 of <span class="math inline">\(V\)</span>. For continuous <span class="math inline">\(V\)</span>, this could be extended using a working Marginal
 Structural Model (MSM), although that has not yet been implemented in <code>tmle3</code>.</p>

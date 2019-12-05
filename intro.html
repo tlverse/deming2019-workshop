@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The Roadmap of Statistical Learning | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
   <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
-  <meta name="generator" content="bookdown 0.16.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The Roadmap of Statistical Learning | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
-<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#international-stroke-trial-example"><i class="fa fa-check"></i>International Stroke Trial Example</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
@@ -293,8 +293,8 @@ useful tool to express what we know about the causal relations among variables
 that are relevant to the question under study <span class="citation">(Pearl <a href="#ref-pearl2009causality">2009</a>)</span>.</p>
 <p>Ignoring error terms, we will assume the following ordering of the variables in
 <span class="math inline">\(O\)</span>.</p>
-<div id="htmlwidget-f299926ffe4bb019eba8" style="width:200px;height:300px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f299926ffe4bb019eba8">{"x":{"nodes":{"id":["W","A","Y"],"label":["W","A","Y"]},"edges":{"from":["W","W","A"],"to":["A","Y","Y"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":{"to":true}},"layout":{"randomSeed":25}},"groups":null,"width":"200px","height":"300px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a2d9257ad7ea09b420e7" style="width:200px;height:300px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a2d9257ad7ea09b420e7">{"x":{"nodes":{"id":["W","A","Y"],"label":["W","A","Y"]},"edges":{"from":["W","W","A"],"to":["A","Y","Y"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"edges":{"arrows":{"to":true}},"layout":{"randomSeed":25}},"groups":null,"width":"200px","height":"300px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
 <p>While directed acyclic graphs (DAGs) like above provide a convenient means by
 which to visualize causal relations between variables, the causal relations
 among variables can be represented via a set of structural equations:
