@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="img/logos/favicons/favicon.png" type="image/x-icon" />
 <link rel="prev" href="super-ensemble-machine-learning.html"/>
-<link rel="next" href="one-step-tmle-for-time-to-event-outcomes.html"/>
+<link rel="next" href="r6.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -227,22 +227,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>5.7</b> Exercise</a></li>
 <li class="chapter" data-level="5.8" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>5.8</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html"><i class="fa fa-check"></i><b>6</b> One-Step TMLE for Time-to-Event Outcomes</a><ul>
-<li class="chapter" data-level="6.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#learning-objectives-2"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
-<li class="chapter" data-level="6.2" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#introduction-2"><i class="fa fa-check"></i><b>6.2</b> Introduction</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#existing-methods-for-observational-survival-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Existing Methods for Observational Survival Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#using-moss-for-one-step-tmle-for-time-to-event-outcomes"><i class="fa fa-check"></i><b>6.3</b> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</a><ul>
-<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#load-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load necessary libraries and data</a></li>
-<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#specify-right-censored-survival-data-arguments"><i class="fa fa-check"></i>1. Specify right-censored survival data arguments</a></li>
-<li><a href="one-step-tmle-for-time-to-event-outcomes.html#obtain-initial-estimates-with-superlearner-r-package">2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</a></li>
-<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#perform-tmle-adjustment-of-the-initial-conditional-survival-estimate"><i class="fa fa-check"></i>3. Perform TMLE adjustment of the initial conditional survival estimate</a></li>
-<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#compute-standard-error-estimates-for-simultaneous-inference"><i class="fa fa-check"></i>4. Compute standard error estimates for simultaneous inference</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>7</b> A Primer on the <code>R6</code> Class System</a><ul>
-<li class="chapter" data-level="7.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>7.1</b> Classes, Fields, and Methods</a></li>
-<li class="chapter" data-level="7.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>7.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+<li class="chapter" data-level="6" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>6</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="6.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>6.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="6.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>6.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -541,15 +528,15 @@ can extra results from the summary by indexing into it:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">print</span>(tmle_fit)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004726 0.004323
-     lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.0132 0.003746       -0.004726           -0.0132          0.003746</code></pre>
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183 -0.004888 0.004317
+      lower    upper psi_transformed lower_transformed upper_transformed
+1: -0.01335 0.003574       -0.004888          -0.01335          0.003574</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># in most cases the transformation that&#39;s applied to tmle3 estimates and </span></a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># inference (psi_transformed) is nothing -- it comes up for estimands like ORs, </span></a>
 <a class="sourceLine" id="cb50-3" data-line-number="3"><span class="co"># which are estimated on the log scale</span></a>
 <a class="sourceLine" id="cb50-4" data-line-number="4">estimates &lt;-<span class="st"> </span>tmle_fit<span class="op">$</span>summary<span class="op">$</span>psi_transformed</a>
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">print</span>(estimates)</a></code></pre></div>
-<pre><code>[1] -0.004726</code></pre>
+<pre><code>[1] -0.004888</code></pre>
 </div>
 </div>
 <div id="tmle3-components" class="section level2">
@@ -611,9 +598,9 @@ estimates for each observation:</p>
    4: 2e-04 0.5162 0.02242  0.9996
    5: 2e-04 0.5157 0.01532  0.9974
   ---                             
-4996: 2e-04 0.4952 0.01269  0.9996
-4997: 2e-04 0.4930 0.02619  0.9985
-4998: 2e-04 0.4928 0.01232  0.9988
+4996: 2e-04 0.4952 0.01268  0.9996
+4997: 2e-04 0.4930 0.02620  0.9985
+4998: 2e-04 0.4928 0.01231  0.9988
 4999: 2e-04 0.4791 0.03180  0.9994
 5000: 2e-04 0.4949 0.01583  0.9982</code></pre>
 <!-- TODO: make helper to get learners out of fit objects -->
@@ -655,9 +642,9 @@ manually fit a <code>tmle3</code>:</p>
 <a class="sourceLine" id="cb63-5" data-line-number="5"><span class="kw">print</span>(tmle_fit_manual)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                      param  init_est  tmle_est       se
-1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002183 -0.004966 0.004319
+1:  ATE ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] -0.002184 -0.004676 0.004306
       lower    upper psi_transformed lower_transformed upper_transformed
-1: -0.01343 0.003499       -0.004966          -0.01343          0.003499</code></pre>
+1: -0.01311 0.003763       -0.004676          -0.01311          0.003763</code></pre>
 <p>The result is equivalent to fitting using the <code>tmle3</code> function as above.</p>
 </div>
 </div>
@@ -706,17 +693,17 @@ above defined ATE parameter</p>
 <a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">print</span>(tmle_fit_multiparam)</a></code></pre></div>
 <pre><code>A tmle3_Fit that took 1 step(s)
    type                                         param  init_est  tmle_est
-1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022008  0.026117
-2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824  0.021108
-3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002183 -0.005009
+1:  TSM                         E[Y_{A=0, delta_Y=1}]  0.022008  0.025995
+2:  TSM                         E[Y_{A=1, delta_Y=1}]  0.019824  0.021300
+3:  ATE E[Y_{A=1, delta_Y=1}] - E[Y_{A=0, delta_Y=1}] -0.002184 -0.004695
          se    lower    upper psi_transformed lower_transformed
-1: 0.003197  0.01985 0.032384        0.026117           0.01985
-2: 0.002906  0.01541 0.026804        0.021108           0.01541
-3: 0.004320 -0.01348 0.003458       -0.005009          -0.01348
+1: 0.003182  0.01976 0.032231        0.025995           0.01976
+2: 0.002906  0.01560 0.026997        0.021300           0.01560
+3: 0.004306 -0.01313 0.003744       -0.004695          -0.01313
    upper_transformed
-1:          0.032384
-2:          0.026804
-3:          0.003458</code></pre>
+1:          0.032231
+2:          0.026997
+3:          0.003744</code></pre>
 </div>
 </div>
 <div id="stratified-effect-estimates" class="section level2">
@@ -774,24 +761,24 @@ Error in xgboost::xgb.DMatrix(Xmat) :
 6:                 ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=South Asia
 7:              ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=North America
 8:         ATE[Y_{A=2, delta_Y=1}-Y_{A=1, delta_Y=1}] | V=Sub-Saharan Africa
-     init_est  tmle_est        se     lower    upper psi_transformed
-1: -2.184e-03 -0.004882 0.0042961 -0.013302 0.003538       -0.004882
-2: -2.182e-03 -0.004439 0.0046159 -0.013486 0.004608       -0.004439
-3: -2.780e-03  0.002457 0.0208680 -0.038443 0.043358        0.002457
-4: -3.394e-05 -0.000122 0.0009757 -0.002034 0.001790       -0.000122
-5: -2.613e-03 -0.025413 0.0226607 -0.069827 0.019001       -0.025413
-6: -7.063e-06  0.001431 0.0014005 -0.001314 0.004176        0.001431
-7: -2.852e-03 -0.006955 0.0469661 -0.099007 0.085097       -0.006955
-8: -4.579e-03 -0.090690 0.1071925 -0.300784 0.119403       -0.090690
+     init_est   tmle_est        se     lower    upper psi_transformed
+1: -2.183e-03 -0.0045235 0.0043081 -0.012967 0.003920      -0.0045235
+2: -2.181e-03 -0.0041622 0.0046189 -0.013215 0.004891      -0.0041622
+3: -2.780e-03  0.0053347 0.0211896 -0.036196 0.046865       0.0053347
+4: -3.395e-05 -0.0001376 0.0009806 -0.002060 0.001784      -0.0001376
+5: -2.613e-03 -0.0263782 0.0228970 -0.071256 0.018499      -0.0263782
+6: -7.065e-06  0.0014967 0.0013940 -0.001236 0.004229       0.0014967
+7: -2.851e-03 -0.0076848 0.0467717 -0.099356 0.083986      -0.0076848
+8: -4.578e-03 -0.1000446 0.1100080 -0.315656 0.115567      -0.1000446
    lower_transformed upper_transformed
-1:         -0.013302          0.003538
-2:         -0.013486          0.004608
-3:         -0.038443          0.043358
-4:         -0.002034          0.001790
-5:         -0.069827          0.019001
-6:         -0.001314          0.004176
-7:         -0.099007          0.085097
-8:         -0.300784          0.119403</code></pre>
+1:         -0.012967          0.003920
+2:         -0.013215          0.004891
+3:         -0.036196          0.046865
+4:         -0.002060          0.001784
+5:         -0.071256          0.018499
+6:         -0.001236          0.004229
+7:         -0.099356          0.083986
+8:         -0.315656          0.115567</code></pre>
 <p>This TMLE is consistent for both the marginal ATE as well as the ATEs in strata
 of <span class="math inline">\(V\)</span>. For continuous <span class="math inline">\(V\)</span>, this could be extended using a working Marginal
 Structural Model (MSM), although that has not yet been implemented in <code>tmle3</code>.</p>
@@ -890,7 +877,7 @@ interventions.</li>
         </div>
       </div>
 <a href="super-ensemble-machine-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="one-step-tmle-for-time-to-event-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
