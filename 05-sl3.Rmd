@@ -422,7 +422,7 @@ We can cross-validate the super learner to see how well the super learner
 performs on unseen data, and obtain an estimate of the cross-validated risk of
 the super learner.
 
-This estimation procedure requires an ``external'' layer of cross-validation,
+This estimation procedure requires an "external" layer of cross-validation,
 also called nested cross-validation, which involves setting aside a separate
 holdout sample that we don’t use to fit the super learner. This external 
 cross-validation procedure may also incorporate 10 folds, which is the default 
@@ -463,7 +463,7 @@ is in the prediction.
 ```{r varimp, message=FALSE, warning=FALSE}
 ist_varimp <- varimp(sl_fit, loss_squared_error)
 ist_varimp %>%
-  kable()
+  kable() %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
   scroll_box(width = "100%", height = "250px")
 ```
