@@ -46,15 +46,26 @@ ate_spec <- tmle_ATE(
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_glm <- make_learner(Lrnr_glm)
-lrnr_xgboost <- make_learner(Lrnr_xgboost)
 lrnr_lasso <- make_learner(Lrnr_glmnet)
 lrnr_ridge <- make_learner(Lrnr_glmnet, alpha = 0)
 lrnr_ranger <- make_learner(Lrnr_ranger)
 
+grid_params <- list(max_depth = c(2, 5, 8),
+                    eta = c(0.01, 0.1, 0.3))
+grid <- expand.grid(grid_params, KEEP.OUT.ATTRS = FALSE)
+params_default <- list(nthread = getOption("sl.cores.learners", 1))
+xgb_learners <- apply(grid, MARGIN = 1, function(params_tune) {
+  do.call(Lrnr_xgboost$new, c(params_default, as.list(params_tune)))})
+
+learners_Y <- make_learner(Stack, unlist(list(xgb_learners, lrnr_ridge, 
+                                              lrnr_mean, lrnr_ranger, 
+                                              lrnr_lasso, lrnr_glm), 
+                                       recursive = TRUE))
+                                            
 # default metalearner appropriate to data types
 sl_Y <- Lrnr_sl$new(
-  learners = list(lrnr_mean, lrnr_glm, lrnr_lasso, lrnr_ridge, lrnr_ranger, 
-    lrnr_xgboost)
+  learners = unlist(list(xgb_learners, lrnr_ridge, lrnr_mean, lrnr_ranger, 
+                         lrnr_lasso, lrnr_glm), recursive = TRUE)
   )
 sl_Delta <- Lrnr_sl$new(
   learners = list(lrnr_mean, lrnr_glm, lrnr_lasso, lrnr_ridge)

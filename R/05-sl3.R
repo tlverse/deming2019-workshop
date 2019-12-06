@@ -56,7 +56,6 @@ sl3_list_learners(c("binomial"))
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_glm <- make_learner(Lrnr_glm)
-lrnr_gam <- make_learner(Lrnr_gam)
 
 
 ## ----extra-lrnr-awesome, message=FALSE, warning=FALSE-------------------------
@@ -101,8 +100,7 @@ lrnr_bayesglm <- Lrnr_pkg_SuperLearner$new("SL.bayesglm")
 
 ## ----stack, message=FALSE, warning=FALSE--------------------------------------
 stack <- make_learner(Stack, 
-  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_gam, 
-  lrnr_bayesglm, lrnr_ridge, lrnr_elasticnet
+  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_ridge, lrnr_elasticnet
 )
 
 
@@ -152,17 +150,17 @@ ist_task_new <- make_sl3_Task(
                      fold_fun = folds_vfold, 
                      V = 2)
 )
-CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
+CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_squared_error)
 CVsl %>%
-   kable(digits = 4) %>%
+   kable() %>%
    kable_styling(fixed_thead = T, font_size = 10) %>%
    scroll_box(width = "100%", height = "250px")
 
 
 ## ----varimp, message=FALSE, warning=FALSE-------------------------------------
-ist_varimp <- varimp(sl_fit, loss_loglik_binomial)
+ist_varimp <- varimp(sl_fit, loss_squared_error)
 ist_varimp %>%
-  kable(digits = 4) %>%
+  kable() %>%
   kable_styling(fixed_thead = T, font_size = 10) %>%
   scroll_box(width = "100%", height = "250px")
 
@@ -195,7 +193,7 @@ head(chspred) %>%
 ## ranger_learner <- Lrnr_ranger$new()
 ## svm_learner <- Lrnr_svm$new()
 ## xgb_learner <- Lrnr_xgboost$new()
-## screen_cor <- Lrnr_pkg_SuperLearner_screener$new("screen.corP")
+## screen_cor <- make_learner(Lrnr_screener_corP)
 ## glm_pipeline <- make_learner(Pipeline, screen_cor, glm_learner)
 ## stack <- make_learner(
 ##   Stack,
@@ -209,7 +207,7 @@ head(chspred) %>%
 ##   learners = stack,
 ##   metalearner = metalearner
 ## )
-## sl_fit <- sl$train(task)
+## sl_fit <- sl$train(chspred_task)
 ## sl_fit$print()
 ## CVsl <- CV_lrnr_sl(sl_fit, chspred_task, loss_squared_error)
 ## CVsl
