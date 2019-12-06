@@ -40,7 +40,7 @@ if (knitr:::is_html_output()) {
 if (knitr:::is_latex_output()) {
   options(width = 65)
 }
-options(digits = 4, bookdown.clean_book = TRUE, knitr.kable.NA = "NA")
+options(digits = 7, bookdown.clean_book = TRUE, knitr.kable.NA = "NA")
 knitr::opts_chunk$set(
   tidy = FALSE,
   fig.align = 'center',
