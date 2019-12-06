@@ -445,6 +445,7 @@ ist_task_new <- make_sl3_Task(
 )
 CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
 CVsl %>%
+   kable() %>%
    kable_styling(fixed_thead = T, font_size = 10) %>%
    scroll_box(width = "100%", height = "250px")
 ```
