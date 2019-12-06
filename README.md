@@ -27,17 +27,14 @@ Statistics, December 4-6, 2019.
 
 ### Day 2: December 6, 2019  
 
-* 8:00A-9:30A: Targeted Maximum Likelihood Estimation of the Average Treatment 
+* 8:00A-9:30A: Targeted Maximum Likelihood Estimation
+* 9:30A-10:00A: Break
+* 10:00A-11:20A: Targeted Maximum Likelihood Estimation of the Average Treatment 
   Effect in the `tlverse` software ecosystem
-* 9:30A-9:50A: Break
-* 9:50A-11:20A: Targeted Minimum Loss-Based Estimation of the Effects of Optimal 
-  Dynamic and Shift Interventions in the `tlverse` software ecosystem
-* 11:20A-11:40A: Break
+* 11:20A-11:40A: Lunch
 * 11:40A-1:10P: Targeted Minimum Loss-Based Estimation of Time-to-Event 
-  Outcomes with `MOSS`
-* 1:10P-2:00P: Lunch Break
-* 2:00P-: Targeted Minimum Loss-Based Estimation for Longitudinal Data with 
-  `ltmle`
+  Outcomes with `MOSS` and Targeted Minimum Loss-Based Estimation for 
+  Longitudinal Data with `ltmle`
 
 Most of the software materials are based on an 
 early draft of the (eventually forthcoming) book **The Hitchhiker's Guide to the 
