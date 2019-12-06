@@ -463,6 +463,7 @@ is in the prediction.
 ```{r varimp, message=FALSE, warning=FALSE}
 ist_varimp <- varimp(sl_fit, loss_squared_error)
 ist_varimp %>%
+  kable()
   kable_styling(fixed_thead = T, font_size = 10) %>%
   scroll_box(width = "100%", height = "250px")
 ```
