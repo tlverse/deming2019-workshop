@@ -254,7 +254,6 @@ Now that we have an idea of some learners, we can construct them using the
 # choose base learners
 lrnr_mean <- make_learner(Lrnr_mean)
 lrnr_glm <- make_learner(Lrnr_glm)
-lrnr_gam <- make_learner(Lrnr_gam)
 ```
 We can customize learner hyperparameters to incorporate a diversity of different
 settings. Documentation for the learners and their hyperparameters can be found
@@ -322,8 +321,7 @@ combined or compared.
 
 ```{r stack, message=FALSE, warning=FALSE}
 stack <- make_learner(Stack, 
-  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_gam, 
-  lrnr_bayesglm, lrnr_ridge, lrnr_elasticnet
+  lrnr_glm, lrnr_mean, lrnr_lasso, lrnr_ridge, lrnr_elasticnet
 )
 ```
 
@@ -443,7 +441,7 @@ ist_task_new <- make_sl3_Task(
                      fold_fun = folds_vfold, 
                      V = 2)
 )
-CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_loglik_binomial)
+CVsl <- CV_lrnr_sl(sl_fit, ist_task_new, loss_squared_error)
 CVsl %>%
    kable() %>%
    kable_styling(fixed_thead = T, font_size = 10) %>%
