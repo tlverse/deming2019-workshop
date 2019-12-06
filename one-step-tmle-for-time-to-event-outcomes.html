@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
   <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
-  <meta name="generator" content="bookdown 0.16.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 One-Step TMLE for Time-to-Event Outcomes | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,7 @@
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
 <script src="libs/vis-4.20.1/vis.min.js"></script>
-<script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#review-of-the-super-learner"><i class="fa fa-check"></i>Review of the Super Learner</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#sl3-microwave-dinner-implementation"><i class="fa fa-check"></i><b>4.2</b> <code>sl3</code> “Microwave Dinner” Implementation</a><ul>
-<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#wash-benefits-study-example"><i class="fa fa-check"></i>WASH Benefits Study Example</a></li>
+<li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#international-stroke-trial-example"><i class="fa fa-check"></i>International Stroke Trial Example</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#load-the-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load the necessary libraries and data</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#define-the-machine-learning-task"><i class="fa fa-check"></i>1. Define the machine learning task</a></li>
 <li class="chapter" data-level="" data-path="super-ensemble-machine-learning.html"><a href="super-ensemble-machine-learning.html#make-a-super-learner"><i class="fa fa-check"></i>2. Make a super learner</a></li>
@@ -269,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 6</span> One-Step TMLE for Time-to-Event Outcomes</h1>
 <p>Based on the <a href="https://github.com/wilsoncai1992/MOSS"><code>MOSS</code> <code>R</code> package</a>
 by <em>Wilson Cai and Mark van der Laan</em>.</p>
-<p>Updated: 2019-12-05</p>
+<p>Updated: 2019-12-06</p>
 <div id="learning-objectives-2" class="section level2">
 <h2><span class="header-section-number">6.1</span> Learning Objectives</h2>
 <ol style="list-style-type: decimal">
@@ -334,7 +334,7 @@ desirable performance of the point-wise TMLE <span class="citation">(Cai and Laa
 conditional survival function of censoring event, and (3) propensity score
 with the <code>SuperLearner</code> <code>R</code> package.</li>
 <li>Perform TMLE adjustment of the initial conditional survival fit.</li>
-<li>Compute standard error estimates for simulaneous inference.</li>
+<li>Compute standard error estimates for simultaneous inference.</li>
 </ol>
 <div id="load-necessary-libraries-and-data" class="section level3 unnumbered">
 <h3>0. Load necessary libraries and data</h3>
@@ -450,7 +450,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.00856701456146469 0.00680894623520466 0.00830563504144 ...
+    hazard: 0.00913095238511278 0.00733923669106901 0.00905979449151 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -469,7 +469,7 @@ object.</p>
     clone: function (deep = FALSE) 
     create_ggplot_df: function (W = NULL) 
     display: function (type, W = NULL) 
-    hazard: 0.00852788749752641 0.00677828457947116 0.00825787668212 ...
+    hazard: 0.00913095238511278 0.00733923669106901 0.00905979449151 ...
     hazard_to_pdf: function () 
     hazard_to_survival: function () 
     initialize: function (t, hazard = NULL, survival = NULL, pdf = NULL) 
@@ -546,23 +546,51 @@ the <code>iterate_onestep()</code> method for this object. <code>MOSS_hazard</co
 <a class="sourceLine" id="cb89-10" data-line-number="10">)</a>
 <a class="sourceLine" id="cb89-11" data-line-number="11">psi_ate &lt;-<span class="st"> </span>hazard_fit_ate<span class="op">$</span><span class="kw">iterate_onestep</span>()</a>
 <a class="sourceLine" id="cb89-12" data-line-number="12"><span class="kw">summary</span>(psi_ate)</a></code></pre></div>
-<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--1.50e-03 -3.79e-05  0.00e+00 -1.79e-04  0.00e+00  0.00e+00 </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0       0       0       0       0       0 </code></pre>
 </div>
 <div id="compute-standard-error-estimates-for-simultaneous-inference" class="section level3 unnumbered">
 <h3>4. Compute standard error estimates for simultaneous inference</h3>
-<p>The simultaneous confidence bands for the survival curve estimates can be
-constructed based on asymptotic linearity of the TMLE uniform in all time points
-considered.</p>
 <p>After creating a vector of survival curve estimates by defining a new
 <code>survival_curve</code> object, we will estimate the efficient influence curve
-using the TML-estimates generated in the previous step. We obtain estimates for
-all times specified in <code>k_grid</code> by calling the <code>all_t()</code> method for <code>eic</code>
-objects. The eic estimates are obtained for each subject and time, so we
-construct a matrix of these estimates and calculate a simultaneous confidence
-band with this matrix by calling the method <code>compute_simultaneous_ci()</code>. See the
-manuscript accompanying the <code>MOSS</code> package for more details on constructing
-simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai2019one">2019</a>)</span>.</p>
+using the TML-estimates generated in the previous step and then generate a
+simultaneous confidence band for the TML-estimates.</p>
+<p>A simultaneous confidence interval achieves the desired coverage across many
+points, unlike the traditional confidence interval which achieves the desired
+coverage for one point. Thus, the standard error for simultaneous inference is
+larger when demanding simultaneous coverage of the truth, and it directly
+follows that simultaneous confidence intervals are wider. Simultaneous inference
+is a multiple testing procedure which controls the family-wise error rate.</p>
+<p>A 95% simultaneous confidence band for the TML-estimates is constructed in the
+following manner:</p>
+<ol style="list-style-type: decimal">
+<li>Retain the TML-estimates of the probability of surviving up to or past each
+time specified in <code>k_grid</code> that we generated in the previous step.</li>
+<li>Compute the influence curve matrix for all times specified in <code>k_grid</code> using
+these TMLEs, where each column is an a time in <code>k_grid</code> and each row
+corresponds to a subject.</li>
+<li>Calculate the correlation of the IC matrix.</li>
+<li>Randomly draw many values from a multivariate Normal(0,Sigma) distribution
+(e.g. <code>z &lt;- rmvnorm(1e6, mean = rep(0, length(k_grid)), sigma = cor(IC_matrix))</code>
+), where sigma corresponds to what was generated in step 3.</li>
+<li>Identify the row-wise maximum of the absolute value of each MVN value (e.g.
+<code>z_abs &lt;-  apply(z, 1, function(x) max(abs(x)))</code>).</li>
+<li>Using these maximum absolute values, calculate the 95th quantile of <code>z_abs</code>,
+which is the standard error to use for simultaneous inference
+(e.g. <code>z_95 &lt;- quantile(z_abs, .95)</code>)</li>
+<li>Calculate the time-specific standard deviation of the influence functions
+(e.g. <code>sd_IC_time1 &lt;- sd(IC_matrix[,1])*sqrt(n-1)/n</code>)</li>
+<li>Calculate the time-specific simultaneous confidence intervals (e.g.
+<code>lower_bound_time1 &lt;- est_time1 - z_95*sd_IC_time1</code>)</li>
+</ol>
+<p>The simultaneous inference for the TML-estimates are constructed based on
+asymptotic linearity of the TMLE uniform in all points considered. Step 4
+approximates the Guassian process, and step 5 calculates the supremum norm of
+this process. The 0.95 quantile of the supremum norm of the Guassian process
+calculated in step 6 (i.e. <code>z_95</code>) will converge as the sample size increases
+and as the values drawn from the MVN (i.e. <code>1e6</code> used in step 4) increase.</p>
+<p>See the manuscript accompanying the <code>MOSS</code> package for more details and
+references on constructing simultaneous inference <span class="citation">(Cai and Laan <a href="#ref-cai2019one">2019</a>)</span>.</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="co"># estimate and obtain inference for survival curve for standard treatment group</span></a>
 <a class="sourceLine" id="cb91-2" data-line-number="2">survival_standardA &lt;-<span class="st"> </span>survival_curve<span class="op">$</span><span class="kw">new</span>(<span class="dt">t =</span> k_grid, <span class="dt">survival =</span> psi_standardA)</a>
 <a class="sourceLine" id="cb91-3" data-line-number="3">survival_curve_standardA &lt;-<span class="st"> </span><span class="kw">as.vector</span>(survival_standardA<span class="op">$</span>survival)</a>
@@ -678,7 +706,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tlverse/deming2019-workshop/edit/master/09-MOSS.Rmd",
+"link": "https://github.com/tlverse/deming2019-workshop/edit/master/07-MOSS.Rmd",
 "text": "Edit"
 },
 "history": {

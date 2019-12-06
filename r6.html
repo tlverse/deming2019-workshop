@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
+  <title>Chapter 7 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem</title>
   <meta name="description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
+  <meta property="og:title" content="Chapter 7 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://tlverse.org/deming2019-workshop/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="tlverse/deming2019-workshop" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
+  <meta name="twitter:title" content="Chapter 7 A Primer on the R6 Class System | Targeted (Machine) Learning for Real-World Data Science and Causal Inference with the tlverse Software Ecosystem" />
   
   <meta name="twitter:description" content="An open-source and fully-reproducible electronic set of software materials accompanying an invited half-day tutorial and 2-day short-course at the Deming Conference on Applied Statistics." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/logos/favicons/favicon.png" type="image/x-icon" />
-<link rel="prev" href="the-tmle-framework.html"/>
+<link rel="prev" href="one-step-tmle-for-time-to-event-outcomes.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -227,9 +227,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#exercise-1"><i class="fa fa-check"></i><b>5.7</b> Exercise</a></li>
 <li class="chapter" data-level="5.8" data-path="the-tmle-framework.html"><a href="the-tmle-framework.html#summary-1"><i class="fa fa-check"></i><b>5.8</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>6</b> A Primer on the <code>R6</code> Class System</a><ul>
-<li class="chapter" data-level="6.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>6.1</b> Classes, Fields, and Methods</a></li>
-<li class="chapter" data-level="6.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>6.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
+<li class="chapter" data-level="6" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html"><i class="fa fa-check"></i><b>6</b> One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="6.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#learning-objectives-2"><i class="fa fa-check"></i><b>6.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#introduction-2"><i class="fa fa-check"></i><b>6.2</b> Introduction</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#existing-methods-for-observational-survival-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Existing Methods for Observational Survival Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#using-moss-for-one-step-tmle-for-time-to-event-outcomes"><i class="fa fa-check"></i><b>6.3</b> Using <code>MOSS</code> for One-Step TMLE for Time-to-Event Outcomes</a><ul>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#load-necessary-libraries-and-data"><i class="fa fa-check"></i>0. Load necessary libraries and data</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#specify-right-censored-survival-data-arguments"><i class="fa fa-check"></i>1. Specify right-censored survival data arguments</a></li>
+<li><a href="one-step-tmle-for-time-to-event-outcomes.html#obtain-initial-estimates-with-superlearner-r-package">2. Obtain initial estimates with <code>SuperLearner</code> <code>R</code> package</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#perform-tmle-adjustment-of-the-initial-conditional-survival-estimate"><i class="fa fa-check"></i>3. Perform TMLE adjustment of the initial conditional survival estimate</a></li>
+<li class="chapter" data-level="" data-path="one-step-tmle-for-time-to-event-outcomes.html"><a href="one-step-tmle-for-time-to-event-outcomes.html#compute-standard-error-estimates-for-simultaneous-inference"><i class="fa fa-check"></i>4. Compute standard error estimates for simultaneous inference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>7</b> A Primer on the <code>R6</code> Class System</a><ul>
+<li class="chapter" data-level="7.1" data-path="r6.html"><a href="r6.html#classes-fields-and-methods"><i class="fa fa-check"></i><b>7.1</b> Classes, Fields, and Methods</a></li>
+<li class="chapter" data-level="7.2" data-path="r6.html"><a href="r6.html#object-oriented-programming-python-and-r"><i class="fa fa-check"></i><b>7.2</b> Object Oriented Programming: <code>Python</code> and <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -253,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="r6" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> A Primer on the <code>R6</code> Class System</h1>
+<h1><span class="header-section-number">Chapter 7</span> A Primer on the <code>R6</code> Class System</h1>
 <p>A central goal of the Targeted Learning statistical paradigm is to estimate
 scientifically relevant parameters in realistic (usually nonparametric) models.</p>
 <p>The <code>tlverse</code> is designed using basic OOP principles and the <code>R6</code> OOP framework.
@@ -262,7 +275,7 @@ much about OOP, it is helpful to have some intuition about how the <code>tlverse
 structured. Here, we briefly outline some key concepts from OOP. Readers
 familiar with OOP basics are invited to skip this section.</p>
 <div id="classes-fields-and-methods" class="section level2">
-<h2><span class="header-section-number">6.1</span> Classes, Fields, and Methods</h2>
+<h2><span class="header-section-number">7.1</span> Classes, Fields, and Methods</h2>
 <p>The key concept of OOP is that of an object, a collection of data and functions
 that corresponds to some conceptual unit. Objects have two main types of
 elements:</p>
@@ -285,7 +298,7 @@ see <a href="http://adv-r.had.co.nz/OO-essentials.html" class="uri">http://adv-r
 R</em> <span class="citation">(Wickham <a href="#ref-wickham2014advanced">2014</a>)</span>.</p>
 </div>
 <div id="object-oriented-programming-python-and-r" class="section level2">
-<h2><span class="header-section-number">6.2</span> Object Oriented Programming: <code>Python</code> and <code>R</code></h2>
+<h2><span class="header-section-number">7.2</span> Object Oriented Programming: <code>Python</code> and <code>R</code></h2>
 <p>OO concepts (classes with inherentence) were baked into Python from the first
 published version (version 0.9 in 1991). In contrast, <code>R</code> gets its OO “approach”
 from its predecessor, <code>S</code>, first released in 1976. For the first 15 years, <code>S</code>
@@ -311,7 +324,7 @@ be modified by reference.</p>
           </div>
         </div>
       </div>
-<a href="the-tmle-framework.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="one-step-tmle-for-time-to-event-outcomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
